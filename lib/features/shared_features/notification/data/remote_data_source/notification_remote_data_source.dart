@@ -31,14 +31,7 @@ class NotificationRemoteDataSourceImpl extends NotificationRemoteDataSource {
   @override
   Future<NotificationEntity> getNotification({required int pageNumber}) async {
     final response = await remoteDataSource.postData(
-      url:
-          // todo: uncomment it
-          '${ /*AppReference.userIsChild()
-              ?*/ EndPoints.childNotification
-          /*: (AppReference.userIsParent())
-              ? EndPoints.parentNotification
-              : EndPoints.institutionNotification*/
-          }?page=$pageNumber',
+      url: '${EndPoints.childNotification}?page=$pageNumber',
       body: {},
     );
     if (response['data'] == null) {
@@ -55,12 +48,7 @@ class NotificationRemoteDataSourceImpl extends NotificationRemoteDataSource {
   @override
   Future<String> readAllNotification() async {
     final response = await remoteDataSource.postData(
-      url: /*AppReference.userIsChild()
-          ?*/
-          EndPoints.childReadAllNotification,
-      /*: (AppReference.userIsParent())
-          ? EndPoints.parentReadAllNotification
-          : EndPoints.institutionReadAllNotification*/
+      url: EndPoints.childReadAllNotification,
       body: {},
     );
     return response['message'] ?? '';
@@ -71,10 +59,7 @@ class NotificationRemoteDataSourceImpl extends NotificationRemoteDataSource {
     required NotificationManagerParameters notificationManagerParameters,
   }) async {
     final response = await remoteDataSource.postData(
-      url: /*(AppReference.userIsParent())
-          ? EndPoints.parentUpdateNotification
-          :*/
-          EndPoints.institutionUpdateNotification,
+      url: EndPoints.institutionUpdateNotification,
       body: {
         'noti_mark_exam': notificationManagerParameters.markExam,
         'noti_reupload_exam': notificationManagerParameters.reUploadExam,

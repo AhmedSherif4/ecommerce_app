@@ -97,4 +97,33 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       );
     });
   }
+  Map<String, List<NotificationItemEntity>> groupNotificationsByDate(
+    //todo: change it with the notifications at state.
+    List<NotificationItemEntity> notifications,
+  ) {
+    final now = DateTime.now();
+    final today = <NotificationItemEntity>[];
+    final yesterday = <NotificationItemEntity>[];
+    final older = <String, List<NotificationItemEntity>>{};
+
+    for (final n in /*state.allNotifications*/ notifications) {
+      final diff = now.difference(n.createdAt).inDays;
+
+      if (diff == 0) {
+        today.add(n);
+      } else if (diff == 1) {
+        yesterday.add(n);
+      } else {
+        final dateLabel =
+            "${n.createdAt.month}/${n.createdAt.day}/${n.createdAt.year}";
+        older.putIfAbsent(dateLabel, () => []).add(n);
+      }
+    }
+
+    final grouped = <String, List<NotificationItemEntity>>{};
+    if (today.isNotEmpty) grouped['Today'] = today;
+    if (yesterday.isNotEmpty) grouped['Yesterday'] = yesterday;
+    grouped.addAll(older);
+    return grouped;
+  }
 }

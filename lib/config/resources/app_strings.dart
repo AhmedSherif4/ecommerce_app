@@ -183,4 +183,8 @@ abstract class AppStrings {
   static const String discover = 'Discover';
 
   static const String searchDescription = 'Search for clothes...';
+
+  static const String notifications = 'Notifications';
+
+  static const String noNotificationsNow = 'You haven’t gotten any notifications yet!';
 }

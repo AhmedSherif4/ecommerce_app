@@ -23,6 +23,7 @@ class NotificationItemEntity extends Equatable {
   final String body;
   final String imgPath;
   final int isRead;
+  final DateTime createdAt;
 
   const NotificationItemEntity({
     required this.title,
@@ -30,8 +31,9 @@ class NotificationItemEntity extends Equatable {
     required this.imgPath,
     required this.isRead,
     required this.id,
+    required this.createdAt,
   });
 
   @override
-  List<Object> get props => [title, body, imgPath, id, isRead];
+  List<Object> get props => [title, body, imgPath, id, isRead, createdAt];
 }

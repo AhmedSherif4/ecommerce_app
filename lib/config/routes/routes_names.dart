@@ -16,4 +16,9 @@ abstract class AppRoutesNames {
   static const String rHomeLayoutView = '/home_layout';
 
   static const String rEditProfileScreen = '/edit_profile';
+
+  static const String rNotificationScreen = '/notification_screen';
+
+  static const String rNotificationManagerScreen =
+      '/notification_manager_screen';
 }

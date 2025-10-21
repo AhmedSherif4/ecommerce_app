@@ -31,10 +31,18 @@ class HomeScreen extends StatelessWidget {
                             fontSize: 32.f,
                           ),
                         ),
-                        SvgPicture.asset(
-                          Assets.projectIconBell,
-                          height: Spacing.iconSizeS24,
-                          width: Spacing.iconSizeS24,
+                        CustomInkWell(
+                          onTap: () {
+                            RouteManager.rPushNamed(
+                              context: context,
+                              rName: AppRoutesNames.rNotificationScreen,
+                            );
+                          },
+                          child: SvgPicture.asset(
+                            Assets.projectIconBell,
+                            height: Spacing.iconSizeS24,
+                            width: Spacing.iconSizeS24,
+                          ),
                         ),
                       ],
                     ),

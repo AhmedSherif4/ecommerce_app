@@ -1,28 +1,28 @@
-import 'package:ecommerce_app/core/responsive_manager/spacing_facade.dart';
+import 'dart:math';
+
+import 'package:ecommerce_app/core/text_styling/extensions/app_text_theme.dart';
+import 'package:ecommerce_app/core/theme_manager/service/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../config/resources/app_strings.dart';
 import '../../../../../core/shared_widget/custom_inkwell.dart';
-import '../../app_assets/app_assets.dart';
-import '../../core/responsive_manager/app_padding.dart';
 import '../../my_app/app_reference.dart';
 
 class HeaderForMore extends StatelessWidget {
   final String title;
-  final Color textColor;
-  final Color backButtonColor;
-  final bool notFirst;
-  final bool haveIcon;
+  final String? logoSvg;
+  final bool hasLogo;
+  final bool hasBack;
   final Function()? onBack;
+  final Function()? logoOnPress;
 
   const HeaderForMore({
-    required this.title,
-    this.textColor = Colors.black,
-    this.backButtonColor = Colors.orange,
     super.key,
-    this.notFirst = true,
-    this.haveIcon = false,
+    required this.title,
+    this.logoSvg,
+    this.hasLogo = false,
+    this.logoOnPress,
+    this.hasBack = true,
     this.onBack,
   });
 
@@ -32,73 +32,42 @@ class HeaderForMore extends StatelessWidget {
       width: double.infinity,
       height: (AppReference.deviceIsTablet && !AppReference.isPortrait(context))
           ? AppReference.deviceWidth(context) * 0.04
-          : AppReference.deviceHeight(context) * 0.08,
+          : AppReference.deviceWidth(context) * 0.08,
       child: LayoutBuilder(
         builder: (context, constrains) {
           return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                Assets.imagesLogoWithoutName,
-                width: constrains.maxWidth * 0.15,
-                height: constrains.maxHeight * 0.6,
-                fit: BoxFit.cover,
-              ),
-              Text(
-                title,
-                // style: const AppTextStyle()
-                //     .w500
-                //     .bodyLarge16
-                //     .copyWith(
-                //     fontSize: 16,
-                //     color: textColor),
-              ),
-              if (haveIcon)
-                SvgPicture.asset(Assets.imagesMyTime, fit: BoxFit.contain),
-              switch (notFirst) {
-                true => CustomInkWell(
+              if (hasBack)
+                CustomInkWell(
                   onTap:
                       onBack ??
                       () {
                         Navigator.pop(context);
                       },
-                  child: Container(
-                    clipBehavior: Clip.antiAlias,
-                    decoration: const BoxDecoration(),
-                    height: constrains.maxHeight,
-                    padding: EdgeInsetsDirectional.all(
-                      AppPadding.screenPaddingP10,
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: context.colors.primary9,
+                    size: min(
+                      constrains.maxWidth * 0.1,
+                      constrains.maxHeight * 0.6,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          AppStrings.back,
-                          // style: const AppTextStyle().balooBhaijaan2.w700.bodyMedium14.copyWith(
-                          //     fontSize: AppFontSize.sp14.responsiveFontSize,
-                          //     color: backButtonColor),
-                        ),
-                        Spacing.spaceSW5,
-                        //SvgPicture.asset(AppIconsAssets.sExit,colorFilter:  ColorFilter.mode(backButtonColor, BlendMode.srcIn),)
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: backButtonColor,
-                          size: 16,
-                        ),
-                      ],
-                    ),
-
-                    // SvgPicture.asset(
-                    //   AppIconsAssets.sOrangeBack,
-                    //   width: constrains.maxWidth * 0.1,
-                    //   height: constrains.maxHeight * 0.3,
-                    //   fit: BoxFit.cover,
-                    // ),
                   ),
                 ),
-                false => SizedBox(width: constrains.maxWidth * 0.1),
-              },
+              const Spacer(),
+              Text(title, style: context.typography.titleLarge),
+              const Spacer(),
+              if (hasLogo)
+                InkWell(
+                  onTap: logoOnPress,
+
+                  child: SvgPicture.asset(
+                    logoSvg!,
+                    width: constrains.maxWidth * 0.15,
+                    height: constrains.maxHeight * 0.6,
+                    fit: BoxFit.cover,
+                  ),
+                ),
             ],
           );
         },

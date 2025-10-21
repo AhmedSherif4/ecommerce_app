@@ -2,6 +2,8 @@ import 'package:ecommerce_app/features/auth/forget_password/forget_password.dart
 import 'package:ecommerce_app/features/home_layout/home_layout.dart';
 import 'package:ecommerce_app/features/intro/onboarding/on_boarding_screen.dart';
 import 'package:ecommerce_app/features/intro/splash/presentation/view/splash_screen.dart';
+import 'package:ecommerce_app/features/shared_features/notification/presentation/view/notification_screen.dart';
+import 'package:ecommerce_app/features/shared_features/notification/presentation/view_model/notification_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +17,7 @@ import '../../features/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../features/auth/sign_up/sign_up.dart';
 import '../../features/auth/verification/verification.dart';
 import '../../features/shared_features/contact_us/presentations/view_model/contact_us_bloc.dart';
+import '../../features/shared_features/notification/presentation/view/notification_manager_screen.dart';
 import 'routes_names.dart';
 import 'un_defined_route.dart';
 
@@ -107,16 +110,26 @@ class AppRouteGenerator {
                 //   ),
                 // )
               ),
-              //   BlocProvider(
-              //     create: (context) =>
-              //         getIt<NotificationBloc>()
-              //           ..add(const GetAllNotificationEvent(pageNumber: 1)),
-              //   ),
             ],
             child: const HomeLayoutView(),
           ),
         );
 
+      case AppRoutesNames.rNotificationScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<NotificationBloc>(),
+            /*..add(const GetAllNotificationEvent(pageNumber: 1))*/
+            child: const NotificationScreen(),
+          ),
+        );
+      case AppRoutesNames.rNotificationManagerScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: getIt<NotificationBloc>(),
+            child: const NotificationManagerScreen(),
+          ),
+        );
       default:
         return unDefinedRoute();
     }

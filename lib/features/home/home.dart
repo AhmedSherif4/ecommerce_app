@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ecommerce_app/app_assets/app_assets.dart';
 import 'package:ecommerce_app/config/extensions/log_extension.dart';
 import 'package:ecommerce_app/config/resources/app_constants.dart';
+import 'package:ecommerce_app/config/routes/route_manager.dart';
+import 'package:ecommerce_app/config/routes/routes_names.dart';
 import 'package:ecommerce_app/core/responsive_manager/app_borders.dart';
 import 'package:ecommerce_app/core/responsive_manager/responsive_extensions.dart';
 import 'package:ecommerce_app/core/responsive_manager/spacing_facade.dart';

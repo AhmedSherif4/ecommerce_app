@@ -19,19 +19,9 @@ class EndPoints {
 
   //------------------------------------------
 
-  static const String socialRegisterPath = '/api/social-register';
-
   static const String forgotPasswordPath = '/api/forget-password';
 
-  static const String socialLoginPath = '/api/social-login';
-
-  static const String storeLastOpen = '/api/store-last-open';
-
   static const String checkChildIsSubscribe = '/api/check-child-is-subscribe';
-
-  static const String childTermRank = '/api/child-term-rank';
-
-  static const String getAttendance = '/api/get-attendance';
 
   static const String parentUnLinkChildPath = '/api/parent-unlink-child';
 

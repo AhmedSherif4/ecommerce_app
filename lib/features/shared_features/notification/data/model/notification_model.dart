@@ -26,6 +26,7 @@ class NotificationItemModel extends NotificationItemEntity {
     required super.imgPath,
     required super.id,
     required super.isRead,
+    required super.createdAt,
   });
 
   factory NotificationItemModel.fromJson(Map<String, dynamic> json) {
@@ -35,6 +36,7 @@ class NotificationItemModel extends NotificationItemEntity {
       body: json['content'] ?? '',
       imgPath: json['img'] ?? '',
       isRead: json['read'] ?? '',
+      createdAt: json['created_at'],
     );
   }
 }
