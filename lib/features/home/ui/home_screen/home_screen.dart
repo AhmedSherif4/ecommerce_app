@@ -140,16 +140,14 @@ class _StickyHorizontalListDelegate extends SliverPersistentHeaderDelegate {
           int selectedIndex = 2;
           bool isSelected = selectedIndex == index;
           return Container(
-            height: Spacing.s32,
+            width: Spacing.s100,
             padding: const EdgeInsets.symmetric(
               horizontal: AppConstants.appPaddingR10,
-              vertical: AppConstants.appPaddingR10,
             ),
             margin: const EdgeInsets.symmetric(
               horizontal: AppConstants.appPaddingR10,
               vertical: AppConstants.appPaddingR20,
             ),
-            clipBehavior: Clip.antiAlias,
             decoration: ShapeDecoration(
               color: isSelected
                   ? context.colors.primary9
@@ -164,7 +162,6 @@ class _StickyHorizontalListDelegate extends SliverPersistentHeaderDelegate {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            width: Spacing.s100,
             alignment: AlignmentGeometry.center,
             child: Text(
               'Item ${index + 1}',
@@ -182,10 +179,10 @@ class _StickyHorizontalListDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 100;
+  double get maxExtent => 90;
 
   @override
-  double get minExtent => 100;
+  double get minExtent => 90;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
