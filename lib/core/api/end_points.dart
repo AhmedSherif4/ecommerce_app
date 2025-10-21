@@ -1,0 +1,76 @@
+class EndPoints {
+  static const String baseUrl =
+      'https://ucyrylmtzpvglhqeztpn.supabase.co/rest/v1/rpc';
+
+  static String imagePath(String imgPath) => '$baseUrl$imgPath';
+
+  static const String checkTokenPath = '/check_user_token';
+
+  static const String getUserData = '/users'; // after login
+
+  static const String updateUserProfile =
+      '/update_user_profile'; // after signup
+
+  static const String sendVerificationCode =
+      '/send_verification_code'; // (at signup screen) before verify code
+
+  static const String verifyCode =
+      '/verify_code'; // (at verification screen) before signup
+
+  //------------------------------------------
+
+  static const String socialRegisterPath = '/api/social-register';
+
+  static const String forgotPasswordPath = '/api/forget-password';
+
+  static const String socialLoginPath = '/api/social-login';
+
+  static const String storeLastOpen = '/api/store-last-open';
+
+  static const String checkChildIsSubscribe = '/api/check-child-is-subscribe';
+
+  static const String childTermRank = '/api/child-term-rank';
+
+  static const String getAttendance = '/api/get-attendance';
+
+  static const String parentUnLinkChildPath = '/api/parent-unlink-child';
+
+  static const String childAddNewParentPath = '/api/child-add-new-parent';
+
+  static const String childAddExistParentPath = '/api/child-add-exist-parent';
+
+  static const String parentAddNewChildPath = '/api/parent-add-new-child';
+
+  static const String parentAddExistChildPath = '/api/parent-add-exist-child';
+
+  static const String termsAndConditionsPath = '/api/terms-and-conditions';
+
+  static const String getGuestData = '/api/guest-login';
+
+  static const String checkVersion = '/api/check-app-version';
+
+  static const String contactUsPath = '/api/contact-us';
+
+  static const String mePath = '/api/me';
+
+  static const String simulatedStoreExamAnswer =
+      '/api/simulated-store-exam-answer';
+
+  static const String simulatedModelAnswers = '/api/simulated-model-answers';
+
+  static const String simulatedExams = '/api/simulated-exams';
+
+  static const String simulatedPlans = '/api/simulated-plans';
+
+  static const String editProfile = '/api/edit-profile';
+
+  static const String changePasswordPath = '/api/change-password';
+
+  static const String childNotification = '/api/child-notification';
+
+  static const String childReadAllNotification =
+      '/api/child-read-all-notification';
+
+  static const String institutionUpdateNotification =
+      '/api/institution-update-notification';
+}

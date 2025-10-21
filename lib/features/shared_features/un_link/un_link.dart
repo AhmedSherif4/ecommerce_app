@@ -1,0 +1,35 @@
+import 'package:dartz/dartz.dart' hide State;
+import 'package:ecommerce_app/app_assets/app_assets.dart';
+import 'package:ecommerce_app/core/base_widgets/loading_widget.dart';
+import 'package:ecommerce_app/core/base_widgets/snackbar_widget.dart';
+import 'package:ecommerce_app/core/shared_widget/custom_tile_widget.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../../../../core/failure/failure.dart';
+import '../../../config/base_remote_data_source/base_remote_data_source.dart';
+import '../../../config/base_repository/base_repository.dart';
+import '../../../core/api/end_points.dart';
+import '../../../core/enum/enum_generation.dart';
+import '../../../core/shared_widget/dialogs/default_alert_dialog.dart';
+import '../../../core/usecase/base_usecase.dart';
+import '../../../my_app/app_reference.dart';
+
+part 'data/remote_data_source/un_link_remote_data_source.dart';
+part 'data/repository/un_link_repository_impl.dart';
+part 'domain/repository/un_link_repository.dart';
+part 'domain/use_case/child_add_exist_parent_screen_usecase.dart';
+part 'domain/use_case/child_add_new_parent_usecase.dart';
+part 'domain/use_case/parent_add_exist_child_usecase.dart';
+part 'domain/use_case/parent_add_new_child_usecase.dart';
+part 'domain/use_case/un_link_use_case.dart';
+part 'presentation/view/child_add_exist_parent_screen_screen/child_add_exist_parent_screen.dart';
+part 'presentation/view/child_add_new_parent_screen/child_add_new_parent_screen.dart';
+part 'presentation/view/parent_add_exist_child_screen/parent_add_exist_child_screen.dart';
+part 'presentation/view/parent_add_new_child_screen/parent_add_new_child_screen.dart';
+part 'presentation/view/un_link_button.dart';
+part 'presentation/view_model/un_link_bloc.dart';
+part 'presentation/view_model/un_link_event.dart';
+part 'presentation/view_model/un_link_state.dart';

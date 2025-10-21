@@ -1,0 +1,52 @@
+library verification;
+
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:dartz/dartz.dart' hide State;
+import 'package:dio/dio.dart';
+import 'package:ecommerce_app/config/extensions/log_extension.dart';
+import 'package:ecommerce_app/core/responsive_manager/responsive_extensions.dart';
+import 'package:ecommerce_app/core/responsive_manager/spacing_facade.dart';
+import 'package:ecommerce_app/core/text_styling/extensions/app_text_theme.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide MultipartFile;
+
+import '../../../../core/enum/enum_generation.dart';
+import '../../../../core/shared_models/user/data/user_local_data_source/user_local_data_source.dart';
+import '../../../config/base_remote_data_source/base_remote_data_source.dart';
+import '../../../config/base_repository/base_repository.dart';
+import '../../../config/resources/app_strings.dart';
+import '../../../config/routes/route_manager.dart';
+import '../../../config/routes/routes_names.dart';
+import '../../../config/storages/secure_storage.dart';
+import '../../../core/api/api_consumer.dart';
+import '../../../core/api/end_points.dart';
+import '../../../core/api/network_info.dart';
+import '../../../core/base_widgets/loading_widget.dart';
+import '../../../core/base_widgets/snackbar_widget.dart';
+import '../../../core/exceptions/exceptions.dart';
+import '../../../core/failure/failure.dart';
+import '../../../core/services/services_locator.dart';
+import '../../../core/shared_models/user/user_entity/user_entity.dart';
+import '../../../core/shared_models/user/user_model/user_model.dart';
+import '../../../core/shared_widget/buttons/back_button_widget.dart';
+import '../../../core/shared_widget/buttons/button_widget.dart';
+import '../../../core/usecase/base_usecase.dart';
+import '../../../my_app/notification/i_notification_service.dart';
+import '../sign_up/sign_up.dart';
+import 'presentation/verification_screen/pin_code_filed_item.dart';
+
+part 'data/verification_data_source/verification_remote_data_source.dart';
+part 'data/verification_repository/verification_repository.dart';
+part 'domain/verification_base_repository/verification_base_repository.dart';
+part 'domain/verification_usecases/verification_usecase.dart';
+part 'presentation/verification_screen/verification_screen.dart';
+part 'presentation/verification_view_model/verification_bloc.dart';
+part 'presentation/verification_view_model/verification_event.dart';
+part 'presentation/verification_view_model/verification_state.dart';
