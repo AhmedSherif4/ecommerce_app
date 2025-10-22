@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/features/auth/forget_password/forget_password.dart';
+import 'package:ecommerce_app/features/checkout/checkout.dart';
 import 'package:ecommerce_app/features/home/home.dart';
 import 'package:ecommerce_app/features/home_layout/home_layout.dart';
 import 'package:ecommerce_app/features/intro/onboarding/on_boarding_screen.dart';
@@ -144,6 +145,13 @@ class AppRouteGenerator {
           builder: (_) => BlocProvider(
             create: (context) => getIt<DetailsProductCubit>(),
             child: DetailsProductScreen(product),
+          ),
+        );
+      case AppRoutesNames.rCheckoutScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<CheckoutCubit>(),
+            child: CheckoutScreen(),
           ),
         );
       case AppRoutesNames.rSearchScreen:

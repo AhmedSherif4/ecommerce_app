@@ -27,7 +27,15 @@ class CartScreen extends StatelessWidget {
                 ),
               ),
             ),
-            DefaultButtonWidget(label: 'Go To Checkout', onPressed: () {}),
+            DefaultButtonWidget(
+              label: 'Go To Checkout',
+              onPressed: () {
+                RouteManager.rPushNamed(
+                  context: context,
+                  rName: AppRoutesNames.rCheckoutScreen,
+                );
+              },
+            ),
           ],
         ),
       ).paddingBody(),
@@ -38,98 +46,106 @@ class CartScreen extends StatelessWidget {
 class ProductCardCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(5),
-      height: Spacing.cartH,
-      width: Spacing.cartW,
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 14),
-      clipBehavior: Clip.antiAlias,
-      decoration: ShapeDecoration(
-        color: context.colors.primary0,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(width: 1, color: context.colors.primary1),
-          borderRadius: BorderRadius.circular(AppConstants.appBorderRadiusR10),
-        ),
-        shadows: [AppShadow.outerShadow],
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          NullableNetworkImage(
-            width: Spacing.s100,
-            height: Spacing.s100,
-            fit: BoxFit.fill,
-            imagePath:
-                'https://lh3.googleusercontent.com/a/ACg8ocJLiPOmHDSGO6HMtuBT4Bv0BIqHZ3V9S6__OCXEJpcN6KOiKrY=s96-c',
-            notHaveImage: false,
+    return CustomInkWell(
+      onTap: () {},
+      child: Container(
+        margin: EdgeInsets.all(5),
+        height: Spacing.cartH,
+        width: Spacing.cartW,
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 14),
+        clipBehavior: Clip.antiAlias,
+        decoration: ShapeDecoration(
+          color: context.colors.primary0,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 1, color: context.colors.primary1),
+            borderRadius: BorderRadius.circular(
+              AppConstants.appBorderRadiusR10,
+            ),
           ),
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 1,
-                    children: [
-                      Text(
-                        'Regular Fit Slogan',
-                        style: context.typography.bodyMedium,
-                      ),
-                      Text(
-                        'Size L',
-                        style: context.typography.caption.copyWith(
-                          color: context.colors.primary5,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Icon(
-                    Icons.restore_from_trash_rounded,
-                    size: Spacing.iconSizeS24,
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 212.50.w,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
+          shadows: [AppShadow.outerShadow],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            NullableNetworkImage(
+              width: Spacing.s100,
+              height: Spacing.s100,
+              fit: BoxFit.fill,
+              imagePath:
+                  'https://lh3.googleusercontent.com/a/ACg8ocJLiPOmHDSGO6HMtuBT4Bv0BIqHZ3V9S6__OCXEJpcN6KOiKrY=s96-c',
+              notHaveImage: false,
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('\$ 1,190', style: context.typography.bodyMedium),
-                    Row(
+                    Column(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: 9,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 1,
                       children: [
-                        CustomInkWell(
-                          onTap: () {},
-                          child: Icon(Icons.remove, size: Spacing.iconSizeS20),
+                        Text(
+                          'Regular Fit Slogan',
+                          style: context.typography.bodyMedium,
                         ),
-                        Text('2', style: context.typography.caption),
-                        CustomInkWell(
-                          onTap: () {},
-                          child: Icon(Icons.add, size: Spacing.iconSizeS20),
+                        Text(
+                          'Size L',
+                          style: context.typography.caption.copyWith(
+                            color: context.colors.primary5,
+                          ),
                         ),
                       ],
                     ),
+                    Icon(
+                      Icons.restore_from_trash_rounded,
+                      size: Spacing.iconSizeS24,
+                    ),
                   ],
                 ),
-              ),
-            ],
-          ),
-        ],
+                SizedBox(
+                  width: 212.50.w,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text('\$ 1,190', style: context.typography.bodyMedium),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        spacing: 9,
+                        children: [
+                          CustomInkWell(
+                            onTap: () {},
+                            child: Icon(
+                              Icons.remove,
+                              size: Spacing.iconSizeS20,
+                            ),
+                          ),
+                          Text('2', style: context.typography.caption),
+                          CustomInkWell(
+                            onTap: () {},
+                            child: Icon(Icons.add, size: Spacing.iconSizeS20),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
