@@ -22,6 +22,8 @@ class Spacing {
   static double get s44 => SpacingContext.instance.spacing.s44;
 
   static double get navBarH => SpacingContext.instance.spacing.navBarH.h;
+  static double get cartH => SpacingContext.instance.spacing.cartH.h;
+  static double get cartW => SpacingContext.instance.spacing.cartW.w;
   static double get buttonHeight =>
       SpacingContext.instance.spacing.buttonHeight.h;
   static double get buttonWidth =>
@@ -37,62 +39,13 @@ class Spacing {
       SpacingContext.instance.spacing.loadingDialogHeight.h;
   static double get loadingDialogWidth =>
       SpacingContext.instance.spacing.loadingDialogWidth.w;
-  static double get childWidgetForParentH =>
-      SpacingContext.instance.spacing.childWidgetForParentH.h;
-
-  static double get sBackgroundHomeH =>
-      SpacingContext.instance.spacing.sBackgroundHomeH.h;
-
-  static double get sImageProfile =>
-      SpacingContext.instance.spacing.sImageProfile.r;
-
-  static double get sMyLevelContainerHomeH =>
-      SpacingContext.instance.spacing.sMyLevelContainerHomeH.h;
 
   static double get splashLogo => SpacingContext.instance.spacing.splashLogo.w;
   static double get pickYourPhoto =>
       SpacingContext.instance.spacing.pickYourPhoto.r;
 
-  static double get sStaticHeader =>
-      SpacingContext.instance.spacing.sStaticHeader.h;
-
-  static double get sChangeGradeH =>
-      SpacingContext.instance.spacing.sChangeGradeH.h;
-
   static double get iconSizeS24 =>
       SpacingContext.instance.spacing.iconSizeS24.r;
-  static double get iconSizeS48 =>
-      SpacingContext.instance.spacing.iconSizeS48.r;
-
-  static double get cupHome => SpacingContext.instance.spacing.cupHome.r;
-  static double get circleProgress =>
-      SpacingContext.instance.spacing.circleProgress.r;
-  static double get imageCarouselH =>
-      SpacingContext.instance.spacing.imageCarouselH.h;
-  static double get imageCarouselW =>
-      SpacingContext.instance.spacing.imageCarouselW.w;
-
-  static double get subjectsHomePrimaryH =>
-      SpacingContext.instance.spacing.subjectsHomePrimaryH.w;
-  static double get subjectsHomePrimaryW =>
-      SpacingContext.instance.spacing.subjectsHomePrimaryW.w;
-  static double get subjectsHomeH =>
-      SpacingContext.instance.spacing.subjectsHomeH.w;
-  static double get subjectsHomeW =>
-      SpacingContext.instance.spacing.subjectsHomeW.w;
-  static double get addTaskButtonH =>
-      SpacingContext.instance.spacing.addTaskButtonH.h;
-  static double get addTaskH => SpacingContext.instance.spacing.addTaskH.h;
-  static double get taskWidgetH =>
-      SpacingContext.instance.spacing.taskWidgetH.h;
-  static double get moreOptionHomeR =>
-      SpacingContext.instance.spacing.moreOptionHomeR.r;
-
-  static double get progressLessonWidgetH =>
-      SpacingContext.instance.spacing.progressLessonWidgetH.h;
-
-  static double get progressLessonWidgetW =>
-      SpacingContext.instance.spacing.progressLessonWidgetW.h;
 
   static SizedBox get spaceHS16 => SizedBox(height: s16.h);
   static SizedBox get spaceHS5 => SizedBox(height: s5.h);

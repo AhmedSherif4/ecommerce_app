@@ -1,5 +1,9 @@
 /// Interface for spacing tokens (raw values only)
 abstract class ISpacingConfig {
+  double get cartW;
+
+  double get cartH;
+
   double get s8;
   double get s16;
   double get s24;
@@ -169,6 +173,12 @@ class MobileSpacingConfig implements ISpacingConfig {
 
   @override
   double get s100 => 100.0;
+
+  @override
+  double get cartH => 110;
+
+  @override
+  double get cartW => 350;
 }
 
 class TabletSpacingConfig implements ISpacingConfig {
@@ -288,4 +298,10 @@ class TabletSpacingConfig implements ISpacingConfig {
 
   @override
   double get s100 => 130.0;
+
+  @override
+  double get cartH => 200;
+
+  @override
+  double get cartW => 500;
 }
