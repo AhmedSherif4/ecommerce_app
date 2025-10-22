@@ -186,5 +186,8 @@ abstract class AppStrings {
 
   static const String notifications = 'Notifications';
 
-  static const String noNotificationsNow = 'You haven’t gotten any notifications yet!';
+  static const String noNotificationsNow =
+      'You haven’t gotten any notifications yet!';
+
+  static const String details = 'Details';
 }

@@ -1,6 +1,8 @@
 part of '../../home.dart';
 
 class ProductModel {
+  ProductModel({this.id = '1'});
+  final String id;
   final String image =
       'https://lh3.googleusercontent.com/a/ACg8ocJLiPOmHDSGO6HMtuBT4Bv0BIqHZ3V9S6__OCXEJpcN6KOiKrY=s96-c';
   final String name = 'product name product name';
@@ -88,7 +90,6 @@ class ProductCard extends StatelessWidget {
                                           '${NumberFormat('#,###', 'en').format(product.priceBefore)}جم',
                                       style: context.typography.labelLarge
                                           .copyWith(
-                                            fontSize: 12.f,
                                             color: context.colors.primary5,
                                             decoration:
                                                 TextDecoration.lineThrough,
@@ -100,12 +101,19 @@ class ProductCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SvgPicture.asset(
-                            product.isFav
-                                ? Assets.projectIconHeartFilled
-                                : Assets.projectIconHeart,
-                            width: Spacing.iconSizeS24,
-                            height: Spacing.iconSizeS24,
+                          CustomInkWell(
+                            onTap: () {
+                              context.read<SavedCubit>().toggleFavourite(
+                                product,
+                              );
+                            },
+                            child: SvgPicture.asset(
+                              product.isFav
+                                  ? Assets.projectIconHeartFilled
+                                  : Assets.projectIconHeart,
+                              width: Spacing.iconSizeS24,
+                              height: Spacing.iconSizeS24,
+                            ),
                           ),
                         ],
                       ).paddingBody(horizontal: 8, vertical: 0),

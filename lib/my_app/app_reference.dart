@@ -64,11 +64,11 @@ class AppReference {
         );
         return iosDeviceId!;
       } else {
-        final iosDeviceId = Uuid().v4();
+        final iosDeviceId = const Uuid().v4();
         await getIt<FlutterSecureStorage>().write(
           key: AppKeys.iosDeviceID,
           value: iosDeviceId,
-          iOptions: IOSOptions(
+          iOptions: const IOSOptions(
             //    accessibility: KeychainAccessibility.first_unlock,
           ),
         );

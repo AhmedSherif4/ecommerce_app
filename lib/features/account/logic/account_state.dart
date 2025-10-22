@@ -4,7 +4,7 @@ class AccountState extends Equatable {
   const AccountState();
 
   AccountState copyWith() {
-    return AccountState();
+    return const AccountState();
   }
 
   @override

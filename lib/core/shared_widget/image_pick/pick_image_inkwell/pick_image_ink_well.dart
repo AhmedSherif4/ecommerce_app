@@ -308,11 +308,11 @@ class ImagePickerSheet extends StatelessWidget {
             Navigator.pop(context);
             onPickType(ImageSourceType.gallery);
           },
-          child: Row(
+          child: const Row(
             children: [
-              const Icon(Icons.photo_library),
+              Icon(Icons.photo_library),
               //  AppSize.s10.sizedBoxWidth,
-              const Text(AppStrings.gallery),
+              Text(AppStrings.gallery),
             ],
           ),
         ),
@@ -321,11 +321,11 @@ class ImagePickerSheet extends StatelessWidget {
             Navigator.pop(context);
             onPickType(ImageSourceType.camera);
           },
-          child: Row(
+          child: const Row(
             children: [
-              const Icon(Icons.camera),
+              Icon(Icons.camera),
               // AppSize.s10.sizedBoxWidth,
-              const Text(AppStrings.camera),
+              Text(AppStrings.camera),
             ],
           ),
         ),

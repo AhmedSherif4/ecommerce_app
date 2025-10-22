@@ -251,7 +251,7 @@ class _NotificationManageItemState extends State<NotificationManageItem> {
       ),
       tileColor: context.colors.primary0,
       trailing: Switch(
-        activeColor: context.colors.primary0,
+        activeThumbColor: context.colors.primary0,
         inactiveThumbColor: context.colors.primary9,
         activeTrackColor: context.colors.primary3,
         inactiveTrackColor: context.colors.primary4,

@@ -156,6 +156,6 @@ class _ChildAccountDetailsScreenState extends State<ChildAccountDetailsScreen> {
     //     ),
     //   ).paddingBody(),
     // );
-    return SizedBox();
+    return const SizedBox();
   }
 }

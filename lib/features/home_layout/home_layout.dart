@@ -2,10 +2,8 @@ library home_layout;
 
 import 'package:ecommerce_app/app_assets/app_assets.dart';
 import 'package:ecommerce_app/config/resources/app_strings.dart';
-import 'package:ecommerce_app/core/responsive_manager/responsive_extensions.dart';
 import 'package:ecommerce_app/core/responsive_manager/spacing_facade.dart';
 import 'package:ecommerce_app/core/services/services_locator.dart';
-import 'package:ecommerce_app/core/shared_widget/custom_inkwell.dart';
 import 'package:ecommerce_app/core/shared_widget/dialogs/exit_dialog.dart';
 import 'package:ecommerce_app/core/text_styling/extensions/app_text_theme.dart';
 import 'package:ecommerce_app/core/theme_manager/service/app_colors.dart';

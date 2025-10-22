@@ -1,10 +1,10 @@
 part of '../../simulated_plans.dart';
 
-
 class SimulatedSubjectData extends Equatable {
   final SimulatedPlansEntity simulatedPlans;
   final List<SimulatedPlansEntity>? simulatedPlansList;
-  final SimulatedExamQuestionsAnswersInputs? simulatedExamQuestionsAnswersInputs;
+  final SimulatedExamQuestionsAnswersInputs?
+  simulatedExamQuestionsAnswersInputs;
   final List<SimulatedQuestionEntity>? simulatedQuestionEntity;
   final int childId;
   final int? index;
@@ -12,7 +12,7 @@ class SimulatedSubjectData extends Equatable {
   final String? piece;
   final bool playDuration;
 
-  const SimulatedSubjectData( {
+  const SimulatedSubjectData({
     required this.simulatedPlans,
     required this.childId,
     required this.playDuration,
@@ -21,7 +21,7 @@ class SimulatedSubjectData extends Equatable {
     this.piece,
     this.simulatedQuestionEntity,
     this.simulatedPlansList,
-    this.simulatedExamQuestionsAnswersInputs
+    this.simulatedExamQuestionsAnswersInputs,
   });
 
   @override
@@ -33,11 +33,10 @@ class SimulatedSubjectScreen extends StatelessWidget {
   const SimulatedSubjectScreen({super.key, required this.simulatedSubjectData});
 
   @override
-  Widget build(BuildContext context)
-  {
-    return SizedBox();
-
+  Widget build(BuildContext context) {
+    return const SizedBox();
   }
+
   // {
   //   return Scaffold(
   //     body: SafeArea(
@@ -49,7 +48,9 @@ class SimulatedSubjectScreen extends StatelessWidget {
 class SimulatedPlansExamsWidget extends StatelessWidget {
   const SimulatedPlansExamsWidget({
     super.key,
-    required this.simulatedExamsData, required this.index, required this.isSubscribed,
+    required this.simulatedExamsData,
+    required this.index,
+    required this.isSubscribed,
   });
 
   final SimulatedExamsData simulatedExamsData;
@@ -57,11 +58,10 @@ class SimulatedPlansExamsWidget extends StatelessWidget {
   final bool isSubscribed;
 
   @override
-  Widget build(BuildContext context)
-  {
-    return SizedBox();
-
+  Widget build(BuildContext context) {
+    return const SizedBox();
   }
+
   // {
   //   return Container(
   //     height: AppReference.deviceHeight(context) *
@@ -128,16 +128,13 @@ class SimulatedPlansExamsWidget extends StatelessWidget {
 
 class _ChildSubjectScreenForSimulated extends StatelessWidget {
   final SimulatedSubjectData simulatedSubjectData;
-  const _ChildSubjectScreenForSimulated({
-  required this.simulatedSubjectData});
-
+  const _ChildSubjectScreenForSimulated({required this.simulatedSubjectData});
 
   @override
-  Widget build(BuildContext context)
-  {
-    return SizedBox();
-
+  Widget build(BuildContext context) {
+    return const SizedBox();
   }
+
   // {
   //   // navigateToSimulatedExamsScreen() {
   //   //   RouteManager.rPushNamed(
@@ -244,19 +241,17 @@ class _ChildSubjectScreenForSimulated extends StatelessWidget {
   //
   // }
 }
+
 class _SimulatedPaymentButton extends StatelessWidget {
-  const _SimulatedPaymentButton({
-    required this.simulatedSubjectData,
-  });
+  const _SimulatedPaymentButton({required this.simulatedSubjectData});
 
   final SimulatedSubjectData simulatedSubjectData;
 
   @override
-  Widget build(BuildContext context)
-  {
-    return SizedBox();
-
+  Widget build(BuildContext context) {
+    return const SizedBox();
   }
+
   // {
   //   return CustomInkWell(
   //     onTap: () {
@@ -363,16 +358,15 @@ class _SimulatedSubjectPortraitView extends StatelessWidget {
   final int childId;
   final SimulatedPlansEntity simulatedPlans;
   const _SimulatedSubjectPortraitView({
-    required this.childId, required this.simulatedPlans,
+    required this.childId,
+    required this.simulatedPlans,
   });
 
-
   @override
-  Widget build(BuildContext context)
-  {
-    return SizedBox();
-
+  Widget build(BuildContext context) {
+    return const SizedBox();
   }
+
   // {
   //   return ListView.separated(
   //     shrinkWrap: true,
@@ -416,17 +410,15 @@ class _SimulatedSubjectLandscapeView extends StatelessWidget {
   final SimulatedPlansEntity simulatedPlans;
 
   const _SimulatedSubjectLandscapeView({
-    required this.childId, required this.simulatedPlans,
-
+    required this.childId,
+    required this.simulatedPlans,
   });
 
-
   @override
-  Widget build(BuildContext context)
-  {
-    return SizedBox();
-
+  Widget build(BuildContext context) {
+    return const SizedBox();
   }
+
   // {
   //   return GridView.builder(
   //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -459,5 +451,3 @@ class _SimulatedSubjectLandscapeView extends StatelessWidget {
   //   );
   // }
 }
-
-

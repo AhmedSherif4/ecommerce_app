@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 class LoadingShimmerStructure extends StatefulWidget {
   final double? height, width, marginStart, marginEnd, marginTop, marginBottom;
 
@@ -30,11 +28,17 @@ class _LoadingShimmerStructureState extends State<LoadingShimmerStructure>
   void initState() {
     super.initState();
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
-    animationOne = ColorTween(begin: Colors.white10, end: Colors.black12)
-        .animate(animationController);
-    animationTwo = ColorTween(begin: Colors.black12, end: Colors.white10)
-        .animate(animationController);
+      duration: const Duration(milliseconds: 2000),
+      vsync: this,
+    );
+    animationOne = ColorTween(
+      begin: Colors.white10,
+      end: Colors.black12,
+    ).animate(animationController);
+    animationTwo = ColorTween(
+      begin: Colors.black12,
+      end: Colors.white10,
+    ).animate(animationController);
     animationController.forward();
     animationController.addListener(() {
       if (animationController.status == AnimationStatus.completed) {
@@ -64,9 +68,11 @@ class _LoadingShimmerStructureState extends State<LoadingShimmerStructure>
         top: widget.marginTop!,
       ),
       decoration: BoxDecoration(
-          gradient:
-              LinearGradient(colors: [animationOne.value, animationTwo.value]),
-          borderRadius: BorderRadius.circular(10)),
+        gradient: LinearGradient(
+          colors: [animationOne.value, animationTwo.value],
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
     );
   }
 }
@@ -76,9 +82,7 @@ class BannerShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoadingShimmerStructure(
-      height: 150,
-    );
+    return const LoadingShimmerStructure(height: 150);
   }
 }
 
@@ -87,17 +91,13 @@ class TitleShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      //  AppSize.s8,
-        LoadingShimmerStructure(
-          height: 10.0,
-        ),
-        LoadingShimmerStructure(
-          height: 10.0,
-        ),
+        //  AppSize.s8,
+        LoadingShimmerStructure(height: 10.0),
+        LoadingShimmerStructure(height: 10.0),
         // AppSize.s8,
       ],
     );
@@ -109,14 +109,11 @@ class ContentShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        LoadingShimmerStructure(
-          width: 70,
-          height: 70,
-        ),
+        LoadingShimmerStructure(width: 70, height: 70),
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -136,10 +133,10 @@ class ContentShimmer extends StatelessWidget {
                 width: 100.0,
                 height: 10.0,
                 marginStart: 0,
-              )
+              ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

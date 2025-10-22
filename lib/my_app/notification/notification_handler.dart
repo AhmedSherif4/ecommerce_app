@@ -2,11 +2,10 @@ import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:injectable/injectable.dart';
-
 
 class LocalNotificationHandler {
-  final FlutterLocalNotificationsPlugin _plugin = FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin _plugin =
+      FlutterLocalNotificationsPlugin();
 
   Future<void> init() async {
     const initSettings = InitializationSettings(
@@ -22,14 +21,16 @@ class LocalNotificationHandler {
     );
 
     await _plugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(
-      const AndroidNotificationChannel(
-        'default_channel',
-        'App Notifications',
-        importance: Importance.max,
-      ),
-    );
+          const AndroidNotificationChannel(
+            'default_channel',
+            'App Notifications',
+            importance: Importance.max,
+          ),
+        );
   }
 
   Future<void> showNotification(RemoteMessage message) async {
@@ -41,7 +42,10 @@ class LocalNotificationHandler {
       notif.title,
       notif.body,
       const NotificationDetails(
-        android: AndroidNotificationDetails('default_channel', 'App Notifications'),
+        android: AndroidNotificationDetails(
+          'default_channel',
+          'App Notifications',
+        ),
         iOS: DarwinNotificationDetails(),
       ),
       payload: jsonEncode(message.data),

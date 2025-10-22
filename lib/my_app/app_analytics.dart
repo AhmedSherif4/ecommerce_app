@@ -37,7 +37,7 @@ class AppAnalytics {
         disableCollectASA: true, // Optional field
         manualStart: true,
       );
-      "${appsFlyerOptions.afDevKey}";
+      appsFlyerOptions.afDevKey;
 
       appsflyerSdk = AppsflyerSdk(appsFlyerOptions);
       await appsflyerSdk
@@ -68,14 +68,14 @@ class AppAnalytics {
   static Future<void> initTiktokSdk() async {
     try {
       // iOS options example
-      final iosOptions = TikTokIosOptions(
+      const iosOptions = TikTokIosOptions(
         disableTracking: false, // true would disable ALL tracking
         disableAutomaticTracking: true,
         disableSKAdNetworkSupport: true,
       );
 
       // Android options example
-      final androidOptions = TikTokAndroidOptions(
+      const androidOptions = TikTokAndroidOptions(
         // disableAutoStart: true,
         enableAutoIapTrack: true, // enable IAP tracking
         disableAdvertiserIDCollection: false,

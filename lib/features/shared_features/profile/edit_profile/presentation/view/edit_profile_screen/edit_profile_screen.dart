@@ -3,10 +3,7 @@ part of '../../../edit_profile.dart';
 class EditProfileScreen extends StatefulWidget {
   final DataToGoToEditProfileScreen data;
 
-  const EditProfileScreen({
-    super.key,
-    required this.data,
-  });
+  const EditProfileScreen({super.key, required this.data});
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -30,7 +27,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context)
-
   // {
   //   return Scaffold(
   //     body: SafeArea(
@@ -149,37 +145,26 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   //     ).paddingBody(),
   //   );
   {
-    return SizedBox();
-  }// }
-
+    return const SizedBox();
+  } // }
 
   void _saveEditProfile() {
     switch (widget.data.title) {
       case AppStrings.gender:
         context.read<EditProfileBloc>().add(
-              EditProfile(
-                gender: genderType.name,
-              ),
-            );
+          EditProfile(gender: genderType.name),
+        );
         break;
       case AppStrings.name:
-        context.read<EditProfileBloc>().add(
-              EditProfile(
-                name: controller.text,
-              ),
-            );
+        context.read<EditProfileBloc>().add(EditProfile(name: controller.text));
       case AppStrings.email:
         context.read<EditProfileBloc>().add(
-              EditProfile(
-                email: controller.text,
-              ),
-            );
+          EditProfile(email: controller.text),
+        );
       case AppStrings.phone:
         context.read<EditProfileBloc>().add(
-              EditProfile(
-                phone: AppReference.formatPhoneNumber(controller.text),
-              ),
-            );
+          EditProfile(phone: AppReference.formatPhoneNumber(controller.text)),
+        );
       default:
     }
   }
@@ -191,7 +176,6 @@ class _EditProfileScreenBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context)
-
   // {
   //   return Align(
   //     alignment: Alignment.centerRight,
@@ -203,7 +187,7 @@ class _EditProfileScreenBanner extends StatelessWidget {
   //   ).paddingBody(start: 50);
   // }
   {
-    return SizedBox();
+    return const SizedBox();
   }
 }
 

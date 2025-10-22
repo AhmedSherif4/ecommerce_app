@@ -1,17 +1,10 @@
 part of '../../account.dart';
 
-
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          'AccountScreen',
-        ),
-      ),
-    );
+    return const Scaffold(body: Center(child: Text('AccountScreen')));
   }
 }

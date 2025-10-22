@@ -1,12 +1,28 @@
 part of '../saved.dart';
 
 class SavedState extends Equatable {
-  const SavedState();
+  final List<ProductModel> favourites;
+  final RequestStates favouriteState;
+  final String errorMessage;
 
-  SavedState copyWith() {
-    return SavedState();
+  const SavedState({
+    this.favourites = const [],
+    this.favouriteState = RequestStates.initial,
+    this.errorMessage = '',
+  });
+
+  SavedState copyWith({
+    List<ProductModel>? favourites,
+    RequestStates? favouriteState,
+    String? errorMessage,
+  }) {
+    return SavedState(
+      favourites: favourites ?? this.favourites,
+      favouriteState: favouriteState ?? this.favouriteState,
+      errorMessage: errorMessage ?? this.errorMessage,
+    );
   }
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [favourites, favouriteState, errorMessage];
 }

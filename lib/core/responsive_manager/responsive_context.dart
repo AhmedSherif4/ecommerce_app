@@ -1,9 +1,8 @@
-
 import 'responsive_strategy.dart';
 import 'responsive_manager.dart';
 
 class SpacingContext {
-  late ISpacingConfig _strategy;
+  late final ISpacingConfig _strategy;
   static late SpacingContext _instance;
 
   SpacingContext._(this._strategy);
@@ -18,10 +17,6 @@ class SpacingContext {
       case DeviceType.tablet:
         _instance = SpacingContext._(TabletSpacingConfig());
         break;
-
-
     }
   }
-
-
 }

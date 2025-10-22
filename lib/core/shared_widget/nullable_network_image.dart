@@ -56,7 +56,6 @@ class _BaseCachedNetworkImage extends StatelessWidget {
   final BoxFit fit;
 
   const _BaseCachedNetworkImage({
-    super.key,
     this.height,
     this.width,
     required this.imgUrl,

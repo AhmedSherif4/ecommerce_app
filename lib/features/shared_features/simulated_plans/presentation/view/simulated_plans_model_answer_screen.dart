@@ -1,6 +1,6 @@
 part of '../../simulated_plans.dart';
 
-class SimulatedAnswerData extends Equatable{
+class SimulatedAnswerData extends Equatable {
   final SimulatedExamResults simulatedExamResults;
   final String piece;
 
@@ -16,9 +16,7 @@ class SimulatedAnswerData extends Equatable{
 class SimulatedAnswerBuild extends StatefulWidget {
   final SimulatedAnswerData simulatedExamResult;
 
-  const SimulatedAnswerBuild({
-    super.key, required this.simulatedExamResult,
-  });
+  const SimulatedAnswerBuild({super.key, required this.simulatedExamResult});
 
   @override
   State<SimulatedAnswerBuild> createState() => SimulatedAnswerBuildState();
@@ -26,12 +24,12 @@ class SimulatedAnswerBuild extends StatefulWidget {
 
 class SimulatedAnswerBuildState extends State<SimulatedAnswerBuild> {
   final PageController _pageController = PageController();
-  final ScrollController _scrollController =
-  ScrollController(keepScrollOffset: true);
+  final ScrollController _scrollController = ScrollController(
+    keepScrollOffset: true,
+  );
 
   @override
   Widget build(BuildContext context) {
-
     // return Scaffold(
     //   body: SafeArea(
     //     child: Column(
@@ -562,6 +560,6 @@ class SimulatedAnswerBuildState extends State<SimulatedAnswerBuild> {
     //     ),
     //   ),
     // );
-  return SizedBox();
+    return const SizedBox();
   }
 }

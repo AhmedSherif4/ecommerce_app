@@ -1,6 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 
 import 'i_notification_service.dart';
 import 'notification_handler.dart';
@@ -18,10 +17,10 @@ class NotificationServiceImpl implements INotificationService {
     required LocalNotificationHandler localHandler,
     required NotificationRouterStrategy router,
     required GlobalKey<NavigatorState> navigatorKey,
-  })  : _messaging = messaging,
-        _localHandler = localHandler,
-        _router = router,
-        _navigatorKey = navigatorKey;
+  }) : _messaging = messaging,
+       _localHandler = localHandler,
+       _router = router,
+       _navigatorKey = navigatorKey;
 
   @override
   Future<void> initialize() async {
@@ -46,10 +45,12 @@ class NotificationServiceImpl implements INotificationService {
   }
 
   @override
-  Future<void> subscribeToTopic(String topic) => _messaging.subscribeToTopic(topic);
+  Future<void> subscribeToTopic(String topic) =>
+      _messaging.subscribeToTopic(topic);
 
   @override
-  Future<void> unsubscribeFromTopic(String topic) => _messaging.unsubscribeFromTopic(topic);
+  Future<void> unsubscribeFromTopic(String topic) =>
+      _messaging.unsubscribeFromTopic(topic);
 
   @override
   Future<String> getDeviceToken() {
@@ -60,5 +61,4 @@ class NotificationServiceImpl implements INotificationService {
       return token;
     });
   }
-
 }

@@ -14,7 +14,7 @@ abstract class InjectableModule {
   InternetConnectionChecker get internetConnectionChecker =>
       InternetConnectionChecker();
   @lazySingleton
-  FlutterSecureStorage get flutterSecureStorage => FlutterSecureStorage();
+  FlutterSecureStorage get flutterSecureStorage => const FlutterSecureStorage();
 
   @lazySingleton
   SupabaseClient get supabaseClient => Supabase.instance.client;

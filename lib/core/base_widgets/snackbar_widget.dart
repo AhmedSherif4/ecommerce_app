@@ -102,9 +102,9 @@ SnackBar _messageSnackBar({
   return SnackBar(
     content: Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
         color: _chooseToastPrimaryColor(state),
       ),
       child: Text(

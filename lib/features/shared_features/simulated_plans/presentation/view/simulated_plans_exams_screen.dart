@@ -3,13 +3,10 @@ part of '../../simulated_plans.dart';
 class SimulatedExamsScreen extends StatelessWidget {
   final SimulatedSubjectData simulatedSubjectData;
 
-  const SimulatedExamsScreen({
-    super.key, required this.simulatedSubjectData,
-  });
+  const SimulatedExamsScreen({super.key, required this.simulatedSubjectData});
 
   @override
   Widget build(BuildContext context)
-
   // {
   //   return BlocProvider(
   //     create: (context) =>  getIt<SimulatedBloc>()..add(
@@ -33,19 +30,16 @@ class SimulatedExamsScreen extends StatelessWidget {
   //   );
   // }
   {
-    return SizedBox();
+    return const SizedBox();
   }
 }
 
 class _ExamsScreenForNafess extends StatelessWidget {
   final SimulatedSubjectData simulatedSubjectData;
-  const _ExamsScreenForNafess({
-    required this.simulatedSubjectData,
-  });
+  const _ExamsScreenForNafess({required this.simulatedSubjectData});
 
   @override
   Widget build(BuildContext context)
-
   // {
   //   return Column(
   //     children: [
@@ -190,19 +184,16 @@ class _ExamsScreenForNafess extends StatelessWidget {
   //   );
   // }
   {
-    return SizedBox();
+    return const SizedBox();
   }
 }
 
 class _SimulatedExamsPortraitView extends StatelessWidget {
   final SimulatedFullExamEntity simulatedFullExamEntity;
-  const _SimulatedExamsPortraitView({
-   required this.simulatedFullExamEntity,
-  });
+  const _SimulatedExamsPortraitView({required this.simulatedFullExamEntity});
 
   @override
   Widget build(BuildContext context)
-
   // {
   //   return simulatedFullExamEntity.simulatedExamResults.isEmpty ? const EmptyListWidgets(message: "لم تقم بحل اختبارات حتى الأن") : ListView.separated(
   //     shrinkWrap: true,
@@ -220,7 +211,7 @@ class _SimulatedExamsPortraitView extends StatelessWidget {
   //   );
   // }
   {
-    return SizedBox();
+    return const SizedBox();
   }
 }
 
@@ -230,12 +221,14 @@ class _SimulatedExamsWidget extends StatelessWidget {
   final String name;
   final String piece;
   const _SimulatedExamsWidget({
-   required this.simulatedExamResults, required this.totalQuestions, required this.name, required this.piece,
+    required this.simulatedExamResults,
+    required this.totalQuestions,
+    required this.name,
+    required this.piece,
   });
 
   @override
   Widget build(BuildContext context)
-
   // {
   //   return CustomInkWell(
   //       onTap: AppReference.userIsChild() ? () {
@@ -314,19 +307,16 @@ class _SimulatedExamsWidget extends StatelessWidget {
   //       )).animateRightLeft();
   // }
   {
-    return SizedBox();
+    return const SizedBox();
   }
 }
 
 class _SimulatedExamsLandscapeView extends StatelessWidget {
   final SimulatedFullExamEntity simulatedFullExamEntity;
-  const _SimulatedExamsLandscapeView({
-   required this.simulatedFullExamEntity,
-  });
+  const _SimulatedExamsLandscapeView({required this.simulatedFullExamEntity});
 
   @override
   Widget build(BuildContext context)
-
   // {
   //   return simulatedFullExamEntity.simulatedExamResults.isEmpty ? const EmptyListWidgets(message: "لم تقم بحل اختبارات حتى الأن") :GridView.builder(
   //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -349,6 +339,6 @@ class _SimulatedExamsLandscapeView extends StatelessWidget {
   //   );
   // }
   {
-    return SizedBox();
+    return const SizedBox();
   }
 }

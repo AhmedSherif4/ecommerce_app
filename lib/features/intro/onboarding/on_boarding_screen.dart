@@ -39,7 +39,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   final List<DummyData> onBoardingData = [
-    DummyData(
+    const DummyData(
       title: AppStrings.onBoardingTitle1,
       imagePath: Assets.imagesOnboarding1,
     ),

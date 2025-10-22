@@ -75,7 +75,7 @@ class SimulatedPlanScreen extends StatelessWidget {
   //   );
   // }
   {
-    return SizedBox();
+    return const SizedBox();
   }
 
   _goToSimulatedScreen(
@@ -122,7 +122,7 @@ class _SimulatedPlanPortraitView extends StatelessWidget {
   //   );
   // }
   {
-    return SizedBox();
+    return const SizedBox();
   }
 }
 
@@ -158,7 +158,7 @@ class _SimulatedPlanLandscapeView extends StatelessWidget {
   //   );
   // }
   {
-    return SizedBox();
+    return const SizedBox();
   }
 }
 
@@ -226,6 +226,6 @@ class SimulatedPlanWidget extends StatelessWidget {
   //   );
   // }
   {
-    return SizedBox();
+    return const SizedBox();
   }
 }

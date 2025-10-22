@@ -4,7 +4,7 @@ class CartState extends Equatable {
   const CartState();
 
   CartState copyWith() {
-    return CartState();
+    return const CartState();
   }
 
   @override

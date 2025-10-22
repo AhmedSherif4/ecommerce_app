@@ -15,8 +15,9 @@ class SimulatedQuestionScreen extends StatefulWidget {
 class _SimulatedQuestionScreenState extends State<SimulatedQuestionScreen> {
   late final PageController pageController;
   Timer? _timer;
-  final ValueNotifier<Duration> _duration =
-      ValueNotifier<Duration>(const Duration(seconds: 0));
+  final ValueNotifier<Duration> _duration = ValueNotifier<Duration>(
+    const Duration(seconds: 0),
+  );
   bool exit = false;
 
   @override
@@ -35,39 +36,44 @@ class _SimulatedQuestionScreenState extends State<SimulatedQuestionScreen> {
         _duration.value = _duration.value - const Duration(seconds: 1);
         if (_duration.value.inSeconds == 2) {
           showDialog(
-              context: context,
-              builder: (dialogContext) => SimulatedTimeOutDialog(
-                    onPressed: () {
-                      if (context
-                          .read<SimulatedBloc>()
-                          .state
-                          .selectedAnswers
-                          .isNotEmpty) {
-                        BlocProvider.of<SimulatedBloc>(context)
-                            .add(SubmitSimulatedExamsAnswersEvent(
-                          simulatedExamQuestionsAnswersInputs:
-                              SimulatedExamQuestionsAnswersInputs(
-                                  childId: widget.simulatedSubjectData.childId,
-                                  examId: widget
-                                      .simulatedSubjectData
-                                      .simulatedPlans
-                                      .examsData[
-                                          widget.simulatedSubjectData.index!]
-                                      .id,
-                                  questions: context
-                                      .read<SimulatedBloc>()
-                                      .state
-                                      .selectedAnswers
-                                      .entries
-                                      .map((entry) =>
-                                          SimulatedExamQuestionsAndAnswersIdsInputs(
-                                              questionId: entry.key,
-                                              answerId: entry.value))
-                                      .toList()),
-                        ));
-                      }
-                    },
-                  ));
+            context: context,
+            builder: (dialogContext) => SimulatedTimeOutDialog(
+              onPressed: () {
+                if (context
+                    .read<SimulatedBloc>()
+                    .state
+                    .selectedAnswers
+                    .isNotEmpty) {
+                  BlocProvider.of<SimulatedBloc>(context).add(
+                    SubmitSimulatedExamsAnswersEvent(
+                      simulatedExamQuestionsAnswersInputs:
+                          SimulatedExamQuestionsAnswersInputs(
+                            childId: widget.simulatedSubjectData.childId,
+                            examId: widget
+                                .simulatedSubjectData
+                                .simulatedPlans
+                                .examsData[widget.simulatedSubjectData.index!]
+                                .id,
+                            questions: context
+                                .read<SimulatedBloc>()
+                                .state
+                                .selectedAnswers
+                                .entries
+                                .map(
+                                  (entry) =>
+                                      SimulatedExamQuestionsAndAnswersIdsInputs(
+                                        questionId: entry.key,
+                                        answerId: entry.value,
+                                      ),
+                                )
+                                .toList(),
+                          ),
+                    ),
+                  );
+                }
+              },
+            ),
+          );
         }
       } else {
         timer.cancel();
@@ -90,7 +96,7 @@ class _SimulatedQuestionScreenState extends State<SimulatedQuestionScreen> {
         '6',
         '7',
         '8',
-        '9'
+        '9',
       ];
       const easternArabicDigits = [
         '٠',
@@ -102,11 +108,13 @@ class _SimulatedQuestionScreenState extends State<SimulatedQuestionScreen> {
         '٦',
         '٧',
         '٨',
-        '٩'
+        '٩',
       ];
       for (int i = 0; i < westernArabicDigits.length; i++) {
-        input =
-            input.replaceAll(westernArabicDigits[i], easternArabicDigits[i]);
+        input = input.replaceAll(
+          westernArabicDigits[i],
+          easternArabicDigits[i],
+        );
       }
       return input;
     }
@@ -129,11 +137,12 @@ class _SimulatedQuestionScreenState extends State<SimulatedQuestionScreen> {
     super.didChangeDependencies();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ScreenProtectorService.instance.enableScreenProtection(context);
-    });  }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
+    return const SizedBox();
   }
   //   return PopScope(
   //     canPop: false,
@@ -835,48 +844,46 @@ class _SimulatedQuestionScreenState extends State<SimulatedQuestionScreen> {
   //     ),
   //   );
   // }
-
-
 }
 
 class NextAndPreviousRandomExams extends StatelessWidget {
   final Function() submit;
   final Function() previous;
   final bool isLastQuestion;
-  const NextAndPreviousRandomExams(
-      {super.key,
-      required this.submit,
-      required this.previous,
-      required this.isLastQuestion});
+  const NextAndPreviousRandomExams({
+    super.key,
+    required this.submit,
+    required this.previous,
+    required this.isLastQuestion,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
-  //   return SizedBox(
-  //     height: AppReference.deviceHeight(context) * 0.07.responsiveHeightRatio,
-  //     child: Padding(
-  //       padding: EdgeInsets.all(5.responsiveSize),
-  //       child: Row(children: [
-  //         Expanded(
-  //             flex: 2,
-  //             child: DefaultButtonWidget(
-  //               textVerticalPadding: 5,
-  //               label: AppStrings.previous,
-  //               buttonColor: AppColors.primaryColorBlue,
-  //               onPressed: previous,
-  //             )),
-  //         AppSize.s10.sizedBoxWidth,
-  //         Expanded(
-  //             flex: 5,
-  //             child: DefaultButtonWidget(
-  //                 textVerticalPadding: 5,
-  //                 label: isLastQuestion ? AppStrings.submit : AppStrings.next,
-  //                 onPressed: submit)),
-  //       ]),
-  //     ),
-  //   );
-  // }
-
+    return const SizedBox();
+    //   return SizedBox(
+    //     height: AppReference.deviceHeight(context) * 0.07.responsiveHeightRatio,
+    //     child: Padding(
+    //       padding: EdgeInsets.all(5.responsiveSize),
+    //       child: Row(children: [
+    //         Expanded(
+    //             flex: 2,
+    //             child: DefaultButtonWidget(
+    //               textVerticalPadding: 5,
+    //               label: AppStrings.previous,
+    //               buttonColor: AppColors.primaryColorBlue,
+    //               onPressed: previous,
+    //             )),
+    //         AppSize.s10.sizedBoxWidth,
+    //         Expanded(
+    //             flex: 5,
+    //             child: DefaultButtonWidget(
+    //                 textVerticalPadding: 5,
+    //                 label: isLastQuestion ? AppStrings.submit : AppStrings.next,
+    //                 onPressed: submit)),
+    //       ]),
+    //     ),
+    //   );
+    // }
   }
 }
 
@@ -889,86 +896,85 @@ class SimulatedExamsBackDialouge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
+    return const SizedBox();
     // return AlertDialog(
-  //     contentPadding: EdgeInsets.zero,
-  //     elevation: 5,
-  //     actionsPadding: EdgeInsets.zero,
-  //     buttonPadding: EdgeInsets.zero,
-  //     iconPadding: EdgeInsets.zero,
-  //     insetPadding: EdgeInsets.zero,
-  //     titlePadding: EdgeInsets.zero,
-  //     content: Container(
-  //       height: AppReference.deviceIsTablet
-  //           ? AppReference.deviceHeight(context) * 0.1.responsiveHeight
-  //           : null,
-  //       width: !AppReference.isPortrait(context)
-  //           ? AppReference.deviceWidth(context) * 0.4
-  //           : AppReference.deviceWidth(context) * 0.8,
-  //       padding: EdgeInsets.all(AppPadding.p20.responsiveSize),
-  //       constraints: BoxConstraints(
-  //         minHeight:
-  //             AppReference.deviceHeight(context) * 0.26.responsiveHeightRatio,
-  //         maxHeight:
-  //             AppReference.deviceHeight(context) * 0.34.responsiveHeightRatio,
-  //       ),
-  //       decoration: BoxDecoration(
-  //         borderRadius: BorderRadius.circular(20.responsiveSize),
-  //         color: Colors.white,
-  //       ),
-  //       child: Column(
-  //         children: [
-  //           Text(
-  //             AppStrings.developerModeCheckTitle,
-  //             style: AppReference.themeData.textTheme.displaySmall!.copyWith(
-  //               color: AppColors.failColor,
-  //               fontWeight: AppFontWeight.regular2W500,
-  //             ),
-  //           ),
-  //           const Divider(color: AppColors.textColor6, thickness: 2),
-  //           const Spacer(),
-  //           Text(
-  //             "بمجرد الخروج من هذا الامتحان، لن يتم احتساب هذة المحاولة.",
-  //             style: const AppTextStyle().s16.titleLarge22,
-  //             maxLines: 2,
-  //             overflow: TextOverflow.ellipsis,
-  //           ),
-  //           const Spacer(),
-  //           Row(
-  //             children: [
-  //               Expanded(
-  //                 child: DefaultButtonWidget(
-  //                     label: 'حسنا',
-  //                     textVerticalPadding:
-  //                         AppReference.isPortrait(context) ? 0 : 6,
-  //                     onPressed: () {
-  //                       Navigator.pop(context);
-  //                       RouteManager.rPushReplacementNamed(
-  //                         context: context,
-  //                         rName: AppRoutesNames.rSimulatedeExamsScreen,
-  //                         arguments: simulatedSubjectData,
-  //                       );
-  //                     }),
-  //               ),
-  //               AppSize.s10.sizedBoxWidth,
-  //               Expanded(
-  //                 child: DefaultButtonWidget(
-  //                   textVerticalPadding:
-  //                       AppReference.isPortrait(context) ? 0 : 6,
-  //                   label: AppStrings.cancel,
-  //                   onPressed: () {
-  //                     Navigator.pop(context);
-  //                   },
-  //                 ),
-  //               ),
-  //             ],
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
+    //     contentPadding: EdgeInsets.zero,
+    //     elevation: 5,
+    //     actionsPadding: EdgeInsets.zero,
+    //     buttonPadding: EdgeInsets.zero,
+    //     iconPadding: EdgeInsets.zero,
+    //     insetPadding: EdgeInsets.zero,
+    //     titlePadding: EdgeInsets.zero,
+    //     content: Container(
+    //       height: AppReference.deviceIsTablet
+    //           ? AppReference.deviceHeight(context) * 0.1.responsiveHeight
+    //           : null,
+    //       width: !AppReference.isPortrait(context)
+    //           ? AppReference.deviceWidth(context) * 0.4
+    //           : AppReference.deviceWidth(context) * 0.8,
+    //       padding: EdgeInsets.all(AppPadding.p20.responsiveSize),
+    //       constraints: BoxConstraints(
+    //         minHeight:
+    //             AppReference.deviceHeight(context) * 0.26.responsiveHeightRatio,
+    //         maxHeight:
+    //             AppReference.deviceHeight(context) * 0.34.responsiveHeightRatio,
+    //       ),
+    //       decoration: BoxDecoration(
+    //         borderRadius: BorderRadius.circular(20.responsiveSize),
+    //         color: Colors.white,
+    //       ),
+    //       child: Column(
+    //         children: [
+    //           Text(
+    //             AppStrings.developerModeCheckTitle,
+    //             style: AppReference.themeData.textTheme.displaySmall!.copyWith(
+    //               color: AppColors.failColor,
+    //               fontWeight: AppFontWeight.regular2W500,
+    //             ),
+    //           ),
+    //           const Divider(color: AppColors.textColor6, thickness: 2),
+    //           const Spacer(),
+    //           Text(
+    //             "بمجرد الخروج من هذا الامتحان، لن يتم احتساب هذة المحاولة.",
+    //             style: const AppTextStyle().s16.titleLarge22,
+    //             maxLines: 2,
+    //             overflow: TextOverflow.ellipsis,
+    //           ),
+    //           const Spacer(),
+    //           Row(
+    //             children: [
+    //               Expanded(
+    //                 child: DefaultButtonWidget(
+    //                     label: 'حسنا',
+    //                     textVerticalPadding:
+    //                         AppReference.isPortrait(context) ? 0 : 6,
+    //                     onPressed: () {
+    //                       Navigator.pop(context);
+    //                       RouteManager.rPushReplacementNamed(
+    //                         context: context,
+    //                         rName: AppRoutesNames.rSimulatedeExamsScreen,
+    //                         arguments: simulatedSubjectData,
+    //                       );
+    //                     }),
+    //               ),
+    //               AppSize.s10.sizedBoxWidth,
+    //               Expanded(
+    //                 child: DefaultButtonWidget(
+    //                   textVerticalPadding:
+    //                       AppReference.isPortrait(context) ? 0 : 6,
+    //                   label: AppStrings.cancel,
+    //                   onPressed: () {
+    //                     Navigator.pop(context);
+    //                   },
+    //                 ),
+    //               ),
+    //             ],
+    //           )
+    //         ],
+    //       ),
+    //     ),
+    //   );
+    // }
   }
 }
 
@@ -979,7 +985,7 @@ class QuestionsText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
+    return const SizedBox();
   }
   //   return Container(
   //     width: AppReference.isPortrait(context)
@@ -1012,20 +1018,16 @@ class QuestionsText extends StatelessWidget {
   //     ),
   //   );
   // }
-
 }
 
 class HintWidgetForSimulated extends StatelessWidget {
-  const HintWidgetForSimulated({
-    super.key,
-    required this.currentQuestion,
-  });
+  const HintWidgetForSimulated({super.key, required this.currentQuestion});
 
   final SimulatedQuestionEntity currentQuestion;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
+    return const SizedBox();
     //   return CustomInkWell(
     //     onTap: () {
     //       showHintOfQuestionsDialog(
@@ -1057,101 +1059,104 @@ class HintWidgetForSimulated extends StatelessWidget {
 
 class SimulatedTimeDialog extends StatelessWidget {
   final Function() onPressedYes, onPressedNo;
-  const SimulatedTimeDialog(
-      {super.key, required this.onPressedNo, required this.onPressedYes});
+  const SimulatedTimeDialog({
+    super.key,
+    required this.onPressedNo,
+    required this.onPressedYes,
+  });
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
-  //   return AlertDialog(
-  //     scrollable: true,
-  //     contentPadding: EdgeInsets.zero,
-  //     elevation: 5,
-  //     actionsPadding: EdgeInsets.zero,
-  //     buttonPadding: EdgeInsets.zero,
-  //     iconPadding: EdgeInsets.zero,
-  //     insetPadding: EdgeInsets.zero,
-  //     titlePadding: EdgeInsets.zero,
-  //     shape: OutlineInputBorder(
-  //         borderSide: BorderSide.none,
-  //         borderRadius: BorderRadius.circular(
-  //           AppConstants.appBorderRadiusR20.responsiveSize,
-  //         )),
-  //     content: Container(
-  //       width: !AppReference.isPortrait(context)
-  //           ? AppReference.deviceWidth(context) * 0.4
-  //           : AppReference.deviceWidth(context) * .8,
-  //       padding: EdgeInsets.all(AppPadding.p20.responsiveSize),
-  //       decoration: BoxDecoration(
-  //           color: AppColors.white,
-  //           borderRadius:
-  //               BorderRadius.circular(AppConstants.appBorderRadiusR10)),
-  //       child: Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           mainAxisAlignment: MainAxisAlignment.start,
-  //           children: [
-  //             Align(
-  //                 alignment: Alignment.center,
-  //                 child: Text(
-  //                   "تنبيه !",
-  //                   style: const AppTextStyle().w700.titleMedium20,
-  //                 )),
-  //             AppSize.s20.sizedBoxHeight,
-  //             SvgPicture.asset(AppIconsAssets.sNafeesTime),
-  //             AppSize.s20.sizedBoxHeight,
-  //             Text("هل تريد أن تفعل وقتا للاختبار؟",
-  //                 textAlign: TextAlign.center,
-  //                 style: const AppTextStyle()
-  //                     .balooBhaijaan2
-  //                     .black
-  //                     .w700
-  //                     .bodyLarge16),
-  //             AppSize.s20.sizedBoxHeight,
-  //             Row(
-  //               children: [
-  //                 Expanded(
-  //                   child: DefaultButtonWidget(
-  //                       textVerticalPadding:
-  //                           AppReference.isPortrait(context) ? 2 : 6,
-  //                       buttonColor: AppColors.primaryColorBlue,
-  //                       labelColor: AppColors.white,
-  //                       isExpanded: true,
-  //                       label: "نعم",
-  //                       borderColor: AppColors.primaryColorBlue,
-  //                       onPressed: () {
-  //                         Navigator.pop(context);
-  //                         onPressedYes();
-  //                       }),
-  //                 ),
-  //                 AppSize.s10.sizedBoxWidth,
-  //                 Expanded(
-  //                   child: DefaultButtonWidget(
-  //                       textVerticalPadding:
-  //                           AppReference.isPortrait(context) ? 2 : 6,
-  //                       buttonColor: AppColors.primaryColorBlue,
-  //                       labelColor: AppColors.white,
-  //                       isExpanded: true,
-  //                       label: "لا",
-  //                       borderColor: AppColors.primaryColorBlue,
-  //                       onPressed: () {
-  //                         Navigator.pop(context);
-  //                         onPressedNo();
-  //                       }),
-  //                 ),
-  //               ],
-  //             ),
-  //           ]),
-  //     ),
-  //   );
-  // }
-
-}}
+    return const SizedBox();
+    //   return AlertDialog(
+    //     scrollable: true,
+    //     contentPadding: EdgeInsets.zero,
+    //     elevation: 5,
+    //     actionsPadding: EdgeInsets.zero,
+    //     buttonPadding: EdgeInsets.zero,
+    //     iconPadding: EdgeInsets.zero,
+    //     insetPadding: EdgeInsets.zero,
+    //     titlePadding: EdgeInsets.zero,
+    //     shape: OutlineInputBorder(
+    //         borderSide: BorderSide.none,
+    //         borderRadius: BorderRadius.circular(
+    //           AppConstants.appBorderRadiusR20.responsiveSize,
+    //         )),
+    //     content: Container(
+    //       width: !AppReference.isPortrait(context)
+    //           ? AppReference.deviceWidth(context) * 0.4
+    //           : AppReference.deviceWidth(context) * .8,
+    //       padding: EdgeInsets.all(AppPadding.p20.responsiveSize),
+    //       decoration: BoxDecoration(
+    //           color: AppColors.white,
+    //           borderRadius:
+    //               BorderRadius.circular(AppConstants.appBorderRadiusR10)),
+    //       child: Column(
+    //           mainAxisSize: MainAxisSize.min,
+    //           mainAxisAlignment: MainAxisAlignment.start,
+    //           children: [
+    //             Align(
+    //                 alignment: Alignment.center,
+    //                 child: Text(
+    //                   "تنبيه !",
+    //                   style: const AppTextStyle().w700.titleMedium20,
+    //                 )),
+    //             AppSize.s20.sizedBoxHeight,
+    //             SvgPicture.asset(AppIconsAssets.sNafeesTime),
+    //             AppSize.s20.sizedBoxHeight,
+    //             Text("هل تريد أن تفعل وقتا للاختبار؟",
+    //                 textAlign: TextAlign.center,
+    //                 style: const AppTextStyle()
+    //                     .balooBhaijaan2
+    //                     .black
+    //                     .w700
+    //                     .bodyLarge16),
+    //             AppSize.s20.sizedBoxHeight,
+    //             Row(
+    //               children: [
+    //                 Expanded(
+    //                   child: DefaultButtonWidget(
+    //                       textVerticalPadding:
+    //                           AppReference.isPortrait(context) ? 2 : 6,
+    //                       buttonColor: AppColors.primaryColorBlue,
+    //                       labelColor: AppColors.white,
+    //                       isExpanded: true,
+    //                       label: "نعم",
+    //                       borderColor: AppColors.primaryColorBlue,
+    //                       onPressed: () {
+    //                         Navigator.pop(context);
+    //                         onPressedYes();
+    //                       }),
+    //                 ),
+    //                 AppSize.s10.sizedBoxWidth,
+    //                 Expanded(
+    //                   child: DefaultButtonWidget(
+    //                       textVerticalPadding:
+    //                           AppReference.isPortrait(context) ? 2 : 6,
+    //                       buttonColor: AppColors.primaryColorBlue,
+    //                       labelColor: AppColors.white,
+    //                       isExpanded: true,
+    //                       label: "لا",
+    //                       borderColor: AppColors.primaryColorBlue,
+    //                       onPressed: () {
+    //                         Navigator.pop(context);
+    //                         onPressedNo();
+    //                       }),
+    //                 ),
+    //               ],
+    //             ),
+    //           ]),
+    //     ),
+    //   );
+    // }
+  }
+}
 
 class SimulatedTimeOutDialog extends StatelessWidget {
   final Function() onPressed;
   const SimulatedTimeOutDialog({super.key, required this.onPressed});
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
+    return const SizedBox();
   }
   //   return AlertDialog(
   //     scrollable: true,
@@ -1212,7 +1217,6 @@ class SimulatedTimeOutDialog extends StatelessWidget {
   //     ),
   //   );
   // }
-
 }
 
 class SimulatedPieceDialog extends StatelessWidget {
@@ -1288,7 +1292,7 @@ class SimulatedPieceDialog extends StatelessWidget {
   //     ),
   //   );
   // }
-Widget build(BuildContext context){
-    return SizedBox();
+  Widget build(BuildContext context) {
+    return const SizedBox();
   }
 }

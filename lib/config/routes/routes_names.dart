@@ -21,4 +21,5 @@ abstract class AppRoutesNames {
 
   static const String rNotificationManagerScreen =
       '/notification_manager_screen';
+  static const String rSearchScreen = '/search_screen';
 }

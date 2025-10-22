@@ -1,10 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:screen_protector/screen_protector.dart';
-
-import '../../../my_app/app_reference.dart';
 
 class ScreenProtectorService {
   // Private constructor for the singleton pattern
@@ -12,13 +9,12 @@ class ScreenProtectorService {
 
   // Singleton instance
   static final ScreenProtectorService _instance =
-  ScreenProtectorService._init();
+      ScreenProtectorService._init();
 
   // Getter to access the singleton instance
   static ScreenProtectorService get instance => _instance;
 
   final bool _isProtectionEnabled = false;
-
 
   /// Enable screen protection
   Future<void> enableScreenProtection(BuildContext context) async {
@@ -29,7 +25,7 @@ class ScreenProtectorService {
           await ScreenProtector.protectDataLeakageOn();
         }
       } catch (e) {
-        throw('Failed to enable screenshot protection: $e');
+        throw ('Failed to enable screenshot protection: $e');
       }
     }
   }
@@ -42,7 +38,7 @@ class ScreenProtectorService {
         ScreenProtector.protectDataLeakageOff();
       }
     } catch (e) {
-      throw('Failed to disable screenshot protection: $e');
+      throw ('Failed to disable screenshot protection: $e');
     }
   }
 }

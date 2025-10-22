@@ -43,7 +43,7 @@ class GoogleButton extends StatelessWidget {
             ),
           ),
         ),
-        child: Row(
+        child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(

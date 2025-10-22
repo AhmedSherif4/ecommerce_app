@@ -13,8 +13,6 @@ import '../../../../../../config/base_repository/base_repository.dart';
 import '../../../../../../core/failure/failure.dart';
 import '../../../../../../core/usecase/base_usecase.dart';
 import '../../../../config/base_remote_data_source/base_remote_data_source.dart';
-import '../../../../core/shared_models/user/user_entity/user_entity.dart';
-import '../login/domain/login_usecases/social_login_use_case.dart';
 
 part 'data/sign_up_data_source/sign_up_remote_data_source.dart';
 part 'data/sign_up_repository/sign_up_repository.dart';

@@ -14,7 +14,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   late GlobalKey<FormState> _formKey;
 
-
   late FocusNode currentPasswordFocus;
   late FocusNode newPasswordFocus;
   late FocusNode confirmPasswordFocus;
@@ -239,6 +238,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     //     ),
     //   ).paddingBody(),
     // );
-  return SizedBox();
+    return const SizedBox();
   }
 }

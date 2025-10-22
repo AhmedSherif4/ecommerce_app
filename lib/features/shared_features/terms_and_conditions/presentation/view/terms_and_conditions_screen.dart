@@ -58,6 +58,6 @@ class TermsAndConditionsScreen extends StatelessWidget {
     //   ),
     // );
 
-    return SizedBox();
+    return const SizedBox();
   }
 }

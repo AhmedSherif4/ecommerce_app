@@ -33,6 +33,7 @@ import 'package:ecommerce_app/core/theme_manager/service/injection_module.dart'
     as _i399;
 import 'package:ecommerce_app/core/theme_manager/theme_bloc/theme_bloc.dart'
     as _i976;
+import 'package:ecommerce_app/features/account/account.dart' as _i731;
 import 'package:ecommerce_app/features/auth/complete_profile_screen/data/social_register_data_source/social_register_remote_data_source.dart'
     as _i55;
 import 'package:ecommerce_app/features/auth/complete_profile_screen/data/social_registetr_repository/social_register_repository.dart'
@@ -51,6 +52,8 @@ import 'package:ecommerce_app/features/auth/login/login.dart' as _i569;
 import 'package:ecommerce_app/features/auth/sign_up/sign_up.dart' as _i613;
 import 'package:ecommerce_app/features/auth/verification/verification.dart'
     as _i1054;
+import 'package:ecommerce_app/features/cart/cart.dart' as _i146;
+import 'package:ecommerce_app/features/home/home.dart' as _i724;
 import 'package:ecommerce_app/features/home_layout/data/data_source/home_layout_remote_data_source/home_layout_remote_data_source.dart'
     as _i834;
 import 'package:ecommerce_app/features/home_layout/data/data_source/home_layout_repository_impl/home_layout_repository_impl.dart'
@@ -82,6 +85,8 @@ import 'package:ecommerce_app/features/intro/splash/domain/splash_usecases/check
     as _i390;
 import 'package:ecommerce_app/features/intro/splash/presentation/splash_view_model/splash_bloc.dart'
     as _i409;
+import 'package:ecommerce_app/features/saved/saved.dart' as _i577;
+import 'package:ecommerce_app/features/search/search.dart' as _i923;
 import 'package:ecommerce_app/features/shared_features/contact_us/data/contact_us_data_source/contact_us_local_data_sourcec.dart'
     as _i510;
 import 'package:ecommerce_app/features/shared_features/contact_us/data/contact_us_data_source/contact_us_remote_data_source.dart'
@@ -148,519 +153,418 @@ import 'package:internet_connection_checker/internet_connection_checker.dart'
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
 extension GetItInjectableX on _i174.GetIt {
-  // initializes the registration of main-scope dependencies inside of GetIt
+// initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) {
-    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final gh = _i526.GetItHelper(
+      this,
+      environment,
+      environmentFilter,
+    );
     final injectableModule = _$InjectableModule();
     final themeInjectionModule = _$ThemeInjectionModule();
     final notificationInjectableModule = _$NotificationInjectableModule();
     gh.factory<_i352.ImagePickBloc>(() => _i352.ImagePickBloc());
+    gh.factory<_i731.AccountCubit>(() => _i731.AccountCubit());
+    gh.factory<_i146.CartCubit>(() => _i146.CartCubit());
+    gh.factory<_i724.HomeCubit>(() => _i724.HomeCubit());
+    gh.factory<_i577.SavedCubit>(() => _i577.SavedCubit());
+    gh.factory<_i923.SearchCubit>(() => _i923.SearchCubit());
     gh.factory<_i954.LanguageBloc>(() => _i954.LanguageBloc());
     gh.lazySingleton<_i348.AppInterceptors>(() => _i348.AppInterceptors());
     gh.lazySingleton<_i361.Dio>(() => injectableModule.dio);
     gh.lazySingleton<_i973.InternetConnectionChecker>(
-      () => injectableModule.internetConnectionChecker,
-    );
+        () => injectableModule.internetConnectionChecker);
     gh.lazySingleton<_i558.FlutterSecureStorage>(
-      () => injectableModule.flutterSecureStorage,
-    );
+        () => injectableModule.flutterSecureStorage);
     gh.lazySingleton<_i454.SupabaseClient>(
-      () => injectableModule.supabaseClient,
-    );
+        () => injectableModule.supabaseClient);
     gh.lazySingleton<_i778.IAppThemeFactory>(
-      () => themeInjectionModule.themeFactory,
-    );
+        () => themeInjectionModule.themeFactory);
     gh.lazySingleton<_i103.IThemeRepository>(
-      () => themeInjectionModule.themeRepository,
-    );
+        () => themeInjectionModule.themeRepository);
     gh.lazySingleton<_i892.FirebaseMessaging>(
-      () => notificationInjectableModule.firebaseMessaging,
-    );
+        () => notificationInjectableModule.firebaseMessaging);
     gh.lazySingleton<_i163.FlutterLocalNotificationsPlugin>(
-      () => notificationInjectableModule.localNotif,
-    );
+        () => notificationInjectableModule.localNotif);
     gh.lazySingleton<_i409.GlobalKey<_i409.NavigatorState>>(
-      () => notificationInjectableModule.navigatorKey,
-    );
+        () => notificationInjectableModule.navigatorKey);
     gh.lazySingleton<_i242.NotificationRouterStrategy>(
-      () => notificationInjectableModule.notificationRouterStrategy,
-    );
+        () => notificationInjectableModule.notificationRouterStrategy);
     gh.lazySingleton<_i496.NotificationInitializer>(
-      () => notificationInjectableModule.notificationInitializer,
-    );
+        () => notificationInjectableModule.notificationInitializer);
     gh.lazySingleton<_i412.LocalNotificationHandler>(
-      () => notificationInjectableModule.localNotificationHandler,
-    );
+        () => notificationInjectableModule.localNotificationHandler);
     gh.lazySingleton<_i651.INotificationService>(
-      () => notificationInjectableModule.notificationService,
-    );
+        () => notificationInjectableModule.notificationService);
     gh.lazySingleton<_i1055.BaseLocalDataSource>(
-      () => _i1055.BaseLocalDataSourceImpl(),
-    );
+        () => _i1055.BaseLocalDataSourceImpl());
+    gh.lazySingleton<_i731.AccountLocalDataSource>(() =>
+        _i731.AccountLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
     gh.lazySingleton<_i405.NetworkInfo>(
-      () => _i405.NetworkInfoImpl(gh<_i973.InternetConnectionChecker>()),
-    );
-    gh.lazySingleton<_i183.UserLocalDataSource>(
-      () => _i183.UserLocalDataSourceImpl(
-        baseLocalDataSource: gh<_i1055.BaseLocalDataSource>(),
-      ),
-    );
+        () => _i405.NetworkInfoImpl(gh<_i973.InternetConnectionChecker>()));
+    gh.lazySingleton<_i183.UserLocalDataSource>(() =>
+        _i183.UserLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
     gh.lazySingleton<_i407.BaseRepository>(() => _i407.BaseRepositoryImpl());
-    gh.factory<_i976.ThemeBloc>(
-      () => _i976.ThemeBloc(
-        gh<_i778.IAppThemeFactory>(),
-        gh<_i103.IThemeRepository>(),
-      ),
-    );
+    gh.factory<_i976.ThemeBloc>(() => _i976.ThemeBloc(
+          gh<_i778.IAppThemeFactory>(),
+          gh<_i103.IThemeRepository>(),
+        ));
+    gh.lazySingleton<_i724.HomeLocalDataSource>(() =>
+        _i724.HomeLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
     gh.lazySingleton<_i176.ApiConsumer>(
-      () => _i190.DioConsumer(client: gh<_i361.Dio>()),
-    );
-    gh.lazySingleton<_i510.GetContactUsLocalDataSource>(
-      () => _i510.GetContactUsLocalDataSourceImpl(
-        localDataSource: gh<_i1055.BaseLocalDataSource>(),
-      ),
-    );
-    gh.lazySingleton<_i567.GetTermsAndConditionsLocalDataSource>(
-      () => _i567.GetTermsAndConditionsLocalDataSourceImpl(
-        localDataSource: gh<_i1055.BaseLocalDataSource>(),
-      ),
-    );
-    gh.lazySingleton<_i226.BaseAppSecurityData>(
-      () => _i226.AppSecurityData(
-        secureStorage: gh<_i558.FlutterSecureStorage>(),
-      ),
-    );
+        () => _i190.DioConsumer(client: gh<_i361.Dio>()));
+    gh.lazySingleton<_i510.GetContactUsLocalDataSource>(() =>
+        _i510.GetContactUsLocalDataSourceImpl(
+            localDataSource: gh<_i1055.BaseLocalDataSource>()));
+    gh.lazySingleton<_i567.GetTermsAndConditionsLocalDataSource>(() =>
+        _i567.GetTermsAndConditionsLocalDataSourceImpl(
+            localDataSource: gh<_i1055.BaseLocalDataSource>()));
+    gh.lazySingleton<_i226.BaseAppSecurityData>(() =>
+        _i226.AppSecurityData(secureStorage: gh<_i558.FlutterSecureStorage>()));
     gh.lazySingleton<_i831.BaseRemoteDataSource>(
-      () => _i831.BaseRemoteDataSourceImpl(
-        apiConsumer: gh<_i176.ApiConsumer>(),
-        networkInfo: gh<_i405.NetworkInfo>(),
-      ),
-    );
-    gh.lazySingleton<_i793.ContactUsRemoteDataSource>(
-      () => _i793.ContactUssRemoteDataSourceImpl(
-        gh<_i831.BaseRemoteDataSource>(),
-      ),
-    );
-    gh.lazySingleton<_i893.EditProfileRemoteDataSource>(
-      () => _i893.EditProfileRemoteDataSourceImpl(
-        baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>(),
-      ),
-    );
-    gh.lazySingleton<_i567.TermsAndConditionsRemoteDataSource>(
-      () => _i567.TermsAndConditionsRemoteDataSourceImpl(
-        gh<_i831.BaseRemoteDataSource>(),
-      ),
-    );
+        () => _i831.BaseRemoteDataSourceImpl(
+              apiConsumer: gh<_i176.ApiConsumer>(),
+              networkInfo: gh<_i405.NetworkInfo>(),
+            ));
+    gh.lazySingleton<_i731.AccountRemoteDataSource>(() =>
+        _i731.AccountRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
+    gh.lazySingleton<_i793.ContactUsRemoteDataSource>(() =>
+        _i793.ContactUssRemoteDataSourceImpl(gh<_i831.BaseRemoteDataSource>()));
+    gh.lazySingleton<_i893.EditProfileRemoteDataSource>(() =>
+        _i893.EditProfileRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
+    gh.lazySingleton<_i146.CartRemoteDataSource>(() =>
+        _i146.CartRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
+    gh.lazySingleton<_i567.TermsAndConditionsRemoteDataSource>(() =>
+        _i567.TermsAndConditionsRemoteDataSourceImpl(
+            gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i414.NotificationRemoteDataSource>(
-      () => _i414.NotificationRemoteDataSourceImpl(
-        remoteDataSource: gh<_i831.BaseRemoteDataSource>(),
-        apiConsumer: gh<_i176.ApiConsumer>(),
-      ),
-    );
+        () => _i414.NotificationRemoteDataSourceImpl(
+              remoteDataSource: gh<_i831.BaseRemoteDataSource>(),
+              apiConsumer: gh<_i176.ApiConsumer>(),
+            ));
+    gh.lazySingleton<_i923.SearchLocalDataSource>(() =>
+        _i923.SearchLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
     gh.lazySingleton<_i893.EditProfileBaseRepository>(
-      () => _i893.EditProfileRepository(
-        remoteDataSource: gh<_i893.EditProfileRemoteDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-        userLocalDataSource: gh<_i183.UserLocalDataSource>(),
-      ),
-    );
+        () => _i893.EditProfileRepository(
+              remoteDataSource: gh<_i893.EditProfileRemoteDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+              userLocalDataSource: gh<_i183.UserLocalDataSource>(),
+            ));
+    gh.lazySingleton<_i577.SavedLocalDataSource>(() =>
+        _i577.SavedLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
     gh.lazySingleton<_i29.CheckUserTokenBaseRemoteDataSource>(
-      () => _i29.CheckUserTokenRemoteDataSourceImpl(
-        networkInfo: gh<_i405.NetworkInfo>(),
-        apiConsumer: gh<_i176.ApiConsumer>(),
-        baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>(),
-      ),
-    );
-    gh.lazySingleton<_i504.OnBoardingLocalData>(
-      () => _i504.OnBoardingLocalDataImpl(
-        baseLocalDataSource: gh<_i1055.BaseLocalDataSource>(),
-      ),
-    );
-    gh.lazySingleton<_i537.SimulatedRemoteDataSource>(
-      () => _i537.SimulatedRemoteDataSourceImpl(
-        baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>(),
-      ),
-    );
-    gh.lazySingleton<_i613.SignUpRemoteDataSource>(
-      () => _i613.SignUpRemoteDataSourceImpl(gh<_i831.BaseRemoteDataSource>()),
-    );
+        () => _i29.CheckUserTokenRemoteDataSourceImpl(
+              networkInfo: gh<_i405.NetworkInfo>(),
+              apiConsumer: gh<_i176.ApiConsumer>(),
+              baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>(),
+            ));
+    gh.lazySingleton<_i146.CartLocalDataSource>(() =>
+        _i146.CartLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
+    gh.lazySingleton<_i504.OnBoardingLocalData>(() =>
+        _i504.OnBoardingLocalDataImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
+    gh.lazySingleton<_i577.SavedRemoteDataSource>(() =>
+        _i577.SavedRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
+    gh.lazySingleton<_i537.SimulatedRemoteDataSource>(() =>
+        _i537.SimulatedRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
+    gh.lazySingleton<_i724.HomeRemoteDataSource>(() =>
+        _i724.HomeRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
+    gh.lazySingleton<_i613.SignUpRemoteDataSource>(() =>
+        _i613.SignUpRemoteDataSourceImpl(gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i687.ContactUsBaseRepository>(
-      () => _i614.ContactUsRepository(
-        localDataSource: gh<_i510.GetContactUsLocalDataSource>(),
-        remoteDataSource: gh<_i793.ContactUsRemoteDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i109.GetContactUsUseCase>(
-      () => _i109.GetContactUsUseCase(
-        repository: gh<_i687.ContactUsBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i613.SignUpBaseRepository>(
-      () => _i613.SignUpRepository(
-        remoteDataSource: gh<_i613.SignUpRemoteDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-      ),
-    );
+        () => _i614.ContactUsRepository(
+              localDataSource: gh<_i510.GetContactUsLocalDataSource>(),
+              remoteDataSource: gh<_i793.ContactUsRemoteDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+            ));
+    gh.lazySingleton<_i109.GetContactUsUseCase>(() => _i109.GetContactUsUseCase(
+        repository: gh<_i687.ContactUsBaseRepository>()));
+    gh.lazySingleton<_i613.SignUpBaseRepository>(() => _i613.SignUpRepository(
+          remoteDataSource: gh<_i613.SignUpRemoteDataSource>(),
+          baseRepository: gh<_i407.BaseRepository>(),
+        ));
+    gh.lazySingleton<_i923.SearchRemoteDataSource>(() =>
+        _i923.SearchRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i1054.VerificationRemoteDataSource>(
-      () => _i1054.VerificationRemoteDataSourceImpl(
-        apiConsumer: gh<_i176.ApiConsumer>(),
-        networkInfo: gh<_i405.NetworkInfo>(),
-        baseDataSource: gh<_i831.BaseRemoteDataSource>(),
-        client: gh<_i454.SupabaseClient>(),
-      ),
-    );
+        () => _i1054.VerificationRemoteDataSourceImpl(
+              apiConsumer: gh<_i176.ApiConsumer>(),
+              networkInfo: gh<_i405.NetworkInfo>(),
+              baseDataSource: gh<_i831.BaseRemoteDataSource>(),
+              client: gh<_i454.SupabaseClient>(),
+            ));
     gh.lazySingleton<_i799.NotificationRepository>(
-      () => _i640.NotificationRepositoryImpl(
-        notificationRemoteDataSource: gh<_i414.NotificationRemoteDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i879.UnLinkRemoteDataSource>(
-      () => _i879.UnLinkRemoteDataSourceImpl(gh<_i831.BaseRemoteDataSource>()),
-    );
+        () => _i640.NotificationRepositoryImpl(
+              notificationRemoteDataSource:
+                  gh<_i414.NotificationRemoteDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+            ));
+    gh.lazySingleton<_i879.UnLinkRemoteDataSource>(() =>
+        _i879.UnLinkRemoteDataSourceImpl(gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i1042.GlobalBaseRemoteDataSource>(
-      () => _i1042.GlobalRemoteDataSourceImpl(
-        networkInfo: gh<_i405.NetworkInfo>(),
-        apiConsumer: gh<_i176.ApiConsumer>(),
-        baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>(),
-      ),
-    );
+        () => _i1042.GlobalRemoteDataSourceImpl(
+              networkInfo: gh<_i405.NetworkInfo>(),
+              apiConsumer: gh<_i176.ApiConsumer>(),
+              baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>(),
+            ));
     gh.lazySingleton<_i55.SocialRegisterBaseRemoteDataSource>(
-      () => _i55.SocialRegisterRemoteDataSourceImpl(
-        baseDataSource: gh<_i831.BaseRemoteDataSource>(),
-        client: gh<_i454.SupabaseClient>(),
-      ),
-    );
+        () => _i55.SocialRegisterRemoteDataSourceImpl(
+              baseDataSource: gh<_i831.BaseRemoteDataSource>(),
+              client: gh<_i454.SupabaseClient>(),
+            ));
+    gh.lazySingleton<_i731.AccountBaseRepository>(() => _i731.AccountRepository(
+          remoteDataSource: gh<_i731.AccountRemoteDataSource>(),
+          baseRepository: gh<_i407.BaseRepository>(),
+        ));
     gh.lazySingleton<_i530.GetSocialDataBaseRemoteDataSource>(
-      () => _i530.GetSocialDataRemoteDataSourceImpl(
-        gh<_i831.BaseRemoteDataSource>(),
-        gh<_i454.SupabaseClient>(),
-      ),
-    );
+        () => _i530.GetSocialDataRemoteDataSourceImpl(
+              gh<_i831.BaseRemoteDataSource>(),
+              gh<_i454.SupabaseClient>(),
+            ));
     gh.lazySingleton<_i569.LoginRemoteDataSource>(
-      () => _i569.LoginRemoteDataSourceImpl(
-        baseDataSource: gh<_i831.BaseRemoteDataSource>(),
-        userLocalDataSource: gh<_i183.UserLocalDataSource>(),
-        client: gh<_i454.SupabaseClient>(),
-        networkInfo: gh<_i405.NetworkInfo>(),
-      ),
-    );
+        () => _i569.LoginRemoteDataSourceImpl(
+              baseDataSource: gh<_i831.BaseRemoteDataSource>(),
+              userLocalDataSource: gh<_i183.UserLocalDataSource>(),
+              client: gh<_i454.SupabaseClient>(),
+              networkInfo: gh<_i405.NetworkInfo>(),
+            ));
     gh.lazySingleton<_i974.CheckUserTokenBaseRepository>(
-      () => _i670.CheckUserTokenRepository(
-        remoteDataSource: gh<_i29.CheckUserTokenBaseRemoteDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-        userLocalDataSource: gh<_i183.UserLocalDataSource>(),
-      ),
-    );
+        () => _i670.CheckUserTokenRepository(
+              remoteDataSource: gh<_i29.CheckUserTokenBaseRemoteDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+              userLocalDataSource: gh<_i183.UserLocalDataSource>(),
+            ));
     gh.lazySingleton<_i648.GetSocialDataBaseRepository>(
-      () => _i253.GetSocialDataRepositoryImpl(
-        getSocialDataBaseRemoteDataSource:
-            gh<_i530.GetSocialDataBaseRemoteDataSource>(),
-        userLocalDataSource: gh<_i183.UserLocalDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-        networkInfo: gh<_i405.NetworkInfo>(),
-      ),
-    );
+        () => _i253.GetSocialDataRepositoryImpl(
+              getSocialDataBaseRemoteDataSource:
+                  gh<_i530.GetSocialDataBaseRemoteDataSource>(),
+              userLocalDataSource: gh<_i183.UserLocalDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+              networkInfo: gh<_i405.NetworkInfo>(),
+            ));
     gh.lazySingleton<_i567.TermsAndConditionsBaseRepository>(
-      () => _i567.TermsAndConditionsRepository(
-        localDataSource: gh<_i567.GetTermsAndConditionsLocalDataSource>(),
-        remoteDataSource: gh<_i567.TermsAndConditionsRemoteDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i390.CheckUserTokenUseCase>(
-      () => _i390.CheckUserTokenUseCase(
-        repository: gh<_i974.CheckUserTokenBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i733.ForgetPasswordRemoteDataSource>(
-      () => _i733.ForgetPasswordRemoteDataSourceImpl(
-        baseDataSource: gh<_i831.BaseRemoteDataSource>(),
-      ),
-    );
+        () => _i567.TermsAndConditionsRepository(
+              localDataSource: gh<_i567.GetTermsAndConditionsLocalDataSource>(),
+              remoteDataSource: gh<_i567.TermsAndConditionsRemoteDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+            ));
+    gh.lazySingleton<_i390.CheckUserTokenUseCase>(() =>
+        _i390.CheckUserTokenUseCase(
+            repository: gh<_i974.CheckUserTokenBaseRepository>()));
+    gh.lazySingleton<_i733.ForgetPasswordRemoteDataSource>(() =>
+        _i733.ForgetPasswordRemoteDataSourceImpl(
+            baseDataSource: gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i1054.VerificationBaseRepository>(
-      () => _i1054.VerificationRepository(
-        userLocalDataSource: gh<_i183.UserLocalDataSource>(),
-        remoteDataSource: gh<_i1054.VerificationRemoteDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i834.HomeLayoutRemoteDataSource>(
-      () => _i834.HomeLayoutRemoteDataSourceImpl(
-        gh<_i831.BaseRemoteDataSource>(),
-      ),
-    );
-    gh.lazySingleton<_i80.HomeLayoutRepository>(
-      () => _i34.HomeLayoutRepositoryImpl(
-        baseRepository: gh<_i407.BaseRepository>(),
-        homeLayoutRemoteDataSource: gh<_i834.HomeLayoutRemoteDataSource>(),
-      ),
-    );
-    gh.lazySingleton<_i879.UnLinkRepository>(
-      () => _i879.UnLinkRepositoryImpl(
-        remoteDataSource: gh<_i879.UnLinkRemoteDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-      ),
-    );
+        () => _i1054.VerificationRepository(
+              userLocalDataSource: gh<_i183.UserLocalDataSource>(),
+              remoteDataSource: gh<_i1054.VerificationRemoteDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+            ));
+    gh.lazySingleton<_i834.HomeLayoutRemoteDataSource>(() =>
+        _i834.HomeLayoutRemoteDataSourceImpl(gh<_i831.BaseRemoteDataSource>()));
+    gh.lazySingleton<_i80.HomeLayoutRepository>(() =>
+        _i34.HomeLayoutRepositoryImpl(
+          baseRepository: gh<_i407.BaseRepository>(),
+          homeLayoutRemoteDataSource: gh<_i834.HomeLayoutRemoteDataSource>(),
+        ));
+    gh.lazySingleton<_i879.UnLinkRepository>(() => _i879.UnLinkRepositoryImpl(
+          remoteDataSource: gh<_i879.UnLinkRemoteDataSource>(),
+          baseRepository: gh<_i407.BaseRepository>(),
+        ));
+    gh.lazySingleton<_i724.HomeBaseRepository>(() => _i724.HomeRepository(
+          remoteDataSource: gh<_i724.HomeRemoteDataSource>(),
+          baseRepository: gh<_i407.BaseRepository>(),
+        ));
     gh.lazySingleton<_i537.SimulatedBaseRepository>(
-      () => _i537.SimulatedRepository(
-        baseRepository: gh<_i407.BaseRepository>(),
-        remoteDataSource: gh<_i537.SimulatedRemoteDataSource>(),
-      ),
-    );
-    gh.lazySingleton<_i893.ChangePasswordUseCase>(
-      () => _i893.ChangePasswordUseCase(
-        repository: gh<_i893.EditProfileBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i893.EditProfileUseCase>(
-      () => _i893.EditProfileUseCase(
-        repository: gh<_i893.EditProfileBaseRepository>(),
-      ),
-    );
-    gh.factory<_i893.EditProfileBloc>(
-      () => _i893.EditProfileBloc(
-        gh<_i893.EditProfileUseCase>(),
-        gh<_i893.ChangePasswordUseCase>(),
-      ),
-    );
+        () => _i537.SimulatedRepository(
+              baseRepository: gh<_i407.BaseRepository>(),
+              remoteDataSource: gh<_i537.SimulatedRemoteDataSource>(),
+            ));
+    gh.lazySingleton<_i577.SavedBaseRepository>(() => _i577.SavedRepository(
+          remoteDataSource: gh<_i577.SavedRemoteDataSource>(),
+          baseRepository: gh<_i407.BaseRepository>(),
+        ));
+    gh.lazySingleton<_i146.CartBaseRepository>(() => _i146.CartRepository(
+          remoteDataSource: gh<_i146.CartRemoteDataSource>(),
+          baseRepository: gh<_i407.BaseRepository>(),
+        ));
+    gh.lazySingleton<_i923.SearchBaseRepository>(() => _i923.SearchRepository(
+          remoteDataSource: gh<_i923.SearchRemoteDataSource>(),
+          baseRepository: gh<_i407.BaseRepository>(),
+        ));
+    gh.lazySingleton<_i893.ChangePasswordUseCase>(() =>
+        _i893.ChangePasswordUseCase(
+            repository: gh<_i893.EditProfileBaseRepository>()));
+    gh.lazySingleton<_i893.EditProfileUseCase>(() => _i893.EditProfileUseCase(
+        repository: gh<_i893.EditProfileBaseRepository>()));
+    gh.factory<_i893.EditProfileBloc>(() => _i893.EditProfileBloc(
+          gh<_i893.EditProfileUseCase>(),
+          gh<_i893.ChangePasswordUseCase>(),
+        ));
     gh.factory<_i380.ContactUsBloc>(
-      () => _i380.ContactUsBloc(gh<_i109.GetContactUsUseCase>()),
-    );
-    gh.lazySingleton<_i377.GetAppleDataUseCase>(
-      () => _i377.GetAppleDataUseCase(
-        getSocialDataBaseRepository: gh<_i648.GetSocialDataBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i802.GetGoogleDataUseCase>(
-      () => _i802.GetGoogleDataUseCase(
-        getSocialDataBaseRepository: gh<_i648.GetSocialDataBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i764.GlobalBaseRepository>(
-      () => _i432.GlobalRepository(
-        remoteDataSource: gh<_i1042.GlobalBaseRemoteDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-        userLocalDataSource: gh<_i183.UserLocalDataSource>(),
-      ),
-    );
-    gh.lazySingleton<_i613.SendVerificationCodeUseCase>(
-      () => _i613.SendVerificationCodeUseCase(
-        repository: gh<_i613.SignUpBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i569.LoginBaseRepository>(
-      () => _i569.LoginRepository(
-        remoteDataSource: gh<_i569.LoginRemoteDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-        userLocalDataSource: gh<_i183.UserLocalDataSource>(),
-      ),
-    );
+        () => _i380.ContactUsBloc(gh<_i109.GetContactUsUseCase>()));
+    gh.lazySingleton<_i377.GetAppleDataUseCase>(() => _i377.GetAppleDataUseCase(
+        getSocialDataBaseRepository: gh<_i648.GetSocialDataBaseRepository>()));
+    gh.lazySingleton<_i802.GetGoogleDataUseCase>(() =>
+        _i802.GetGoogleDataUseCase(
+            getSocialDataBaseRepository:
+                gh<_i648.GetSocialDataBaseRepository>()));
+    gh.lazySingleton<_i764.GlobalBaseRepository>(() => _i432.GlobalRepository(
+          remoteDataSource: gh<_i1042.GlobalBaseRemoteDataSource>(),
+          baseRepository: gh<_i407.BaseRepository>(),
+          userLocalDataSource: gh<_i183.UserLocalDataSource>(),
+        ));
+    gh.lazySingleton<_i613.SendVerificationCodeUseCase>(() =>
+        _i613.SendVerificationCodeUseCase(
+            repository: gh<_i613.SignUpBaseRepository>()));
+    gh.lazySingleton<_i569.LoginBaseRepository>(() => _i569.LoginRepository(
+          remoteDataSource: gh<_i569.LoginRemoteDataSource>(),
+          baseRepository: gh<_i407.BaseRepository>(),
+          userLocalDataSource: gh<_i183.UserLocalDataSource>(),
+        ));
     gh.factory<_i409.SplashBloc>(
-      () => _i409.SplashBloc(gh<_i390.CheckUserTokenUseCase>()),
-    );
-    gh.lazySingleton<_i167.NotificationUseCase>(
-      () => _i167.NotificationUseCase(
-        repository: gh<_i799.NotificationRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i167.ReadAllNotificationUseCase>(
-      () => _i167.ReadAllNotificationUseCase(
-        repository: gh<_i799.NotificationRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i167.UpdateNotificationUseCase>(
-      () => _i167.UpdateNotificationUseCase(
-        repository: gh<_i799.NotificationRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i49.SocialLoginUseCase>(
-      () =>
-          _i49.SocialLoginUseCase(repository: gh<_i569.LoginBaseRepository>()),
-    );
+        () => _i409.SplashBloc(gh<_i390.CheckUserTokenUseCase>()));
+    gh.lazySingleton<_i167.NotificationUseCase>(() => _i167.NotificationUseCase(
+        repository: gh<_i799.NotificationRepository>()));
+    gh.lazySingleton<_i167.ReadAllNotificationUseCase>(() =>
+        _i167.ReadAllNotificationUseCase(
+            repository: gh<_i799.NotificationRepository>()));
+    gh.lazySingleton<_i167.UpdateNotificationUseCase>(() =>
+        _i167.UpdateNotificationUseCase(
+            repository: gh<_i799.NotificationRepository>()));
+    gh.lazySingleton<_i49.SocialLoginUseCase>(() =>
+        _i49.SocialLoginUseCase(repository: gh<_i569.LoginBaseRepository>()));
     gh.lazySingleton<_i569.LoginUseCase>(
-      () => _i569.LoginUseCase(repository: gh<_i569.LoginBaseRepository>()),
-    );
+        () => _i569.LoginUseCase(repository: gh<_i569.LoginBaseRepository>()));
     gh.lazySingleton<_i395.SocialRegisterBaseRepository>(
-      () => _i984.SocialRegisterRepository(
-        remoteDataSource: gh<_i55.SocialRegisterBaseRemoteDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-        userLocalDataSource: gh<_i183.UserLocalDataSource>(),
-      ),
-    );
+        () => _i984.SocialRegisterRepository(
+              remoteDataSource: gh<_i55.SocialRegisterBaseRemoteDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+              userLocalDataSource: gh<_i183.UserLocalDataSource>(),
+            ));
     gh.lazySingleton<_i733.ForgetPasswordBaseRepository>(
-      () => _i733.ForgetPasswordRepository(
-        remoteDataSource: gh<_i733.ForgetPasswordRemoteDataSource>(),
-        baseRepository: gh<_i407.BaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i879.ChildAddExistParentScreenUseCase>(
-      () => _i879.ChildAddExistParentScreenUseCase(
-        repository: gh<_i879.UnLinkRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i879.ChildAddNewParentUseCase>(
-      () => _i879.ChildAddNewParentUseCase(
-        repository: gh<_i879.UnLinkRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i879.ParentAddExistChildUseCase>(
-      () => _i879.ParentAddExistChildUseCase(
-        repository: gh<_i879.UnLinkRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i879.ParentAddNewChildUseCase>(
-      () => _i879.ParentAddNewChildUseCase(
-        repository: gh<_i879.UnLinkRepository>(),
-      ),
-    );
+        () => _i733.ForgetPasswordRepository(
+              remoteDataSource: gh<_i733.ForgetPasswordRemoteDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+            ));
+    gh.lazySingleton<_i879.ChildAddExistParentScreenUseCase>(() =>
+        _i879.ChildAddExistParentScreenUseCase(
+            repository: gh<_i879.UnLinkRepository>()));
+    gh.lazySingleton<_i879.ChildAddNewParentUseCase>(() =>
+        _i879.ChildAddNewParentUseCase(
+            repository: gh<_i879.UnLinkRepository>()));
+    gh.lazySingleton<_i879.ParentAddExistChildUseCase>(() =>
+        _i879.ParentAddExistChildUseCase(
+            repository: gh<_i879.UnLinkRepository>()));
+    gh.lazySingleton<_i879.ParentAddNewChildUseCase>(() =>
+        _i879.ParentAddNewChildUseCase(
+            repository: gh<_i879.UnLinkRepository>()));
     gh.lazySingleton<_i879.UnLinkUseCase>(
-      () => _i879.UnLinkUseCase(repository: gh<_i879.UnLinkRepository>()),
-    );
-    gh.lazySingleton<_i537.GetSimulatedPlansUseCase>(
-      () => _i537.GetSimulatedPlansUseCase(
-        repository: gh<_i537.SimulatedBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i537.GetSimulatedExamsUseCase>(
-      () => _i537.GetSimulatedExamsUseCase(
-        repository: gh<_i537.SimulatedBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i537.GetSimulatedModelAnswersUseCase>(
-      () => _i537.GetSimulatedModelAnswersUseCase(
-        repository: gh<_i537.SimulatedBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i537.SubmitExamAnswerUseCase>(
-      () => _i537.SubmitExamAnswerUseCase(
-        repository: gh<_i537.SimulatedBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i567.GetTermsAndConditionsUseCase>(
-      () => _i567.GetTermsAndConditionsUseCase(
-        repository: gh<_i567.TermsAndConditionsBaseRepository>(),
-      ),
-    );
+        () => _i879.UnLinkUseCase(repository: gh<_i879.UnLinkRepository>()));
+    gh.lazySingleton<_i537.GetSimulatedPlansUseCase>(() =>
+        _i537.GetSimulatedPlansUseCase(
+            repository: gh<_i537.SimulatedBaseRepository>()));
+    gh.lazySingleton<_i537.GetSimulatedExamsUseCase>(() =>
+        _i537.GetSimulatedExamsUseCase(
+            repository: gh<_i537.SimulatedBaseRepository>()));
+    gh.lazySingleton<_i537.GetSimulatedModelAnswersUseCase>(() =>
+        _i537.GetSimulatedModelAnswersUseCase(
+            repository: gh<_i537.SimulatedBaseRepository>()));
+    gh.lazySingleton<_i537.SubmitExamAnswerUseCase>(() =>
+        _i537.SubmitExamAnswerUseCase(
+            repository: gh<_i537.SimulatedBaseRepository>()));
+    gh.lazySingleton<_i567.GetTermsAndConditionsUseCase>(() =>
+        _i567.GetTermsAndConditionsUseCase(
+            repository: gh<_i567.TermsAndConditionsBaseRepository>()));
     gh.lazySingleton<_i1065.GetGuestDataUseCase>(
-      () => _i1065.GetGuestDataUseCase(gh<_i764.GlobalBaseRepository>()),
-    );
-    gh.lazySingleton<_i1054.CheckVerificationCodeUseCase>(
-      () => _i1054.CheckVerificationCodeUseCase(
-        repository: gh<_i1054.VerificationBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i1054.ResendVerificationCodeUseCase>(
-      () => _i1054.ResendVerificationCodeUseCase(
-        repository: gh<_i1054.VerificationBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i1054.SignUpUseCase>(
-      () => _i1054.SignUpUseCase(
-        repository: gh<_i1054.VerificationBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i1065.CheckAppVersionUseCase>(
-      () => _i1065.CheckAppVersionUseCase(
-        repository: gh<_i764.GlobalBaseRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i1065.GetInfoUseCase>(
-      () => _i1065.GetInfoUseCase(repository: gh<_i764.GlobalBaseRepository>()),
-    );
-    gh.lazySingleton<_i1065.EditUserDataUseCase>(
-      () => _i1065.EditUserDataUseCase(
-        repository: gh<_i764.GlobalBaseRepository>(),
-      ),
-    );
-    gh.factory<_i641.GetSocialDataBloc>(
-      () => _i641.GetSocialDataBloc(
-        getGoogleDataUseCase: gh<_i802.GetGoogleDataUseCase>(),
-        getAppleDataUseCase: gh<_i377.GetAppleDataUseCase>(),
-      ),
-    );
-    gh.lazySingleton<_i778.CheckChildIsSubscribeUseCase>(
-      () => _i778.CheckChildIsSubscribeUseCase(
-        homeLayoutRepository: gh<_i80.HomeLayoutRepository>(),
-      ),
-    );
-
-    gh.lazySingleton<_i1023.SocialRegisterCodeUseCase>(
-      () => _i1023.SocialRegisterCodeUseCase(
-        repository: gh<_i395.SocialRegisterBaseRepository>(),
-      ),
-    );
+        () => _i1065.GetGuestDataUseCase(gh<_i764.GlobalBaseRepository>()));
+    gh.lazySingleton<_i1054.CheckVerificationCodeUseCase>(() =>
+        _i1054.CheckVerificationCodeUseCase(
+            repository: gh<_i1054.VerificationBaseRepository>()));
+    gh.lazySingleton<_i1054.ResendVerificationCodeUseCase>(() =>
+        _i1054.ResendVerificationCodeUseCase(
+            repository: gh<_i1054.VerificationBaseRepository>()));
+    gh.lazySingleton<_i1054.SignUpUseCase>(() => _i1054.SignUpUseCase(
+        repository: gh<_i1054.VerificationBaseRepository>()));
+    gh.lazySingleton<_i1065.CheckAppVersionUseCase>(() =>
+        _i1065.CheckAppVersionUseCase(
+            repository: gh<_i764.GlobalBaseRepository>()));
+    gh.lazySingleton<_i1065.GetInfoUseCase>(() =>
+        _i1065.GetInfoUseCase(repository: gh<_i764.GlobalBaseRepository>()));
+    gh.lazySingleton<_i1065.EditUserDataUseCase>(() =>
+        _i1065.EditUserDataUseCase(
+            repository: gh<_i764.GlobalBaseRepository>()));
+    gh.factory<_i641.GetSocialDataBloc>(() => _i641.GetSocialDataBloc(
+          getGoogleDataUseCase: gh<_i802.GetGoogleDataUseCase>(),
+          getAppleDataUseCase: gh<_i377.GetAppleDataUseCase>(),
+        ));
+    gh.lazySingleton<_i778.CheckChildIsSubscribeUseCase>(() =>
+        _i778.CheckChildIsSubscribeUseCase(
+            homeLayoutRepository: gh<_i80.HomeLayoutRepository>()));
+    gh.lazySingleton<_i1023.SocialRegisterCodeUseCase>(() =>
+        _i1023.SocialRegisterCodeUseCase(
+            repository: gh<_i395.SocialRegisterBaseRepository>()));
     gh.factory<_i867.SocialRegisterBloc>(
-      () => _i867.SocialRegisterBloc(gh<_i1023.SocialRegisterCodeUseCase>()),
-    );
-    gh.factory<_i879.UnLinkBloc>(
-      () => _i879.UnLinkBloc(
-        gh<_i879.UnLinkUseCase>(),
-        gh<_i879.ChildAddExistParentScreenUseCase>(),
-        gh<_i879.ChildAddNewParentUseCase>(),
-        gh<_i879.ParentAddNewChildUseCase>(),
-        gh<_i879.ParentAddExistChildUseCase>(),
-      ),
-    );
-    gh.factory<_i532.NotificationBloc>(
-      () => _i532.NotificationBloc(
-        gh<_i167.NotificationUseCase>(),
-        gh<_i167.ReadAllNotificationUseCase>(),
-        gh<_i167.UpdateNotificationUseCase>(),
-      ),
-    );
-    gh.factory<_i708.HomeLayoutBloc>(
-      () => _i708.HomeLayoutBloc(gh<_i778.CheckChildIsSubscribeUseCase>()),
-    );
-    gh.factory<_i569.LoginBloc>(
-      () => _i569.LoginBloc(
-        loginUseCase: gh<_i569.LoginUseCase>(),
-        socialLoginUseCase: gh<_i49.SocialLoginUseCase>(),
-      ),
-    );
+        () => _i867.SocialRegisterBloc(gh<_i1023.SocialRegisterCodeUseCase>()));
+    gh.factory<_i879.UnLinkBloc>(() => _i879.UnLinkBloc(
+          gh<_i879.UnLinkUseCase>(),
+          gh<_i879.ChildAddExistParentScreenUseCase>(),
+          gh<_i879.ChildAddNewParentUseCase>(),
+          gh<_i879.ParentAddNewChildUseCase>(),
+          gh<_i879.ParentAddExistChildUseCase>(),
+        ));
+    gh.factory<_i532.NotificationBloc>(() => _i532.NotificationBloc(
+          gh<_i167.NotificationUseCase>(),
+          gh<_i167.ReadAllNotificationUseCase>(),
+          gh<_i167.UpdateNotificationUseCase>(),
+        ));
+    gh.factory<_i569.LoginBloc>(() => _i569.LoginBloc(
+          loginUseCase: gh<_i569.LoginUseCase>(),
+          socialLoginUseCase: gh<_i49.SocialLoginUseCase>(),
+        ));
     gh.factory<_i613.SignUpBloc>(
-      () => _i613.SignUpBloc(gh<_i613.SendVerificationCodeUseCase>()),
-    );
-    gh.factory<_i866.GlobalBloc>(
-      () => _i866.GlobalBloc(
-        gh<_i1065.GetGuestDataUseCase>(),
-        gh<_i1065.CheckAppVersionUseCase>(),
-        gh<_i1065.GetInfoUseCase>(),
-        gh<_i1065.EditUserDataUseCase>(),
-      ),
-    );
-    gh.lazySingleton<_i733.ForgetPasswordUseCase>(
-      () => _i733.ForgetPasswordUseCase(
-        repository: gh<_i733.ForgetPasswordBaseRepository>(),
-      ),
-    );
-    gh.factory<_i567.TermsAndConditionsBloc>(
-      () => _i567.TermsAndConditionsBloc(
-        gh<_i567.GetTermsAndConditionsUseCase>(),
-      ),
-    );
-    gh.factory<_i537.SimulatedBloc>(
-      () => _i537.SimulatedBloc(
-        gh<_i537.GetSimulatedPlansUseCase>(),
-        gh<_i537.GetSimulatedExamsUseCase>(),
-        gh<_i537.GetSimulatedModelAnswersUseCase>(),
-        gh<_i537.SubmitExamAnswerUseCase>(),
-      ),
-    );
-    gh.factory<_i1054.VerificationBloc>(
-      () => _i1054.VerificationBloc(
-        gh<_i1054.CheckVerificationCodeUseCase>(),
-        gh<_i1054.ResendVerificationCodeUseCase>(),
-        gh<_i1054.SignUpUseCase>(),
-      ),
-    );
+        () => _i613.SignUpBloc(gh<_i613.SendVerificationCodeUseCase>()));
+    gh.factory<_i866.GlobalBloc>(() => _i866.GlobalBloc(
+          gh<_i1065.GetGuestDataUseCase>(),
+          gh<_i1065.CheckAppVersionUseCase>(),
+          gh<_i1065.GetInfoUseCase>(),
+          gh<_i1065.EditUserDataUseCase>(),
+        ));
+    gh.lazySingleton<_i733.ForgetPasswordUseCase>(() =>
+        _i733.ForgetPasswordUseCase(
+            repository: gh<_i733.ForgetPasswordBaseRepository>()));
+    gh.factory<_i567.TermsAndConditionsBloc>(() =>
+        _i567.TermsAndConditionsBloc(gh<_i567.GetTermsAndConditionsUseCase>()));
+    gh.factory<_i537.SimulatedBloc>(() => _i537.SimulatedBloc(
+          gh<_i537.GetSimulatedPlansUseCase>(),
+          gh<_i537.GetSimulatedExamsUseCase>(),
+          gh<_i537.GetSimulatedModelAnswersUseCase>(),
+          gh<_i537.SubmitExamAnswerUseCase>(),
+        ));
+    gh.factory<_i1054.VerificationBloc>(() => _i1054.VerificationBloc(
+          gh<_i1054.CheckVerificationCodeUseCase>(),
+          gh<_i1054.ResendVerificationCodeUseCase>(),
+          gh<_i1054.SignUpUseCase>(),
+        ));
     gh.factory<_i733.ForgetPasswordBloc>(
-      () => _i733.ForgetPasswordBloc(gh<_i733.ForgetPasswordUseCase>()),
-    );
+        () => _i733.ForgetPasswordBloc(gh<_i733.ForgetPasswordUseCase>()));
+    gh.factory<_i708.HomeLayoutBloc>(
+        () => _i708.HomeLayoutBloc(gh<_i778.CheckChildIsSubscribeUseCase>()));
     return this;
   }
 }

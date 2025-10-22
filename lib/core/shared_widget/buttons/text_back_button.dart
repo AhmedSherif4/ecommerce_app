@@ -34,7 +34,7 @@ class TextBackButton extends StatelessWidget {
                 },
           ),
           Spacing.spaceSW10,
-          Icon(Icons.arrow_forward_ios, color: Colors.orange, size: 16),
+          const Icon(Icons.arrow_forward_ios, color: Colors.orange, size: 16),
         ],
       ),
     );

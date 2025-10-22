@@ -228,7 +228,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Spacing.spaceHS16,
                     const DividerOrWidget(),
                     Spacing.spaceHS16,
-                    GetSocialView(),
+                    const GetSocialView(),
                     Spacing.spaceHS16,
                     Align(
                       alignment: AlignmentGeometry.center,

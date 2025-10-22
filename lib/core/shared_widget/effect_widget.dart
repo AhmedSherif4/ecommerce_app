@@ -28,7 +28,7 @@ class EffectWidget extends StatelessWidget {
               minWidth: MediaQuery.sizeOf(context).width,
             ),
             decoration: BoxDecoration(
-              color: Color(0xffF15A22),
+              color: const Color(0xffF15A22),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(AppBorders.appBorderWidthR30),
                 bottomRight: Radius.circular(AppBorders.appBorderWidthR30),

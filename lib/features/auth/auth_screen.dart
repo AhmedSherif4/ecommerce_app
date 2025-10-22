@@ -41,7 +41,7 @@ class TabletAuthView extends StatelessWidget {
     return Row(
       children: [
         SizedBox(width: AppReference.deviceWidth(context) * 0.2),
-        Expanded(child: MobileAuthView()),
+        const Expanded(child: MobileAuthView()),
         SizedBox(width: AppReference.deviceWidth(context) * 0.2),
       ],
     );
@@ -76,7 +76,7 @@ class _MobileAuthViewState extends State<MobileAuthView> {
         Expanded(
           child: IndexedStack(
             index: selectedTabIndex,
-            children: [LoginScreen(), SignUpScreen()],
+            children: const [LoginScreen(), SignUpScreen()],
           ),
         ),
       ],

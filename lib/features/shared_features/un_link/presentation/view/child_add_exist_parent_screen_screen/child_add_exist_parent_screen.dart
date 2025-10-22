@@ -1,6 +1,5 @@
 part of '../../../un_link.dart';
 
-
 class ChildAddExistParentScreen extends StatefulWidget {
   const ChildAddExistParentScreen({super.key});
 
@@ -77,6 +76,6 @@ class _ChildAddExistParentScreenState extends State<ChildAddExistParentScreen> {
     //         AppReference.deviceHeight(context) * 0.17.responsiveHeightRatio,
     //   ),
     // );
-  return SizedBox();
+    return const SizedBox();
   }
 }

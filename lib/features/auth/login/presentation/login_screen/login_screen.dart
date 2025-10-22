@@ -184,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     Spacing.spaceHS16,
 
-                    GetSocialView(),
+                    const GetSocialView(),
 
                     Spacing.spaceHS16,
 

@@ -55,12 +55,33 @@ class HomeScreen extends StatelessWidget {
                           child: CustomSearchField(
                             onSearchTap: (value) {
                               value.log();
+                              context.read<SearchCubit>().changeValue(value);
+                              context.read<HomeLayoutBloc>().add(
+                                ChangeBottomNavBarIndexEvent(1),
+                              );
                             },
                           ),
                         ),
                         Spacing.spaceSW5,
                         CustomInkWell(
-                          onTap: () {},
+                          onTap: () async {
+                            final result = await FilterBottomSheet.show(
+                              context,
+                            );
+                            if (result != null) {
+                              // هنا هترجع FilterState النهائية
+                              print(
+                                'Selected sort: ${result.selectedSortIndex}',
+                              );
+                              print(
+                                'Price range: ${result.priceRange.start} - ${result.priceRange.end}',
+                              );
+                              print('Size: ${result.selectedSize}');
+                              // طبق الفلاتر على البيانات بتاعتك
+                            } else {
+                              // المستخدم قفل الشيت بدون apply
+                            }
+                          },
                           child: Container(
                             width: Spacing.s50,
                             height: Spacing.s50,
@@ -222,6 +243,9 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
         ),
       ),
       child: TextFormField(
+        onChanged: (value) {
+          widget.onSearchTap(value);
+        },
         cursorColor: context.colors.primary9,
         controller: _controller,
         decoration: InputDecoration(

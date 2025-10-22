@@ -72,7 +72,7 @@ class VerificationRemoteDataSourceImpl implements VerificationRemoteDataSource {
         token: signupResult.session!.accessToken,
       );
       'saved token'.log();
-      print(client.auth.currentSession?.user?.id);
+      print(client.auth.currentSession?.user.id);
       print(client.auth.currentSession?.accessToken);
 
       getIt<BaseAppSecurityData>().getToken().log();

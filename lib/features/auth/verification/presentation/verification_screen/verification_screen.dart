@@ -203,7 +203,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
 class _ResendCodeWidget extends StatelessWidget {
   final VoidCallback? onPressed;
-  const _ResendCodeWidget({super.key, required this.onPressed});
+  const _ResendCodeWidget({required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
