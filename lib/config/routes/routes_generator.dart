@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/features/auth/forget_password/forget_password.dart';
+import 'package:ecommerce_app/features/home/home.dart';
 import 'package:ecommerce_app/features/home_layout/home_layout.dart';
 import 'package:ecommerce_app/features/intro/onboarding/on_boarding_screen.dart';
 import 'package:ecommerce_app/features/intro/splash/presentation/view/splash_screen.dart';
@@ -17,6 +18,7 @@ import '../../features/auth/login/presentation/login_screen/login_screen.dart';
 import '../../features/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../features/auth/sign_up/sign_up.dart';
 import '../../features/auth/verification/verification.dart';
+import '../../features/details_product/details_product.dart';
 import '../../features/search/search.dart';
 import '../../features/shared_features/contact_us/presentations/view_model/contact_us_bloc.dart';
 import '../../features/shared_features/notification/presentation/view/notification_manager_screen.dart';
@@ -133,6 +135,15 @@ class AppRouteGenerator {
           builder: (_) => BlocProvider.value(
             value: getIt<NotificationBloc>(),
             child: const NotificationManagerScreen(),
+          ),
+        );
+      case AppRoutesNames.rDetailsProductScreen:
+        ProductModel product = settings.arguments as ProductModel;
+
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<DetailsProductCubit>(),
+            child: DetailsProductScreen(product),
           ),
         );
       case AppRoutesNames.rSearchScreen:

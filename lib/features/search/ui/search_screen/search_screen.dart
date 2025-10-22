@@ -70,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return SliverAppBar(
       pinned: false,
       floating: false,
-      expandedHeight: tablet ? 190 : 100,
+      expandedHeight: tablet ? 190 : 140,
       flexibleSpace: FlexibleSpaceBar(
         background: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

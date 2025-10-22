@@ -21,7 +21,11 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigate to product details by id
+        RouteManager.rPushNamed(
+          context: context,
+          rName: AppRoutesNames.rDetailsProductScreen,
+          arguments: product,
+        );
       },
       child: Stack(
         clipBehavior: Clip.none, // علشان الزرار يطلع برا حدود الStack
