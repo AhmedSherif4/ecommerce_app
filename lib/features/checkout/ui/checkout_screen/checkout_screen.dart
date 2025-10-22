@@ -47,7 +47,12 @@ class DeliveryAddress extends StatelessWidget {
           children: [
             Text('Delivery Address', style: context.typography.titleMedium),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                RouteManager.rPushNamed(
+                  context: context,
+                  rName: AppRoutesNames.rAddressScreen,
+                );
+              },
               child: Text(
                 'Change',
                 textAlign: TextAlign.right,
@@ -214,7 +219,7 @@ class PaymentMethod extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             decoration: ShapeDecoration(
               shape: RoundedRectangleBorder(
-                side: BorderSide(width: 1, color: const Color(0xFFE6E6E6)),
+                side: BorderSide(width: 1, color: context.colors.primary1),
                 borderRadius: BorderRadius.circular(10),
               ),
             ),

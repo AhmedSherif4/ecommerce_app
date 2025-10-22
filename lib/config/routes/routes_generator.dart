@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/services/services_locator.dart';
 import '../../core/shared_models/user/user_entity/user_entity.dart';
+import '../../features/address/address.dart';
 import '../../features/auth/complete_profile_screen/complete_profile_screen.dart';
 import '../../features/auth/complete_profile_screen/social_register_view_model/social_register_bloc.dart';
 import '../../features/auth/login/login.dart';
@@ -151,7 +152,14 @@ class AppRouteGenerator {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<CheckoutCubit>(),
-            child: CheckoutScreen(),
+            child: const CheckoutScreen(),
+          ),
+        );
+      case AppRoutesNames.rAddressScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => AddressCubit()..loadAddresses(),
+            child: const AddressScreen(),
           ),
         );
       case AppRoutesNames.rSearchScreen:

@@ -25,4 +25,6 @@ abstract class AppRoutesNames {
   static const String rDetailsProductScreen = '/details_product_screen';
 
   static const String rCheckoutScreen = '/checkout_screen';
+
+  static const String rAddressScreen = '/address_screen';
 }

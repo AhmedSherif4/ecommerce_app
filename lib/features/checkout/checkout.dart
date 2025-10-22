@@ -1,4 +1,6 @@
 import 'package:ecommerce_app/app_assets/app_assets.dart';
+import 'package:ecommerce_app/config/routes/route_manager.dart';
+import 'package:ecommerce_app/config/routes/routes_names.dart';
 import 'package:ecommerce_app/core/responsive_manager/responsive_extensions.dart';
 import 'package:ecommerce_app/core/responsive_manager/spacing_facade.dart';
 import 'package:ecommerce_app/core/shared_widget/buttons/button_widget.dart';
@@ -24,4 +26,6 @@ part 'data/checkout_repository/checkout_repository.dart';
 part 'logic/checkout_cubit/checkout_cubit.dart';
 part 'logic/checkout_cubit/checkout_state.dart';
 part 'ui/checkout_screen/checkout_screen.dart';
+part 'ui/checkout_screen/new_card_screen.dart';
+part 'ui/checkout_screen/payment_method_screen.dart';
 part 'ui/checkout_widgets/checkout_widgets.dart';
