@@ -38,7 +38,7 @@ class _CustomTabsState extends State<CustomTabs> {
     return Container(
       height: Spacing.tabBarHeight, // Responsive height
       decoration: BoxDecoration(
-        color: context.colors.primary5,
+        color: context.colors.primary1,
         borderRadius: BorderRadius.circular(AppBorders.appBorderWidthR15),
       ),
       child: Padding(
@@ -52,7 +52,7 @@ class _CustomTabsState extends State<CustomTabs> {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: selectedTab == 0
-                        ? context.colors.primary4
+                        ? context.colors.primary0
                         : Colors.transparent,
                     borderRadius: BorderRadius.circular(
                       AppBorders.appBorderWidthR15,
@@ -77,7 +77,7 @@ class _CustomTabsState extends State<CustomTabs> {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: selectedTab == 1
-                        ? context.colors.primary4
+                        ? context.colors.primary0
                         : Colors.transparent,
                     borderRadius: BorderRadius.circular(
                       AppBorders.appBorderWidthR15,

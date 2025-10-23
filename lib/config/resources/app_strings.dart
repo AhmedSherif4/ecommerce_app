@@ -190,4 +190,7 @@ abstract class AppStrings {
       'You haven’t gotten any notifications yet!';
 
   static const String details = 'Details';
+
+  static const String permissionPhotoMessage =
+      'Please give us permission for photos.';
 }

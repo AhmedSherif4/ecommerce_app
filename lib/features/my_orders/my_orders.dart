@@ -1,0 +1,29 @@
+import 'package:ecommerce_app/core/responsive_manager/responsive_extensions.dart';
+import 'package:ecommerce_app/core/responsive_manager/spacing_facade.dart';
+import 'package:ecommerce_app/core/shared_widget/buttons/button_widget.dart';
+import 'package:ecommerce_app/core/text_styling/extensions/app_text_theme.dart';
+import 'package:ecommerce_app/core/theme_manager/service/app_colors.dart';
+import 'package:ecommerce_app/features/shared_features/header_for_more.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../../../config/base_local_data_source/base_local_data_source.dart';
+import '../../../../config/base_remote_data_source/base_remote_data_source.dart';
+import '../../../../config/base_repository/base_repository.dart';
+import '../../config/resources/app_constants.dart';
+import '../../config/resources/app_shadow.dart';
+import '../../core/shared_widget/custom_inkwell.dart';
+import '../../core/shared_widget/custom_tabs.dart';
+import '../../core/shared_widget/nullable_network_image.dart';
+
+part 'data/my_orders_data_source/my_orders_local_data_source.dart';
+part 'data/my_orders_data_source/my_orders_remote_data_source.dart';
+part 'data/my_orders_models/my_orders_entity.dart';
+part 'data/my_orders_models/my_orders_model.dart';
+part 'data/my_orders_repository/my_orders_repository.dart';
+part 'logic/my_orders_cubit/my_orders_cubit.dart';
+part 'logic/my_orders_cubit/my_orders_state.dart';
+part 'ui/my_orders_screen/my_orders_screen.dart';
+part 'ui/my_orders_widgets/my_orders_widgets.dart';

@@ -15,8 +15,6 @@ abstract class AppRoutesNames {
   //Layout for All Users
   static const String rHomeLayoutView = '/home_layout';
 
-  static const String rEditProfileScreen = '/edit_profile';
-
   static const String rNotificationScreen = '/notification_screen';
 
   static const String rNotificationManagerScreen =
@@ -25,6 +23,15 @@ abstract class AppRoutesNames {
   static const String rDetailsProductScreen = '/details_product_screen';
 
   static const String rCheckoutScreen = '/checkout_screen';
+  static const String rPaymentMethodsScreen = '/payment_methods';
 
   static const String rAddressScreen = '/address_screen';
+
+  static const String rMyOrdersScreen = '/my_orders_screen';
+  static const String rEditProfileScreen = '/edit_profile';
+  static const String rProfileDetailsScreen = '/profile_details_profile';
+
+  static const String rFaqsScreen = '/faqs_screen';
+
+  static const String rHelpCenterScreen = '/help_center_screen';
 }

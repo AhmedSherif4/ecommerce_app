@@ -300,7 +300,7 @@ class TabletSpacingConfig implements ISpacingConfig {
   double get s100 => 130.0;
 
   @override
-  double get cartH => 200;
+  double get cartH => 300;
 
   @override
   double get cartW => 500;

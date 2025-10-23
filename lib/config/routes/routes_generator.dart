@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/features/auth/forget_password/forget_password.dart';
 import 'package:ecommerce_app/features/checkout/checkout.dart';
+import 'package:ecommerce_app/features/help_center/help_center.dart';
 import 'package:ecommerce_app/features/home/home.dart';
 import 'package:ecommerce_app/features/home_layout/home_layout.dart';
 import 'package:ecommerce_app/features/intro/onboarding/on_boarding_screen.dart';
@@ -7,6 +8,7 @@ import 'package:ecommerce_app/features/intro/splash/presentation/view/splash_scr
 import 'package:ecommerce_app/features/saved/saved.dart';
 import 'package:ecommerce_app/features/shared_features/notification/presentation/view/notification_screen.dart';
 import 'package:ecommerce_app/features/shared_features/notification/presentation/view_model/notification_bloc.dart';
+import 'package:ecommerce_app/features/shared_features/profile/edit_profile/presentation/view/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,9 +23,12 @@ import '../../features/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../features/auth/sign_up/sign_up.dart';
 import '../../features/auth/verification/verification.dart';
 import '../../features/details_product/details_product.dart';
+import '../../features/faqs/faqs.dart';
+import '../../features/my_orders/my_orders.dart';
 import '../../features/search/search.dart';
 import '../../features/shared_features/contact_us/presentations/view_model/contact_us_bloc.dart';
 import '../../features/shared_features/notification/presentation/view/notification_manager_screen.dart';
+import '../../features/shared_features/profile/edit_profile/edit_profile.dart';
 import 'routes_names.dart';
 import 'un_defined_route.dart';
 
@@ -155,11 +160,53 @@ class AppRouteGenerator {
             child: const CheckoutScreen(),
           ),
         );
+      case AppRoutesNames.rPaymentMethodsScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<CheckoutCubit>(),
+            child: const PaymentMethodScreen(),
+          ),
+        );
       case AppRoutesNames.rAddressScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => AddressCubit()..loadAddresses(),
+            create: (context) => getIt<AddressCubit>()..loadAddresses(),
             child: const AddressScreen(),
+          ),
+        );
+      case AppRoutesNames.rMyOrdersScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<MyOrdersCubit>(),
+            child: const MyOrdersScreen(),
+          ),
+        );
+      case AppRoutesNames.rProfileDetailsScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<EditProfileBloc>(),
+            child: const ProfileDetailsScreen(),
+          ),
+        );
+      case AppRoutesNames.rEditProfileScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<EditProfileBloc>(),
+            child: const EditProfileScreen(),
+          ),
+        );
+      case AppRoutesNames.rFaqsScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<FaqsCubit>(),
+            child: const FaqsScreen(),
+          ),
+        );
+      case AppRoutesNames.rHelpCenterScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<HelpCenterCubit>(),
+            child: const HelpCenterScreen(),
           ),
         );
       case AppRoutesNames.rSearchScreen:

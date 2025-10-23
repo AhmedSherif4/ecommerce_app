@@ -8,22 +8,19 @@ import 'package:flutter/material.dart';
 import '../../../../../../../core/shared_models/user/data/user_local_data_source/user_local_data_source.dart';
 import '../../../../../../../core/shared_models/user/user_entity/user_entity.dart';
 
-class ChildAccountDetailsScreen extends StatefulWidget {
-  const ChildAccountDetailsScreen({super.key});
+class ProfileDetailsScreen extends StatefulWidget {
+  const ProfileDetailsScreen({super.key});
 
   @override
-  State<ChildAccountDetailsScreen> createState() =>
-      _ChildAccountDetailsScreenState();
+  State<ProfileDetailsScreen> createState() => _ProfileDetailsScreenState();
 }
 
-class _ChildAccountDetailsScreenState extends State<ChildAccountDetailsScreen> {
+class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
   late UserEntity userData;
   File imageFile = File("");
   @override
   void didChangeDependencies() {
-    setState(() {
-      userData = getIt<UserLocalDataSource>().getUserData()!;
-    });
+    userData = getIt<UserLocalDataSource>().getUserData()!;
     super.didChangeDependencies();
   }
 
@@ -56,77 +53,85 @@ class _ChildAccountDetailsScreenState extends State<ChildAccountDetailsScreen> {
     //     child: SingleChildScrollView(
     //       child: Column(
     //         children: [
-    //           const HeaderForMore(
-    //             title: AppStrings.accountDetails,
-    //           ),
+    //           HeaderForMore(title: 'My Details'),
     //           PickImageInkWell(
-    //               pickImageWidget:  ImageAccountMoreWidget(
-    //                 withCamera: true,
-    //                 imageFile: imageFile,
-    //               ),
-    //               loadingPickImageWidget: ImageAccountMoreWidget(
-    //                 withCamera: true,
-    //                 imageFile: imageFile,
-    //               ),
-    //               loadedPickImageWidget: StatefulBuilder(
-    //                   builder: (context, updateState) {
-    //                     return ImageAccountMoreWidget(
-    //                       withCamera: true,
-    //                       imageFile: imageFile,
-    //                     );
-    //                   }
-    //               ),
-    //               errorPickImageWidget:  ImageAccountMoreWidget(
-    //                 withCamera: true,
-    //                 imageFile: imageFile,
-    //               ),
-    //               pickImageShape: PickImageShape.bottomSheet,
-    //               permissionDialogMessage: AppStrings.permissionPhotoMessage,
-    //               onErrorMessage:(value){} ,
-    //               onPickFile:(value){
-    //                 imageFile = value;
-    //                 getIt<EditProfileBloc>().add(EditProfile(
-    //                   image: imageFile.path,
-    //                   withImage: true,));
-    //               } ),
-    //           AppSize.s12.sizedBoxHeight,
-    //           if((AppReference.deviceIsTablet && !AppReference.isPortrait(context)))
+    //             pickImageWidget: ImageAccountMoreWidget(
+    //               withCamera: true,
+    //               imageFile: imageFile,
+    //             ),
+    //             loadingPickImageWidget: ImageAccountMoreWidget(
+    //               withCamera: true,
+    //               imageFile: imageFile,
+    //             ),
+    //             loadedPickImageWidget: StatefulBuilder(
+    //               builder: (context, updateState) {
+    //                 return ImageAccountMoreWidget(
+    //                   withCamera: true,
+    //                   imageFile: imageFile,
+    //                 );
+    //               },
+    //             ),
+    //             errorPickImageWidget: ImageAccountMoreWidget(
+    //               withCamera: true,
+    //               imageFile: imageFile,
+    //             ),
+    //             pickImageShape: PickImageShape.bottomSheet,
+    //             permissionDialogMessage: AppStrings.permissionPhotoMessage,
+    //             onErrorMessage: (value) {},
+    //             onPickFile: (value) {
+    //               imageFile = value;
+    //               getIt<EditProfileBloc>().add(
+    //                 EditProfile(image: imageFile.path, withImage: true),
+    //               );
+    //             },
+    //           ),
+    //           Spacing.spaceHS10,
+    //           if ((AppReference.deviceIsTablet &&
+    //               !AppReference.isPortrait(context)))
     //             Container(
-    //               padding: EdgeInsets.all(20.responsiveSize),
+    //               padding: EdgeInsets.all(20.r),
     //               decoration: BoxDecoration(
-    //                 color: AppColors.white,
-    //                 borderRadius: BorderRadius.circular(AppConstants.appBorderRadiusR20.responsiveSize),
+    //                 color: context.colors.primary0,
+    //                 borderRadius: BorderRadius.circular(
+    //                   AppConstants.appBorderRadiusR20,
+    //                 ),
     //               ),
-    //               child: GridView(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-    //                 childAspectRatio: 8/.8,
-    //                 crossAxisCount: 2,
-    //                 mainAxisSpacing: 20,
-    //                 crossAxisSpacing: 30,),
+    //               child: GridView(
+    //                 gridDelegate:
+    //                     const SliverGridDelegateWithFixedCrossAxisCount(
+    //                       childAspectRatio: 8 / .8,
+    //                       crossAxisCount: 2,
+    //                       mainAxisSpacing: 20,
+    //                       crossAxisSpacing: 30,
+    //                     ),
     //                 shrinkWrap: true,
     //                 physics: const NeverScrollableScrollPhysics(),
     //                 children: [
-    //                   ...data.map((e) => ListTileUpdateUserDataWidget(
-    //                     title: e['title'],
-    //                     subtitle: e['subtitle'],
-    //                     withEdit: e['withEdit'],
-    //                     routeTo: e['routeTo'] as String?,
-    //                   ),),
+    //                   ...data.map(
+    //                     (e) => ListTileUpdateUserDataWidget(
+    //                       title: e['title'],
+    //                       subtitle: e['subtitle'],
+    //                       withEdit: e['withEdit'],
+    //                       routeTo: e['routeTo'] as String?,
+    //                     ),
+    //                   ),
     //                   (userData.socialId?.isEmpty ?? true)
     //                       ? const ChangePasswordUpdateUserDataWidget(
-    //                     title: AppStrings.changePassword,
-    //                     icon: AppIconsAssets.sPasswordChange,
-    //                     routeTo: AppRoutesNames.rChangePasswordScreen,
-    //                   )
+    //                           title: AppStrings.changePassword,
+    //                           icon: AppIconsAssets.sPasswordChange,
+    //                           routeTo: AppRoutesNames.rChangePasswordScreen,
+    //                         )
     //                       : const SizedBox.shrink(),
     //                 ],
     //               ),
     //             ),
-    //           if(!AppReference.deviceIsTablet||(AppReference.deviceIsTablet && AppReference.isPortrait(context))
-    //           )...[
+    //           if (!AppReference.deviceIsTablet ||
+    //               (AppReference.deviceIsTablet &&
+    //                   AppReference.isPortrait(context))) ...[
     //             ListView.separated(
     //               itemBuilder: (context, index) => ListTileUpdateUserDataWidget(
-    //                 withAdd:data[index]['subtitle'] == "",
-    //                 withCopy:data[index]['title'] == AppStrings.userName,
+    //                 withAdd: data[index]['subtitle'] == "",
+    //                 withCopy: data[index]['title'] == AppStrings.userName,
     //
     //                 title: data[index]['title'],
     //                 subtitle: data[index]['subtitle'],
@@ -146,11 +151,12 @@ class _ChildAccountDetailsScreenState extends State<ChildAccountDetailsScreen> {
     //             50.sizedBoxHeight,
     //             (userData.socialId?.isEmpty ?? true)
     //                 ? const ChangePasswordUpdateUserDataWidget(
-    //               title: AppStrings.changePassword,
-    //               icon: AppIconsAssets.sPasswordChange,
-    //               routeTo: AppRoutesNames.rChangePasswordScreen,
-    //             )
-    //                 : const SizedBox.shrink(),]
+    //                     title: AppStrings.changePassword,
+    //                     icon: AppIconsAssets.sPasswordChange,
+    //                     routeTo: AppRoutesNames.rChangePasswordScreen,
+    //                   )
+    //                 : const SizedBox.shrink(),
+    //           ],
     //         ],
     //       ),
     //     ),

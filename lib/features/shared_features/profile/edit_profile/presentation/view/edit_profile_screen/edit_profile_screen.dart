@@ -1,9 +1,7 @@
 part of '../../../edit_profile.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  final DataToGoToEditProfileScreen data;
-
-  const EditProfileScreen({super.key, required this.data});
+  const EditProfileScreen({super.key});
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -16,7 +14,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController(text: widget.data.oldData);
+    controller = TextEditingController(text: 'widget.data.oldData');
   }
 
   @override
@@ -149,7 +147,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   } // }
 
   void _saveEditProfile() {
-    switch (widget.data.title) {
+    switch ('widget.data.title') {
       case AppStrings.gender:
         context.read<EditProfileBloc>().add(
           EditProfile(gender: genderType.name),
@@ -206,9 +204,9 @@ class _EditCustomTextFormField extends StatelessWidget {
       controller: controller,
       keyboardType: TextInputType.text,
       inputAction: TextInputAction.done,
-      label: widget.data.title,
+      label: 'widget.data.title',
       onFieldSubmitted: (_) {},
-      validator: switch (widget.data.title) {
+      validator: switch ('widget.data.title') {
         AppStrings.email => AppValidation.emailValidation(),
         AppStrings.phone => AppValidation.phoneValidation(),
         AppStrings.name => AppValidation.nameValidation(),

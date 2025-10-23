@@ -34,6 +34,7 @@ import 'package:ecommerce_app/core/theme_manager/service/injection_module.dart'
 import 'package:ecommerce_app/core/theme_manager/theme_bloc/theme_bloc.dart'
     as _i976;
 import 'package:ecommerce_app/features/account/account.dart' as _i731;
+import 'package:ecommerce_app/features/address/address.dart' as _i868;
 import 'package:ecommerce_app/features/auth/complete_profile_screen/data/social_register_data_source/social_register_remote_data_source.dart'
     as _i55;
 import 'package:ecommerce_app/features/auth/complete_profile_screen/data/social_registetr_repository/social_register_repository.dart'
@@ -53,6 +54,11 @@ import 'package:ecommerce_app/features/auth/sign_up/sign_up.dart' as _i613;
 import 'package:ecommerce_app/features/auth/verification/verification.dart'
     as _i1054;
 import 'package:ecommerce_app/features/cart/cart.dart' as _i146;
+import 'package:ecommerce_app/features/checkout/checkout.dart' as _i914;
+import 'package:ecommerce_app/features/details_product/details_product.dart'
+    as _i799;
+import 'package:ecommerce_app/features/faqs/faqs.dart' as _i159;
+import 'package:ecommerce_app/features/help_center/help_center.dart' as _i723;
 import 'package:ecommerce_app/features/home/home.dart' as _i724;
 import 'package:ecommerce_app/features/home_layout/data/data_source/home_layout_remote_data_source/home_layout_remote_data_source.dart'
     as _i834;
@@ -85,6 +91,7 @@ import 'package:ecommerce_app/features/intro/splash/domain/splash_usecases/check
     as _i390;
 import 'package:ecommerce_app/features/intro/splash/presentation/splash_view_model/splash_bloc.dart'
     as _i409;
+import 'package:ecommerce_app/features/my_orders/my_orders.dart' as _i363;
 import 'package:ecommerce_app/features/saved/saved.dart' as _i577;
 import 'package:ecommerce_app/features/search/search.dart' as _i923;
 import 'package:ecommerce_app/features/shared_features/contact_us/data/contact_us_data_source/contact_us_local_data_sourcec.dart'
@@ -173,6 +180,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i577.SavedCubit>(() => _i577.SavedCubit());
     gh.factory<_i923.SearchCubit>(() => _i923.SearchCubit());
     gh.factory<_i954.LanguageBloc>(() => _i954.LanguageBloc());
+    gh.factory<_i868.AddressCubit>(() => _i868.AddressCubit());
+    gh.factory<_i914.CheckoutCubit>(() => _i914.CheckoutCubit());
+    gh.factory<_i799.DetailsProductCubit>(() => _i799.DetailsProductCubit());
+    gh.factory<_i159.FaqsCubit>(() => _i159.FaqsCubit());
+    gh.factory<_i723.HelpCenterCubit>(() => _i723.HelpCenterCubit());
+    gh.factory<_i363.MyOrdersCubit>(() => _i363.MyOrdersCubit());
     gh.lazySingleton<_i348.AppInterceptors>(() => _i348.AppInterceptors());
     gh.lazySingleton<_i361.Dio>(() => injectableModule.dio);
     gh.lazySingleton<_i973.InternetConnectionChecker>(
@@ -201,8 +214,17 @@ extension GetItInjectableX on _i174.GetIt {
         () => notificationInjectableModule.notificationService);
     gh.lazySingleton<_i1055.BaseLocalDataSource>(
         () => _i1055.BaseLocalDataSourceImpl());
+    gh.lazySingleton<_i868.AddressLocalDataSource>(() =>
+        _i868.AddressLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
     gh.lazySingleton<_i731.AccountLocalDataSource>(() =>
         _i731.AccountLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
+    gh.lazySingleton<_i723.HelpCenterLocalDataSource>(() =>
+        _i723.HelpCenterLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
+    gh.lazySingleton<_i914.CheckoutLocalDataSource>(() =>
+        _i914.CheckoutLocalDataSourceImpl(
             baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
     gh.lazySingleton<_i405.NetworkInfo>(
         () => _i405.NetworkInfoImpl(gh<_i973.InternetConnectionChecker>()));
@@ -260,6 +282,9 @@ extension GetItInjectableX on _i174.GetIt {
               baseRepository: gh<_i407.BaseRepository>(),
               userLocalDataSource: gh<_i183.UserLocalDataSource>(),
             ));
+    gh.lazySingleton<_i799.DetailsProductLocalDataSource>(() =>
+        _i799.DetailsProductLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
     gh.lazySingleton<_i577.SavedLocalDataSource>(() =>
         _i577.SavedLocalDataSourceImpl(
             baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
@@ -269,9 +294,24 @@ extension GetItInjectableX on _i174.GetIt {
               apiConsumer: gh<_i176.ApiConsumer>(),
               baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>(),
             ));
+    gh.lazySingleton<_i363.MyOrdersRemoteDataSource>(() =>
+        _i363.MyOrdersRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i146.CartLocalDataSource>(() =>
         _i146.CartLocalDataSourceImpl(
             baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
+    gh.lazySingleton<_i914.CheckoutRemoteDataSource>(() =>
+        _i914.CheckoutRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
+    gh.lazySingleton<_i363.MyOrdersLocalDataSource>(() =>
+        _i363.MyOrdersLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
+    gh.lazySingleton<_i159.FaqsLocalDataSource>(() =>
+        _i159.FaqsLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
+    gh.lazySingleton<_i723.HelpCenterRemoteDataSource>(() =>
+        _i723.HelpCenterRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i504.OnBoardingLocalData>(() =>
         _i504.OnBoardingLocalDataImpl(
             baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
@@ -286,6 +326,11 @@ extension GetItInjectableX on _i174.GetIt {
             baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i613.SignUpRemoteDataSource>(() =>
         _i613.SignUpRemoteDataSourceImpl(gh<_i831.BaseRemoteDataSource>()));
+    gh.lazySingleton<_i914.CheckoutBaseRepository>(
+        () => _i914.CheckoutRepository(
+              remoteDataSource: gh<_i914.CheckoutRemoteDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+            ));
     gh.lazySingleton<_i687.ContactUsBaseRepository>(
         () => _i614.ContactUsRepository(
               localDataSource: gh<_i510.GetContactUsLocalDataSource>(),
@@ -298,8 +343,14 @@ extension GetItInjectableX on _i174.GetIt {
           remoteDataSource: gh<_i613.SignUpRemoteDataSource>(),
           baseRepository: gh<_i407.BaseRepository>(),
         ));
+    gh.lazySingleton<_i868.AddressRemoteDataSource>(() =>
+        _i868.AddressRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i923.SearchRemoteDataSource>(() =>
         _i923.SearchRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
+    gh.lazySingleton<_i799.DetailsProductRemoteDataSource>(() =>
+        _i799.DetailsProductRemoteDataSourceImpl(
             baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i1054.VerificationRemoteDataSource>(
         () => _i1054.VerificationRemoteDataSourceImpl(
@@ -314,6 +365,9 @@ extension GetItInjectableX on _i174.GetIt {
                   gh<_i414.NotificationRemoteDataSource>(),
               baseRepository: gh<_i407.BaseRepository>(),
             ));
+    gh.lazySingleton<_i159.FaqsRemoteDataSource>(() =>
+        _i159.FaqsRemoteDataSourceImpl(
+            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i879.UnLinkRemoteDataSource>(() =>
         _i879.UnLinkRemoteDataSourceImpl(gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i1042.GlobalBaseRemoteDataSource>(
@@ -366,6 +420,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i390.CheckUserTokenUseCase>(() =>
         _i390.CheckUserTokenUseCase(
             repository: gh<_i974.CheckUserTokenBaseRepository>()));
+    gh.lazySingleton<_i868.AddressBaseRepository>(() => _i868.AddressRepository(
+          remoteDataSource: gh<_i868.AddressRemoteDataSource>(),
+          baseRepository: gh<_i407.BaseRepository>(),
+        ));
     gh.lazySingleton<_i733.ForgetPasswordRemoteDataSource>(() =>
         _i733.ForgetPasswordRemoteDataSourceImpl(
             baseDataSource: gh<_i831.BaseRemoteDataSource>()));
@@ -373,6 +431,11 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1054.VerificationRepository(
               userLocalDataSource: gh<_i183.UserLocalDataSource>(),
               remoteDataSource: gh<_i1054.VerificationRemoteDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+            ));
+    gh.lazySingleton<_i363.MyOrdersBaseRepository>(
+        () => _i363.MyOrdersRepository(
+              remoteDataSource: gh<_i363.MyOrdersRemoteDataSource>(),
               baseRepository: gh<_i407.BaseRepository>(),
             ));
     gh.lazySingleton<_i834.HomeLayoutRemoteDataSource>(() =>
@@ -403,6 +466,11 @@ extension GetItInjectableX on _i174.GetIt {
           remoteDataSource: gh<_i146.CartRemoteDataSource>(),
           baseRepository: gh<_i407.BaseRepository>(),
         ));
+    gh.lazySingleton<_i723.HelpCenterBaseRepository>(
+        () => _i723.HelpCenterRepository(
+              remoteDataSource: gh<_i723.HelpCenterRemoteDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+            ));
     gh.lazySingleton<_i923.SearchBaseRepository>(() => _i923.SearchRepository(
           remoteDataSource: gh<_i923.SearchRemoteDataSource>(),
           baseRepository: gh<_i407.BaseRepository>(),
@@ -424,6 +492,11 @@ extension GetItInjectableX on _i174.GetIt {
         _i802.GetGoogleDataUseCase(
             getSocialDataBaseRepository:
                 gh<_i648.GetSocialDataBaseRepository>()));
+    gh.lazySingleton<_i799.DetailsProductBaseRepository>(
+        () => _i799.DetailsProductRepository(
+              remoteDataSource: gh<_i799.DetailsProductRemoteDataSource>(),
+              baseRepository: gh<_i407.BaseRepository>(),
+            ));
     gh.lazySingleton<_i764.GlobalBaseRepository>(() => _i432.GlobalRepository(
           remoteDataSource: gh<_i1042.GlobalBaseRemoteDataSource>(),
           baseRepository: gh<_i407.BaseRepository>(),
@@ -432,6 +505,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i613.SendVerificationCodeUseCase>(() =>
         _i613.SendVerificationCodeUseCase(
             repository: gh<_i613.SignUpBaseRepository>()));
+    gh.lazySingleton<_i159.FaqsBaseRepository>(() => _i159.FaqsRepository(
+          remoteDataSource: gh<_i159.FaqsRemoteDataSource>(),
+          baseRepository: gh<_i407.BaseRepository>(),
+        ));
     gh.lazySingleton<_i569.LoginBaseRepository>(() => _i569.LoginRepository(
           remoteDataSource: gh<_i569.LoginRemoteDataSource>(),
           baseRepository: gh<_i407.BaseRepository>(),
