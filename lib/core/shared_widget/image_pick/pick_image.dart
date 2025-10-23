@@ -23,6 +23,7 @@ import '../../../../../my_app/app_reference.dart';
 import 'image_pick_view_model/image_pick_bloc.dart';
 import 'image_pick_view_model/image_pick_event.dart';
 import 'image_pick_view_model/image_pick_state.dart';
+import 'image_picker_sheet.dart';
 
 class CustomImagePickerWidget extends StatefulWidget {
   final Function(File?) onImageChanged;
@@ -448,55 +449,6 @@ class _CustomImagePickerWidgetState extends State<CustomImagePickerWidget> {
           ),
         ),
       ],
-    );
-  }
-}
-
-// نسخ ImagePickerSheet كما هو
-class ImagePickerSheet extends StatelessWidget {
-  const ImagePickerSheet({super.key, required this.onPickType});
-
-  final Function(ImageSourceType) onPickType;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: Spacing.buttonWidth,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Spacing.spaceHS10,
-          CustomInkWell(
-            onTap: () {
-              Navigator.pop(context);
-              onPickType(ImageSourceType.gallery);
-            },
-            child: Row(
-              children: [
-                const Icon(Icons.photo_library),
-                Spacing.spaceSW10,
-                const Text(AppStrings.gallery),
-              ],
-            ),
-          ),
-          Spacing.spaceHS10,
-          CustomInkWell(
-            onTap: () {
-              Navigator.pop(context);
-              onPickType(ImageSourceType.camera);
-            },
-            child: Row(
-              children: [
-                const Icon(Icons.camera),
-                Spacing.spaceSW10,
-                const Text(AppStrings.camera),
-              ],
-            ),
-          ),
-          Spacing.spaceHS10,
-        ],
-      ).paddingBody(),
     );
   }
 }

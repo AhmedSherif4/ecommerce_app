@@ -1,13 +1,14 @@
 part of '../../checkout.dart';
 
+class CheckoutState extends Equatable {
+  final List<PaymentMethodModel> cards;
 
-class CheckoutState extends Equatable{
+  const CheckoutState({this.cards = const []});
 
-    const CheckoutState();
+  CheckoutState copyWith({List<PaymentMethodModel>? cards}) {
+    return CheckoutState(cards: cards ?? this.cards);
+  }
 
-    CheckoutState copyWith(){return CheckoutState();}
-
-      @override
-  List<Object> get props => [];
+  @override
+  List<Object> get props => [cards];
 }
-

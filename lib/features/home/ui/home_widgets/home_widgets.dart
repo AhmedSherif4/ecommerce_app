@@ -1,17 +1,5 @@
 part of '../../home.dart';
 
-class ProductModel {
-  ProductModel({this.id = '1'});
-  final String id;
-  final String image =
-      'https://lh3.googleusercontent.com/a/ACg8ocJLiPOmHDSGO6HMtuBT4Bv0BIqHZ3V9S6__OCXEJpcN6KOiKrY=s96-c';
-  final String name = 'product name product name';
-  final bool hasOffer = true;
-  final bool isFav = true;
-  final double priceAfter = 2000000;
-  final double priceBefore = 3000000;
-}
-
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product});
 

@@ -52,9 +52,9 @@ class ProductTitleAndDescription extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(product.name + product.name, style: context.typography.titleLarge),
+        Text(product.name, style: context.typography.titleLarge),
         Text(
-          product.name * 10,
+          product.description,
           style: context.typography.titleMedium.copyWith(
             color: context.colors.primary5,
           ),

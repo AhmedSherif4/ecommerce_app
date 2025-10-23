@@ -201,6 +201,7 @@ class AppThemeFactory implements IAppThemeFactory {
         AppColorsTheme(semantic: colors),
         AppTextTheme(styles: textConfig.createTextStyles()),
       ],
+      dividerColor: Colors.transparent, // ده اللي بيشيل الخط من الاكستنشن ويجت
     );
   }
 }

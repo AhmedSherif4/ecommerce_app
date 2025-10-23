@@ -125,13 +125,13 @@ class HomeScreen extends StatelessWidget {
             SliverPadding(
               padding: const EdgeInsets.all(AppConstants.appPaddingR20),
               sliver: SliverGrid(
-                delegate: SliverChildBuilderDelegate(childCount: 20, (
-                  context,
-                  index,
-                ) {
-                  ProductModel productModel = ProductModel();
-                  return ProductCard(product: productModel);
-                }),
+                delegate: SliverChildBuilderDelegate(
+                  childCount: dummyProducts.length,
+                  (context, index) {
+                    List<ProductModel> products = dummyProducts;
+                    return ProductCard(product: products[index]);
+                  },
+                ),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: tablet ? 3 : 2,
                   crossAxisSpacing: 12,

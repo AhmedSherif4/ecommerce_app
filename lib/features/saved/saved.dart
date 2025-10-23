@@ -14,6 +14,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../config/base_local_data_source/base_local_data_source.dart';
 import '../../../../config/base_remote_data_source/base_remote_data_source.dart';
 import '../../../../config/base_repository/base_repository.dart';
+import '../../dummy_data.dart';
 import '../home/home.dart';
 
 part 'data/saved_data_source/saved_local_data_source.dart';

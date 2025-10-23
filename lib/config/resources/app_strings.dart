@@ -193,4 +193,18 @@ abstract class AppStrings {
 
   static const String permissionPhotoMessage =
       'Please give us permission for photos.';
+
+  static const String changePassword = 'Change Password';
+
+  static const String oldPassword = 'Old Password';
+
+  static const String newPassword = 'New Password';
+
+  static const String confirmNewPassword = 'Confirm New Password';
+
+  static const String forgotPassword = 'Forgot Password';
+
+  static const String save = 'Save';
+
+  static const String edit = 'Edit';
 }

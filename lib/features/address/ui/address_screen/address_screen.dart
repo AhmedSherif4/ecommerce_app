@@ -13,7 +13,7 @@ class AddressScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    HeaderForMore(title: 'Checkout'),
+                    HeaderForMore(title: 'Address'),
                     Divider(thickness: 1, color: context.colors.primary1),
                     AddressListScreen(),
                     DefaultButtonWidget(

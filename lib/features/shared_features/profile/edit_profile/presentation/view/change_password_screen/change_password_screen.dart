@@ -43,201 +43,196 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   body: SafeArea(
-    //     child: SingleChildScrollView(
-    //       child: BlocListener<EditProfileBloc, EditProfileState>(
-    //         listener: (context, state) {
-    //           switch (state.changePasswordStates) {
-    //             case RequestStates.loading:
-    //               showLoadingDialog(context);
-    //             case RequestStates.loaded:
-    //               Navigator.of(context).pop();
-    //               showSnackBar(
-    //                 context: context,
-    //                 description: state.changePasswordMessage,
-    //                 state: ToastStates.congrats,
-    //               );
-    //               Navigator.popUntil(context, (route) => route.isFirst);
-    //             case RequestStates.error:
-    //               Navigator.of(context).pop();
-    //               showSnackBar(
-    //                 context: context,
-    //                 description: state.changePasswordMessage,
-    //                 state: ToastStates.error,
-    //               );
-    //             default:
-    //           }
-    //         },
-    //         child: Form(
-    //           key:_formKey ,
-    //           child: Column(
-    //             children: [
-    //               const HeaderForMore(title: AppStrings.changePassword),
-    //               ResponsiveWidgetForTablet(
-    //                 mobile: Column(
-    //                   children: [
-    //                     Align(
-    //                       alignment: AlignmentDirectional.centerStart,
-    //                       child: Container(
-    //                         padding: EdgeInsetsDirectional.all(
-    //                             AppPadding.p20.responsiveSize),
-    //                         child: SvgPicture.asset(
-    //                           AppImagesAssets.sChangePassword,
-    //                           height: AppReference.deviceHeight(context) *
-    //                               0.1.responsiveHeightRatio,
-    //                         ),
-    //                       ),
-    //                     ),
-    //                     PasswordInputFiled(
-    //                       passwordController: currentPasswordController,
-    //                       passwordFocusNode: currentPasswordFocus,
-    //                       nextFocusNode: newPasswordFocus,
-    //                       label: AppStrings.oldPassword,
-    //                     ),
-    //
-    //                     PasswordInputFiled(
-    //                       passwordController: newPasswordController,
-    //                       passwordFocusNode: newPasswordFocus,
-    //                       nextFocusNode: confirmPasswordFocus,
-    //                       label: AppStrings.newPassword,
-    //                     ),
-    //
-    //                     PasswordInputFiled(
-    //                       passwordController: confirmPasswordController,
-    //                       passwordFocusNode: confirmPasswordFocus,
-    //                       label: AppStrings.confirmNewPassword,
-    //                     ),
-    //
-    //                     CustomInkWell(
-    //                       onTap: () {
-    //                         RouteManager.rPushNamed(
-    //                           context: context,
-    //                           rName: AppRoutesNames.rForgotPasswordScreen,
-    //                         );
-    //                       },
-    //                       child: Align(
-    //                         alignment: AlignmentDirectional.centerStart,
-    //                         child: Text(
-    //                           AppStrings.forgotPassword,
-    //                           style:
-    //                           const AppTextStyle().blue.w700.bodyMedium14.copyWith(
-    //                             decoration: TextDecoration.underline,
-    //                             decorationColor: AppColors.primaryColorBlue,
-    //                           ),
-    //                         ),
-    //                       ),
-    //                     ),
-    //                     AppSize.s20.sizedBoxHeight,
-    //                     DefaultButtonWidget(
-    //                       label: AppStrings.save,
-    //                       onPressed: () {
-    //                         if(!_formKey.currentState!.validate()) {
-    //                           return;
-    //                         }else{
-    //                           context.read<EditProfileBloc>().add(
-    //                             ChangePassword(
-    //                               oldPassword: currentPasswordController.text,
-    //                               newPassword: newPasswordController.text,
-    //                             ),
-    //                           );
-    //                         }
-    //
-    //                       },
-    //                     ),
-    //                   ],
-    //                 ),
-    //                 tablet: Row(
-    //                   mainAxisAlignment: MainAxisAlignment.center,
-    //                   children: [
-    //                     Align(
-    //                       alignment: AlignmentDirectional.topStart,
-    //                       child: Container(
-    //                         padding: EdgeInsetsDirectional.all(
-    //                             AppPadding.p20.responsiveSize),
-    //                         child: SvgPicture.asset(
-    //                           AppImagesAssets.sChangePassword,
-    //                           height: AppReference.deviceHeight(context) *
-    //                               0.1.responsiveHeightRatio,
-    //                         ),
-    //                       ),
-    //                     ),
-    //                     AppSize.s20.sizedBoxWidth,
-    //
-    //                     SizedBox(
-    //                       width: AppReference.deviceWidth(context) * 0.4,
-    //                       child: Column(
-    //                         children: [
-    //                           PasswordInputFiled(
-    //                             passwordController: currentPasswordController,
-    //                             passwordFocusNode: currentPasswordFocus,
-    //                             nextFocusNode: newPasswordFocus,
-    //                             label: AppStrings.oldPassword,
-    //                           ),
-    //
-    //                           PasswordInputFiled(
-    //                             passwordController: newPasswordController,
-    //                             passwordFocusNode: newPasswordFocus,
-    //                             nextFocusNode: confirmPasswordFocus,
-    //                             label: AppStrings.newPassword,
-    //                           ),
-    //
-    //                           PasswordInputFiled(
-    //                             passwordController: confirmPasswordController,
-    //                             passwordFocusNode: confirmPasswordFocus,
-    //                             label: AppStrings.confirmNewPassword,
-    //                           ),
-    //
-    //                           CustomInkWell(
-    //                             onTap: () {
-    //                               RouteManager.rPushNamed(
-    //                                 context: context,
-    //                                 rName: AppRoutesNames.rForgotPasswordScreen,
-    //                               );
-    //                             },
-    //                             child: Align(
-    //                               alignment: AlignmentDirectional.centerStart,
-    //                               child: Text(
-    //                                 AppStrings.forgotPassword,
-    //                                 style:
-    //                                 const AppTextStyle().blue.w700.bodyMedium14.copyWith(
-    //                                   decoration: TextDecoration.underline,
-    //                                   decorationColor: AppColors.primaryColorBlue,
-    //                                 ),
-    //                               ),
-    //                             ),
-    //                           ),
-    //                           AppSize.s20.sizedBoxHeight,
-    //                           DefaultButtonWidget(
-    //                             label: AppStrings.save,
-    //                             onPressed: () {
-    //                               if(!_formKey.currentState!.validate()) {
-    //                                 return;
-    //                               }else{
-    //                                 context.read<EditProfileBloc>().add(
-    //                                   ChangePassword(
-    //                                     oldPassword: currentPasswordController.text,
-    //                                     newPassword: newPasswordController.text,
-    //                                   ),
-    //                                 );
-    //                               }
-    //
-    //                             },
-    //                           ),
-    //                         ],
-    //                       ),
-    //                     ),
-    //                   ],
-    //                 ),
-    //               ),
-    //
-    //             ],
-    //           ),
-    //         ),
-    //       ),
-    //     ),
-    //   ).paddingBody(),
-    // );
-    return const SizedBox();
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: BlocListener<EditProfileBloc, EditProfileState>(
+            listener: (context, state) {
+              switch (state.changePasswordStates) {
+                case RequestStates.loading:
+                  showLoadingDialog(context);
+                case RequestStates.loaded:
+                  Navigator.of(context).pop();
+                  showSnackBar(
+                    context: context,
+                    description: state.changePasswordMessage,
+                    state: ToastStates.congrats,
+                  );
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                case RequestStates.error:
+                  Navigator.of(context).pop();
+                  showSnackBar(
+                    context: context,
+                    description: state.changePasswordMessage,
+                    state: ToastStates.error,
+                  );
+                default:
+              }
+            },
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const HeaderForMore(title: AppStrings.changePassword),
+                  ResponsiveWidgetForTablet(
+                    mobile: Column(
+                      children: [
+                        Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Container(
+                            padding: EdgeInsetsDirectional.all(AppPadding.p20),
+                            child: SvgPicture.asset(
+                              Assets.iconsPasswordChange,
+                              height:
+                                  AppReference.deviceHeight(context) * 0.1.h,
+                            ),
+                          ),
+                        ),
+                        PasswordInputFiled(
+                          passwordController: currentPasswordController,
+                          passwordFocusNode: currentPasswordFocus,
+                          nextFocusNode: newPasswordFocus,
+                          label: AppStrings.oldPassword,
+                        ),
+
+                        PasswordInputFiled(
+                          passwordController: newPasswordController,
+                          passwordFocusNode: newPasswordFocus,
+                          nextFocusNode: confirmPasswordFocus,
+                          label: AppStrings.newPassword,
+                        ),
+
+                        PasswordInputFiled(
+                          passwordController: confirmPasswordController,
+                          passwordFocusNode: confirmPasswordFocus,
+                          label: AppStrings.confirmNewPassword,
+                        ),
+
+                        CustomInkWell(
+                          onTap: () {
+                            RouteManager.rPushNamed(
+                              context: context,
+                              rName: AppRoutesNames.rForgotPasswordScreen,
+                            );
+                          },
+                          child: Align(
+                            alignment: AlignmentDirectional.centerStart,
+                            child: Text(
+                              AppStrings.forgotPassword,
+                              style: context.typography.bodyMedium.copyWith(
+                                decoration: TextDecoration.underline,
+                                decorationColor: context.colors.primary5,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Spacing.spaceHS16,
+                        DefaultButtonWidget(
+                          label: AppStrings.save,
+                          onPressed: () {
+                            if (!_formKey.currentState!.validate()) {
+                              return;
+                            } else {
+                              context.read<EditProfileBloc>().add(
+                                ChangePassword(
+                                  oldPassword: currentPasswordController.text,
+                                  newPassword: newPasswordController.text,
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                    tablet: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Align(
+                          alignment: AlignmentDirectional.topStart,
+                          child: Container(
+                            padding: EdgeInsetsDirectional.all(AppPadding.p20),
+                            child: SvgPicture.asset(
+                              Assets.iconsPasswordChange,
+                              height:
+                                  AppReference.deviceHeight(context) * 0.1.r,
+                            ),
+                          ),
+                        ),
+                        Spacing.spaceSW16,
+
+                        SizedBox(
+                          width: AppReference.deviceWidth(context) * 0.4,
+                          child: Column(
+                            children: [
+                              PasswordInputFiled(
+                                passwordController: currentPasswordController,
+                                passwordFocusNode: currentPasswordFocus,
+                                nextFocusNode: newPasswordFocus,
+                                label: AppStrings.oldPassword,
+                              ),
+
+                              PasswordInputFiled(
+                                passwordController: newPasswordController,
+                                passwordFocusNode: newPasswordFocus,
+                                nextFocusNode: confirmPasswordFocus,
+                                label: AppStrings.newPassword,
+                              ),
+
+                              PasswordInputFiled(
+                                passwordController: confirmPasswordController,
+                                passwordFocusNode: confirmPasswordFocus,
+                                label: AppStrings.confirmNewPassword,
+                              ),
+
+                              CustomInkWell(
+                                onTap: () {
+                                  RouteManager.rPushNamed(
+                                    context: context,
+                                    rName: AppRoutesNames.rForgotPasswordScreen,
+                                  );
+                                },
+                                child: Align(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text(
+                                    AppStrings.forgotPassword,
+                                    style: context.typography.bodyMedium
+                                        .copyWith(
+                                          decoration: TextDecoration.underline,
+                                          decorationColor:
+                                              context.colors.primary5,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                              Spacing.spaceHS16,
+                              DefaultButtonWidget(
+                                label: AppStrings.save,
+                                onPressed: () {
+                                  if (!_formKey.currentState!.validate()) {
+                                    return;
+                                  } else {
+                                    context.read<EditProfileBloc>().add(
+                                      ChangePassword(
+                                        oldPassword:
+                                            currentPasswordController.text,
+                                        newPassword: newPasswordController.text,
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ).paddingBody(),
+    );
   }
 }

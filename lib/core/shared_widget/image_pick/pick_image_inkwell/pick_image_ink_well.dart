@@ -17,6 +17,7 @@ import '../../../../config/resources/app_strings.dart';
 import '../image_pick_view_model/image_pick_bloc.dart';
 import '../image_pick_view_model/image_pick_event.dart';
 import '../image_pick_view_model/image_pick_state.dart';
+import '../image_picker_sheet.dart';
 
 class PickImageInkWell extends StatelessWidget {
   const PickImageInkWell({
@@ -289,47 +290,6 @@ class PickImageInkWell extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-}
-
-class ImagePickerSheet extends StatelessWidget {
-  const ImagePickerSheet({super.key, required this.onPickType});
-
-  final Function(ImageSourceType) onPickType;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        CustomInkWell(
-          onTap: () {
-            Navigator.pop(context);
-            onPickType(ImageSourceType.gallery);
-          },
-          child: const Row(
-            children: [
-              Icon(Icons.photo_library),
-              //  AppSize.s10.sizedBoxWidth,
-              Text(AppStrings.gallery),
-            ],
-          ),
-        ),
-        CustomInkWell(
-          onTap: () {
-            Navigator.pop(context);
-            onPickType(ImageSourceType.camera);
-          },
-          child: const Row(
-            children: [
-              Icon(Icons.camera),
-              // AppSize.s10.sizedBoxWidth,
-              Text(AppStrings.camera),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

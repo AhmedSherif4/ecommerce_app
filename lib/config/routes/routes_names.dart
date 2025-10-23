@@ -34,4 +34,6 @@ abstract class AppRoutesNames {
   static const String rFaqsScreen = '/faqs_screen';
 
   static const String rHelpCenterScreen = '/help_center_screen';
+
+  static const String rChangePasswordScreen = '/change_password_screen';
 }

@@ -214,7 +214,7 @@ class PaymentMethod extends StatelessWidget {
 
         Center(
           child: Container(
-            width: AppReference.deviceWidth(context) * 0.6,
+            width: Spacing.buttonWidth,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             clipBehavior: Clip.antiAlias,
             decoration: ShapeDecoration(
@@ -242,8 +242,7 @@ class PaymentMethod extends StatelessWidget {
                         height: 14,
                         clipBehavior: Clip.antiAlias,
                       ),
-                      SizedBox(
-                        width: 225,
+                      Flexible(
                         child: Text(
                           '**** **** **** 2512',
                           style: TextStyle(

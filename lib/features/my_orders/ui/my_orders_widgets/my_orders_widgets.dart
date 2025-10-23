@@ -39,7 +39,7 @@ class _ProductCardCart extends StatelessWidget {
                     height: Spacing.s100,
                     fit: BoxFit.contain,
                     imagePath:
-                        'https://lh3.googleusercontent.com/a/ACg8ocJLiPOmHDSGO6HMtuBT4Bv0BIqHZ3V9S6__OCXEJpcN6KOiKrY=s96-c',
+                        'https://i.etsystatic.com/42377391/r/il/f4c4b5/5133648322/il_570xN.5133648322_3fx8.jpg',
                     notHaveImage: false,
                   ),
                 ),
@@ -52,23 +52,27 @@ class _ProductCardCart extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            spacing: 1,
-                            children: [
-                              Text(
-                                'Regular Fit Slogan',
-                                style: context.typography.bodyMedium,
-                              ),
-                              Text(
-                                'Size L',
-                                style: context.typography.caption.copyWith(
-                                  color: context.colors.primary5,
+                          Flexible(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              spacing: 1,
+                              children: [
+                                Text(
+                                  'Regular Fit Slogan',
+                                  style: context.typography.bodyMedium,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  'Size L',
+                                  style: context.typography.caption.copyWith(
+                                    color: context.colors.primary5,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(

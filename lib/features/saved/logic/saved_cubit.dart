@@ -4,22 +4,7 @@ part of '../saved.dart';
 class SavedCubit extends Cubit<SavedState> {
   SavedCubit() : super(const SavedState());
 
-  List<ProductModel> favs = [
-    ProductModel(id: '2'),
-    ProductModel(id: '3'),
-    ProductModel(id: '4'),
-    ProductModel(id: '5'),
-    ProductModel(id: '6'),
-    ProductModel(id: '7'),
-    ProductModel(id: '8'),
-    ProductModel(id: '9'),
-    ProductModel(id: '10'),
-    ProductModel(id: '11'),
-    ProductModel(id: '12'),
-    ProductModel(id: '13'),
-    ProductModel(id: '14'),
-    ProductModel(id: '15'),
-  ];
+  List<ProductModel> favs = dummyProducts;
 
   void getAllFavourites() {
     // implement get favs from api

@@ -78,7 +78,7 @@ class ProductCardCart extends StatelessWidget {
                     height: Spacing.s100,
                     fit: BoxFit.contain,
                     imagePath:
-                        'https://lh3.googleusercontent.com/a/ACg8ocJLiPOmHDSGO6HMtuBT4Bv0BIqHZ3V9S6__OCXEJpcN6KOiKrY=s96-c',
+                        'https://i.etsystatic.com/42377391/r/il/f4c4b5/5133648322/il_570xN.5133648322_3fx8.jpg',
                     notHaveImage: false,
                   ),
                 ),
@@ -98,7 +98,7 @@ class ProductCardCart extends StatelessWidget {
                             spacing: 1,
                             children: [
                               Text(
-                                'Regular Fit Slogan',
+                                'Classic Sneakers',
                                 style: context.typography.bodyMedium,
                               ),
                               Text(
@@ -120,7 +120,7 @@ class ProductCardCart extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            '\$ 1,190',
+                            '\$ 59.99',
                             style: context.typography.bodyMedium,
                           ),
                           Row(

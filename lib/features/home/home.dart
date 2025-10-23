@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui' as ui;
 
 import 'package:easy_localization/easy_localization.dart';
@@ -28,6 +29,7 @@ import '../../../../config/base_local_data_source/base_local_data_source.dart';
 import '../../../../config/base_remote_data_source/base_remote_data_source.dart';
 import '../../../../config/base_repository/base_repository.dart';
 import '../../config/resources/app_strings.dart';
+import '../../dummy_data.dart';
 
 part 'data/home_data_source/home_local_data_source.dart';
 part 'data/home_data_source/home_remote_data_source.dart';

@@ -5,11 +5,7 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit() : super(const SearchState());
 
   // 🧠 Simulated list of all products (normally from API or repo)
-  final List<ProductModel> allProducts = [
-    ProductModel(),
-    ProductModel(),
-    ProductModel(),
-  ];
+  final List<ProductModel> allProducts = dummyProducts;
 
   // 🧠 Function to handle text change
   void changeValue(String value) {

@@ -175,7 +175,7 @@ class MobileSpacingConfig implements ISpacingConfig {
   double get s100 => 100.0;
 
   @override
-  double get cartH => 110;
+  double get cartH => 125;
 
   @override
   double get cartW => 350;
@@ -300,7 +300,7 @@ class TabletSpacingConfig implements ISpacingConfig {
   double get s100 => 130.0;
 
   @override
-  double get cartH => 300;
+  double get cartH => 200;
 
   @override
   double get cartW => 500;

@@ -189,10 +189,19 @@ class AppRouteGenerator {
           ),
         );
       case AppRoutesNames.rEditProfileScreen:
+        final DataToGoToEditProfileScreen data =
+            settings.arguments as DataToGoToEditProfileScreen;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<EditProfileBloc>(),
-            child: const EditProfileScreen(),
+            child: EditProfileScreen(data: data),
+          ),
+        );
+      case AppRoutesNames.rChangePasswordScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<EditProfileBloc>(),
+            child: const ChangePasswordScreen(),
           ),
         );
       case AppRoutesNames.rFaqsScreen:
@@ -209,6 +218,7 @@ class AppRouteGenerator {
             child: const HelpCenterScreen(),
           ),
         );
+
       case AppRoutesNames.rSearchScreen:
         String value = settings.arguments as String;
         return MaterialPageRoute(builder: (_) => SearchScreen(value: value));

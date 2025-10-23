@@ -1,7 +1,8 @@
 part of '../../../edit_profile.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  final DataToGoToEditProfileScreen data;
+  EditProfileScreen({super.key, required this.data});
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -14,7 +15,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController(text: 'widget.data.oldData');
+    controller = TextEditingController(text: widget.data.oldData);
   }
 
   @override
@@ -24,130 +25,106 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   @override
-  Widget build(BuildContext context)
-  // {
-  //   return Scaffold(
-  //     body: SafeArea(
-  //       child: SingleChildScrollView(
-  //         child: BlocListener<EditProfileBloc, EditProfileState>(
-  //           listener: (context, state) {
-  //             switch (state.editStates) {
-  //               case RequestStates.loading:
-  //                 showLoadingDialog(context);
-  //               case RequestStates.loaded:
-  //                 Navigator.of(context).pop();
-  //                 showSnackBar(
-  //                     description: state.editMessage,
-  //                     state: ToastStates.congrats,
-  //                     context: context);
-  //                 Navigator.popUntil(context, (route) => route.isFirst);
-  //               case RequestStates.error:
-  //                 Navigator.of(context).pop();
-  //                 showSnackBar(
-  //                     description: state.editMessage,
-  //                     state: ToastStates.error,
-  //                     context: context);
-  //               default:
-  //             }
-  //           },
-  //           child: Column(
-  //             children: [
-  //               const HeaderForMore(
-  //                 title: AppStrings.edit,
-  //               ).paddingBody(),
-  //               ResponsiveWidgetForTablet(
-  //                 mobile: Column(
-  //                   children: [
-  //                     const _EditProfileScreenBanner(
-  //                       height: AppSize.s50,
-  //                     ),
-  //                     AppSize.s50.sizedBoxHeight,
-  //                     if (widget.data.title == AppStrings.gender)...[
-  //                       SelectGender(
-  //                         onGenderSelected: (value) {
-  //                           genderType = value;
-  //                         },
-  //                       )],
-  //                     if (widget.data.title != AppStrings.gender)
-  //                       _EditCustomTextFormField(
-  //                           controller: controller, widget: widget),
-  //                     AppSize.s50.sizedBoxHeight,
-  //                     DefaultButtonWidget(
-  //                       label: AppStrings.save,
-  //                       onPressed: () {
-  //                         _saveEditProfile();
-  //                       },
-  //                     ),
-  //                   ],
-  //                 ),
-  //                 tablet: OrientationItem(
-  //                   portraitWidget: Column(
-  //                     children: [
-  //                       const _EditProfileScreenBanner(
-  //                         height: AppSize.s50,
-  //                       ),
-  //                       AppSize.s50.sizedBoxHeight,
-  //                       if (widget.data.title == AppStrings.gender)
-  //                         SelectGender(
-  //                           onGenderSelected: (value) {
-  //                             genderType = value;
-  //                           },
-  //                         ),
-  //                       if (widget.data.title != AppStrings.gender)
-  //                         _EditCustomTextFormField(
-  //                             controller: controller, widget: widget),
-  //                       AppSize.s50.sizedBoxHeight,
-  //                       DefaultButtonWidget(
-  //                           label: AppStrings.save,
-  //                           onPressed: () {
-  //                             _saveEditProfile();
-  //                           }),
-  //                     ],
-  //                   ),
-  //                   landscapeWidget: Row(
-  //                     children: [
-  //                       const _EditProfileScreenBanner(
-  //                         height: 120,
-  //                       ),
-  //                       AppSize.s50.sizedBoxWidth,
-  //                       SizedBox(
-  //                         width: AppReference.deviceWidth(context) * 0.4,
-  //                         child: Column(
-  //                           children: [
-  //                             if (widget.data.title == AppStrings.gender)
-  //                               SelectGender(
-  //                                 onGenderSelected: (value) {
-  //                                   genderType = value;
-  //                                 },
-  //                               ),
-  //                             if (widget.data.title != AppStrings.gender)
-  //                               _EditCustomTextFormField(
-  //                                   controller: controller, widget: widget),
-  //                             AppSize.s50.sizedBoxHeight,
-  //                             DefaultButtonWidget(
-  //                                 label: AppStrings.save,
-  //                                 onPressed: () {
-  //                                   _saveEditProfile();
-  //                                 }),
-  //                           ],
-  //                         ),
-  //                       )
-  //                     ],
-  //                   ),
-  //                 ),
-  //               )
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     ).paddingBody(),
-  //   );
-  {
-    return const SizedBox();
-  } // }
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: BlocListener<EditProfileBloc, EditProfileState>(
+            listener: (context, state) {
+              switch (state.editStates) {
+                case RequestStates.loading:
+                  showLoadingDialog(context);
+                case RequestStates.loaded:
+                  Navigator.of(context).pop();
+                  showSnackBar(
+                    description: state.editMessage,
+                    state: ToastStates.congrats,
+                    context: context,
+                  );
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                case RequestStates.error:
+                  Navigator.of(context).pop();
+                  showSnackBar(
+                    description: state.editMessage,
+                    state: ToastStates.error,
+                    context: context,
+                  );
+                default:
+              }
+            },
+            child: Column(
+              children: [
+                HeaderForMore(title: AppStrings.edit).paddingBody(),
+                ResponsiveWidgetForTablet(
+                  mobile: Column(
+                    children: [
+                      Spacing.spaceHS50,
+                      _EditCustomTextFormField(
+                        controller: controller,
+                        widget: widget,
+                      ),
+                      Spacing.spaceHS50,
+                      DefaultButtonWidget(
+                        label: AppStrings.save,
+                        onPressed: () {
+                          _saveEditProfile();
+                        },
+                      ),
+                    ],
+                  ),
+                  tablet: OrientationItem(
+                    portraitWidget: Column(
+                      children: [
+                        Spacing.spaceHS50,
+
+                        _EditCustomTextFormField(
+                          controller: controller,
+                          widget: widget,
+                        ),
+                        Spacing.spaceHS50,
+                        DefaultButtonWidget(
+                          label: AppStrings.save,
+                          onPressed: () {
+                            _saveEditProfile();
+                          },
+                        ),
+                      ],
+                    ),
+                    landscapeWidget: Row(
+                      children: [
+                        Spacing.spaceSW50,
+                        SizedBox(
+                          width: AppReference.deviceWidth(context) * 0.4,
+                          child: Column(
+                            children: [
+                              _EditCustomTextFormField(
+                                controller: controller,
+                                widget: widget,
+                              ),
+                              Spacing.spaceHS50,
+                              DefaultButtonWidget(
+                                label: AppStrings.save,
+                                onPressed: () {
+                                  _saveEditProfile();
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ).paddingBody(),
+    );
+  }
 
   void _saveEditProfile() {
-    switch ('widget.data.title') {
+    switch (widget.data.title) {
       case AppStrings.gender:
         context.read<EditProfileBloc>().add(
           EditProfile(gender: genderType.name),
@@ -168,27 +145,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 }
 
-class _EditProfileScreenBanner extends StatelessWidget {
-  final double height;
-  const _EditProfileScreenBanner({required this.height});
-
-  @override
-  Widget build(BuildContext context)
-  // {
-  //   return Align(
-  //     alignment: Alignment.centerRight,
-  //     child: SvgPicture.asset(
-  //       AppIconsAssets.pEditProfileScreenLogo,
-  //       height: height.responsiveHeight,
-  //       width: height.responsiveWidth,
-  //     ),
-  //   ).paddingBody(start: 50);
-  // }
-  {
-    return const SizedBox();
-  }
-}
-
 class _EditCustomTextFormField extends StatelessWidget {
   const _EditCustomTextFormField({
     required this.controller,
@@ -204,9 +160,9 @@ class _EditCustomTextFormField extends StatelessWidget {
       controller: controller,
       keyboardType: TextInputType.text,
       inputAction: TextInputAction.done,
-      label: 'widget.data.title',
+      label: widget.data.title,
       onFieldSubmitted: (_) {},
-      validator: switch ('widget.data.title') {
+      validator: switch (widget.data.title) {
         AppStrings.email => AppValidation.emailValidation(),
         AppStrings.phone => AppValidation.phoneValidation(),
         AppStrings.name => AppValidation.nameValidation(),

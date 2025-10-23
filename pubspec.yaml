@@ -38,7 +38,7 @@ dependencies:
   device_info_plus: ^11.5.0
   internet_connection_checker: ^1.0.0+1
   appsflyer_sdk: ^6.16.21
-  tiktok_events_sdk: ^1.0.9
+#  tiktok_events_sdk: ^1.0.9
   permission_handler: ^12.0.1
   image_cropper: ^9.1.0
   image: ^4.5.4
