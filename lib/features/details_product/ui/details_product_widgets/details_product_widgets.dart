@@ -11,7 +11,7 @@ class ProductImageWithFavourite extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         NullableNetworkImage(
-          imagePath: product.image,
+          imagePath: product.imageUrl,
           notHaveImage: false,
           fit: BoxFit.fill,
           height:
@@ -29,7 +29,7 @@ class ProductImageWithFavourite extends StatelessWidget {
               context.read<SavedCubit>().toggleFavourite(product);
             },
             child: SvgPicture.asset(
-              product.isFav
+              product.isFavorite
                   ? Assets.projectIconHeartFilled
                   : Assets.projectIconHeart,
               width: Spacing.iconSizeS24.r,
@@ -130,7 +130,7 @@ class ProductPriceAndCart extends StatelessWidget {
               child: Directionality(
                 textDirection: ui.TextDirection.rtl,
                 child: Text(
-                  '${NumberFormat('#,###', 'en').format(product.priceAfter)}جم',
+                  '${NumberFormat('#,###', 'en').format(product.priceAfterOffer)}جم',
                   overflow: TextOverflow.ellipsis,
                   style: context.typography.bodyLarge.copyWith(
                     color: context.colors.primary9,
@@ -142,7 +142,7 @@ class ProductPriceAndCart extends StatelessWidget {
               child: Directionality(
                 textDirection: ui.TextDirection.rtl,
                 child: Text(
-                  '${NumberFormat('#,###', 'en').format(product.priceBefore)}جم',
+                  '${NumberFormat('#,###', 'en').format(product.price)}جم',
                   style: context.typography.labelLarge.copyWith(
                     color: context.colors.primary5,
                     decoration: TextDecoration.lineThrough,

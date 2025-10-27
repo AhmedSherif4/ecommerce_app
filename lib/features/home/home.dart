@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:ui' as ui;
 
 import 'package:dartz/dartz.dart' hide State;
@@ -9,6 +8,7 @@ import 'package:ecommerce_app/config/resources/app_constants.dart';
 import 'package:ecommerce_app/config/routes/route_manager.dart';
 import 'package:ecommerce_app/config/routes/routes_names.dart';
 import 'package:ecommerce_app/core/api/end_points.dart';
+import 'package:ecommerce_app/core/enum/enum_generation.dart';
 import 'package:ecommerce_app/core/failure/failure.dart';
 import 'package:ecommerce_app/core/responsive_manager/app_borders.dart';
 import 'package:ecommerce_app/core/responsive_manager/responsive_extensions.dart';
@@ -18,10 +18,13 @@ import 'package:ecommerce_app/core/shared_models/category/category_model.dart';
 import 'package:ecommerce_app/core/shared_models/product/product_entity.dart';
 import 'package:ecommerce_app/core/shared_models/product/product_model.dart';
 import 'package:ecommerce_app/core/shared_widget/custom_inkwell.dart';
+import 'package:ecommerce_app/core/shared_widget/empty_list_widget.dart';
+import 'package:ecommerce_app/core/shared_widget/loading_shimmer_list.dart';
 import 'package:ecommerce_app/core/shared_widget/nullable_network_image.dart';
 import 'package:ecommerce_app/core/text_styling/extensions/app_text_theme.dart';
 import 'package:ecommerce_app/core/theme_manager/service/app_colors.dart';
 import 'package:ecommerce_app/features/home/ui/home_widgets/filter_widget.dart';
+import 'package:ecommerce_app/features/home/view_model/home_bloc.dart';
 import 'package:ecommerce_app/features/home_layout/home_layout.dart';
 import 'package:ecommerce_app/features/saved/saved.dart';
 import 'package:ecommerce_app/features/search/search.dart';
@@ -35,7 +38,6 @@ import '../../../../config/base_local_data_source/base_local_data_source.dart';
 import '../../../../config/base_remote_data_source/base_remote_data_source.dart';
 import '../../../../config/base_repository/base_repository.dart';
 import '../../config/resources/app_strings.dart';
-import '../../dummy_data.dart';
 
 part 'data/home_data_source/home_local_data_source.dart';
 part 'data/home_data_source/home_remote_data_source.dart';

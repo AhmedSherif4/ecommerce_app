@@ -11,6 +11,12 @@ class ProductEntity extends Equatable {
   final int stock;
   final String categoryId;
   final String createdAt;
+  final int favoritesCount;
+  final int reviewsCount;
+  final double averageRate;
+  final bool isFavorite;
+  final List<ReviewEntity> reviews;
+  final ReviewEntity? userReview;
 
   const ProductEntity({
     required this.id,
@@ -23,6 +29,12 @@ class ProductEntity extends Equatable {
     required this.stock,
     required this.categoryId,
     required this.createdAt,
+    required this.favoritesCount,
+    required this.reviewsCount,
+    required this.averageRate,
+    required this.isFavorite,
+    required this.reviews,
+    this.userReview,
   });
 
   @override
@@ -37,5 +49,28 @@ class ProductEntity extends Equatable {
     stock,
     categoryId,
     createdAt,
+    favoritesCount,
+    reviewsCount,
+    averageRate,
+    isFavorite,
+    reviews,
+    userReview,
   ];
+}
+
+class ReviewEntity extends Equatable {
+  final String id;
+  final int rate;
+  final String comment;
+  final String createdAt;
+
+  const ReviewEntity({
+    required this.id,
+    required this.rate,
+    required this.comment,
+    required this.createdAt,
+  });
+
+  @override
+  List<Object?> get props => [id, rate, comment, createdAt];
 }

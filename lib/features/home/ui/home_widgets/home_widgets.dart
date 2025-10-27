@@ -3,7 +3,7 @@ part of '../../home.dart';
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product});
 
-  final ProductModel product;
+  final ProductEntity product;
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +41,11 @@ class ProductCard extends StatelessWidget {
                       ),
                       clipBehavior: Clip.antiAlias,
                       child: NullableNetworkImage(
-                        imagePath: product.image,
+                        imagePath: product.imageUrl,
                         width: constraints.maxWidth,
                         height: constraints.maxHeight * 0.7,
                         fit: BoxFit.fill,
-                        notHaveImage: product.image.isEmpty,
+                        notHaveImage: product.imageUrl.isEmpty,
                       ),
                     ),
                     SizedBox(
@@ -73,13 +73,13 @@ class ProductCard extends StatelessWidget {
                                   children: [
                                     TextSpan(
                                       text:
-                                          '${NumberFormat('#,###', 'en').format(product.priceAfter)}جم/',
+                                          '${NumberFormat('#,###', 'en').format(product.priceAfterOffer)}جم/',
                                       style: context.typography.bodyLarge
                                           .copyWith(color: context.colors.red),
                                     ),
                                     TextSpan(
                                       text:
-                                          '${NumberFormat('#,###', 'en').format(product.priceBefore)}جم',
+                                          '${NumberFormat('#,###', 'en').format(product.price)}جم',
                                       style: context.typography.labelLarge
                                           .copyWith(
                                             color: context.colors.primary5,
@@ -100,7 +100,7 @@ class ProductCard extends StatelessWidget {
                               );
                             },
                             child: SvgPicture.asset(
-                              product.isFav
+                              product.isFavorite
                                   ? Assets.projectIconHeartFilled
                                   : Assets.projectIconHeart,
                               width: Spacing.iconSizeS24,

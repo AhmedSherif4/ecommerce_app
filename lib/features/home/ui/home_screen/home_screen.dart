@@ -11,138 +11,189 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            /// =======================
-            /// SliverAppBar (الجزء اللي بيختفي)
-            /// =======================
-            SliverAppBar(
-              pinned: false,
-              floating: false,
-              expandedHeight: tablet ? 230 : 150,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          AppStrings.discover,
-                          style: context.typography.titleLarge.copyWith(
-                            fontSize: 32.f,
-                          ),
-                        ),
-                        CustomInkWell(
-                          onTap: () {
-                            RouteManager.rPushNamed(
-                              context: context,
-                              rName: AppRoutesNames.rNotificationScreen,
-                            );
-                          },
-                          child: SvgPicture.asset(
-                            Assets.projectIconBell,
-                            height: Spacing.iconSizeS24,
-                            width: Spacing.iconSizeS24,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    Spacing.spaceHS10,
-
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CustomSearchField(
-                            onSearchTap: (value) {
-                              value.log();
-                              context.read<SearchCubit>().changeValue(value);
-                              context.read<HomeLayoutBloc>().add(
-                                ChangeBottomNavBarIndexEvent(1),
-                              );
-                            },
-                          ),
-                        ),
-                        Spacing.spaceSW5,
-                        CustomInkWell(
-                          onTap: () async {
-                            final result = await FilterBottomSheet.show(
-                              context,
-                            );
-                            if (result != null) {
-                              // هنا هترجع FilterState النهائية
-                              print(
-                                'Selected sort: ${result.selectedSortIndex}',
-                              );
-                              print(
-                                'Price range: ${result.priceRange.start} - ${result.priceRange.end}',
-                              );
-                              print('Size: ${result.selectedSize}');
-                              // طبق الفلاتر على البيانات بتاعتك
-                            } else {
-                              // المستخدم قفل الشيت بدون apply
-                            }
-                          },
-                          child: Container(
-                            width: Spacing.s50,
-                            height: Spacing.s50,
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            clipBehavior: Clip.antiAlias,
-                            decoration: ShapeDecoration(
-                              color: context.colors.primary9,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: SvgPicture.asset(
-                              Assets.projectIconFilter,
-                              height: Spacing.iconSizeS24,
-                              width: Spacing.iconSizeS24,
-                              colorFilter: ColorFilter.mode(
-                                context.colors.primary0,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ).paddingBody(vertical: 20),
-              ),
-            ),
-
-            /// =======================
-            /// SliverPersistentHeader (اللي بيثبت)
-            /// =======================
-            SliverPersistentHeader(
-              pinned: AppReference.isPortrait(context) ? true : false,
-              delegate: _StickyHorizontalListDelegate(),
-            ),
-
-            /// =======================
-            /// SliverGrid (Responsive)
-            /// =======================
-            SliverPadding(
-              padding: const EdgeInsets.all(AppConstants.appPaddingR20),
-              sliver: SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: dummyProducts.length,
-                  (context, index) {
-                    List<ProductModel> products = dummyProducts;
-                    return ProductCard(product: products[index]);
-                  },
-                ),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: tablet ? 3 : 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: AppReference.isPortrait(context)
-                      ? 0.7
-                      : 0.9,
-                ),
-              ),
-            ),
+            _buildSliverAppBar(context),
+            _buildStickyHeader(context),
+            _buildProductGrid(context, tablet),
           ],
+        ),
+      ),
+    );
+  }
+
+  /// =======================
+  /// SliverAppBar Section
+  /// =======================
+  Widget _buildSliverAppBar(BuildContext context) {
+    final bool tablet = AppReference.deviceIsTablet;
+
+    return SliverAppBar(
+      pinned: false,
+      floating: false,
+      expandedHeight: tablet ? 230 : 150,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildAppBarHeader(context),
+            Spacing.spaceHS10,
+            _buildSearchAndFilterRow(context),
+          ],
+        ).paddingBody(vertical: 20),
+      ),
+    );
+  }
+
+  Widget _buildAppBarHeader(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          AppStrings.discover,
+          style: context.typography.titleLarge.copyWith(fontSize: 32.f),
+        ),
+        CustomInkWell(
+          onTap: () {
+            RouteManager.rPushNamed(
+              context: context,
+              rName: AppRoutesNames.rNotificationScreen,
+            );
+          },
+          child: SvgPicture.asset(
+            Assets.projectIconBell,
+            height: Spacing.iconSizeS24,
+            width: Spacing.iconSizeS24,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSearchAndFilterRow(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: CustomSearchField(
+            onSearchTap: (value) {
+              context.read<SearchCubit>().changeValue(value);
+              context.read<HomeLayoutBloc>().add(
+                ChangeBottomNavBarIndexEvent(1),
+              );
+            },
+          ),
+        ),
+        Spacing.spaceSW5,
+        CustomInkWell(
+          onTap: () async => await FilterBottomSheet.show(context),
+          child: Container(
+            width: Spacing.s50,
+            height: Spacing.s50,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            clipBehavior: Clip.antiAlias,
+            decoration: ShapeDecoration(
+              color: context.colors.primary9,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            child: SvgPicture.asset(
+              Assets.projectIconFilter,
+              height: Spacing.iconSizeS24,
+              width: Spacing.iconSizeS24,
+              colorFilter: ColorFilter.mode(
+                context.colors.primary0,
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// =======================
+  /// Sticky Header
+  /// =======================
+  Widget _buildStickyHeader(BuildContext context) {
+    return SliverPersistentHeader(
+      pinned: AppReference.isPortrait(context),
+      delegate: _StickyHorizontalListDelegate(),
+    );
+  }
+
+  /// =======================
+  /// Product Grid
+  /// =======================
+  Widget _buildProductGrid(BuildContext context, bool tablet) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (previous, current) =>
+          previous.products != current.products ||
+          previous.getAllProductsState != current.getAllProductsState ||
+          previous.getProductsByCategoryState !=
+              current.getProductsByCategoryState ||
+          previous.filterProductsState != current.filterProductsState,
+      builder: (context, state) {
+        if (_isLoading(state)) {
+          return const SliverToBoxAdapter(child: LoadingShimmerList());
+        }
+
+        if (_hasError(state)) {
+          return SliverToBoxAdapter(
+            child: EmptyListWidgets(message: _errorMessage(state)),
+          );
+        }
+
+        final finalProducts = state.products;
+        if (finalProducts.isEmpty) {
+          return const SliverToBoxAdapter(
+            child: EmptyListWidgets(message: 'لا توجد منتجات'),
+          );
+        }
+
+        return _buildProductGridSliver(finalProducts, context, tablet);
+      },
+    );
+  }
+
+  bool _isLoading(HomeState state) =>
+      state.getAllProductsState == RequestStates.loading ||
+      state.getProductsByCategoryState == RequestStates.loading;
+
+  bool _hasError(HomeState state) =>
+      state.getAllProductsState == RequestStates.error ||
+      state.getProductsByCategoryState == RequestStates.error;
+
+  String _errorMessage(HomeState state) {
+    if (state.getAllProductsState == RequestStates.error) {
+      return state.getAllProductsMessage;
+    }
+    return state.getProductsByCategoryMessage;
+  }
+
+  Widget _buildProductGridSliver(
+    List<ProductEntity> finalProducts,
+    BuildContext context,
+    bool tablet,
+  ) {
+    return SliverPadding(
+      padding: const EdgeInsets.all(AppConstants.appPaddingR20),
+      sliver: SliverGrid(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) {
+            final product = finalProducts[index];
+            return ProductCard(key: ValueKey(product.id), product: product);
+          },
+          childCount: finalProducts.length,
+          findChildIndexCallback: (Key key) {
+            final valueKey = key as ValueKey;
+            return finalProducts.indexWhere((p) => p.id == valueKey.value);
+          },
+          addRepaintBoundaries: true,
+        ),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: tablet ? 3 : 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: AppReference.isPortrait(context) ? 0.7 : 0.9,
         ),
       ),
     );
@@ -161,49 +212,7 @@ class _StickyHorizontalListDelegate extends SliverPersistentHeaderDelegate {
   ) {
     return Container(
       color: context.colors.primary0,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        itemCount: 8,
-        itemBuilder: (context, index) {
-          int selectedIndex = 2;
-          bool isSelected = selectedIndex == index;
-          return Container(
-            width: Spacing.s100,
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppConstants.appPaddingR10,
-            ),
-            margin: const EdgeInsets.symmetric(
-              horizontal: AppConstants.appPaddingR10,
-              vertical: AppConstants.appPaddingR20,
-            ),
-            decoration: ShapeDecoration(
-              color: isSelected
-                  ? context.colors.primary9
-                  : context.colors.primary0,
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  width: 1,
-                  color: isSelected
-                      ? context.colors.primary0
-                      : context.colors.primary1,
-                ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            alignment: AlignmentGeometry.center,
-            child: Text(
-              'Item ${index + 1}',
-              style: context.typography.bodyMedium.copyWith(
-                color: isSelected
-                    ? context.colors.primary0
-                    : context.colors.primary9,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          );
-        },
-      ),
+      child: const CategoriesListWidget(),
     );
   }
 
@@ -216,6 +225,86 @@ class _StickyHorizontalListDelegate extends SliverPersistentHeaderDelegate {
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
       false;
+}
+
+class CategoriesListWidget extends StatelessWidget {
+  const CategoriesListWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemCount: state.categories.length,
+          itemBuilder: (context, index) {
+            bool isSelected = state.selectedCategoryIndex == index;
+            String categoryName = state.categories[index].name;
+
+            return GestureDetector(
+              onTap: () {
+                // Trigger events based on selection
+                if (index == 0) {
+                  // "All" category - get all products
+                  context.read<HomeBloc>().add(
+                    const GetAllProductsEvent(
+                      getAllProductsRequest: GetAllProductsRequest(),
+                    ),
+                  );
+                } else {
+                  // Specific category - get products by category
+                  context.read<HomeBloc>().add(
+                    GetProductsByCategoryEvent(
+                      getProductsByCategoryRequest:
+                          GetProductsByCategoryRequest(
+                            categoryId: state.categories[index].id,
+                          ),
+                      selectedCategoryIndex: index,
+                    ),
+                  );
+                }
+              },
+              child: Container(
+                width: Spacing.s100,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppConstants.appPaddingR10,
+                ),
+                margin: const EdgeInsets.symmetric(
+                  horizontal: AppConstants.appPaddingR10,
+                  vertical: AppConstants.appPaddingR20,
+                ),
+                decoration: ShapeDecoration(
+                  color: isSelected
+                      ? context.colors.primary9
+                      : context.colors.primary0,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      width: 1,
+                      color: isSelected
+                          ? context.colors.primary0
+                          : context.colors.primary1,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  categoryName,
+                  style: context.typography.bodyMedium.copyWith(
+                    color: isSelected
+                        ? context.colors.primary0
+                        : context.colors.primary9,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
 }
 
 class CustomSearchField extends StatefulWidget {

@@ -1,5 +1,7 @@
 enum ToastStates { congrats, error, info, warning }
 
+enum FilterSortTypes { relevance, price_low_high, price_high_low }
+
 enum RequestStates { initial, loading, loaded, error }
 
 enum FormattedAppState { initial, loading, error, loaded }

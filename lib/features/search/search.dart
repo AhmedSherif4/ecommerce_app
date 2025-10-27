@@ -7,7 +7,6 @@ import 'package:ecommerce_app/core/shared_widget/empty_list_widget.dart';
 import 'package:ecommerce_app/core/shared_widget/nullable_network_image.dart';
 import 'package:ecommerce_app/core/text_styling/extensions/app_text_theme.dart';
 import 'package:ecommerce_app/core/theme_manager/service/app_colors.dart';
-import 'package:ecommerce_app/dummy_data.dart';
 import 'package:ecommerce_app/features/shared_features/header_for_more.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +19,7 @@ import '../../../../config/base_repository/base_repository.dart';
 import '../../config/resources/app_constants.dart';
 import '../../config/resources/app_strings.dart';
 import '../../core/responsive_manager/spacing_facade.dart';
+import '../../core/shared_models/product/product_model.dart';
 import '../../my_app/app_reference.dart';
 import '../home/home.dart';
 

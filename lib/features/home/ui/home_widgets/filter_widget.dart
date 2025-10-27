@@ -1,4 +1,5 @@
-import 'package:ecommerce_app/core/responsive_manager/responsive_extensions.dart';
+import 'package:ecommerce_app/config/routes/route_manager.dart';
+import 'package:ecommerce_app/core/enum/enum_generation.dart';
 import 'package:ecommerce_app/core/responsive_manager/spacing_facade.dart';
 import 'package:ecommerce_app/core/shared_widget/buttons/button_widget.dart';
 import 'package:ecommerce_app/core/shared_widget/custom_inkwell.dart';
@@ -8,15 +9,11 @@ import 'package:ecommerce_app/my_app/app_reference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/services/services_locator.dart';
-import '../../../home_layout/home_layout.dart';
+import '../../view_model/home_bloc.dart';
 
 class FilterBottomSheet {
-  // helper to show the sheet
-  static Future<HomeLayoutState?> show(BuildContext context) {
-    final provided = getIt<HomeLayoutBloc>();
-
-    return showModalBottomSheet<HomeLayoutState>(
+  static Future<void> show(BuildContext context) {
+    return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
@@ -25,9 +22,12 @@ class FilterBottomSheet {
         vsync: Navigator.of(context),
       ),
       builder: (ctx) {
+        // استخدم BlocProvider.of(context) بدل inject جديد
+        final homeBloc = context.read<HomeBloc>();
+
         return BlocProvider.value(
-          value: provided,
-          child: const _FilterSheetContent(),
+          value: homeBloc,
+          child: _FilterSheetContent(context),
         );
       },
     );
@@ -35,7 +35,8 @@ class FilterBottomSheet {
 }
 
 class _FilterSheetContent extends StatefulWidget {
-  const _FilterSheetContent({super.key});
+  final BuildContext contextGlob;
+  const _FilterSheetContent(this.contextGlob, {super.key});
 
   @override
   State<_FilterSheetContent> createState() => _FilterSheetContentState();
@@ -45,11 +46,10 @@ class _FilterSheetContentState extends State<_FilterSheetContent>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<Offset> _offsetAnimation;
-  final List<String> sortOptions = [
-    'Newest',
-    'Price: Low to High',
-    'Price: High to Low',
-    'Popular',
+  final List<FilterSortTypes> sortOptions = [
+    FilterSortTypes.relevance,
+    FilterSortTypes.price_low_high,
+    FilterSortTypes.price_high_low,
   ];
 
   final List<String> sizes = ['S', 'M', 'L', 'XL', 'XXL'];
@@ -156,11 +156,11 @@ class _FilterSheetContentState extends State<_FilterSheetContent>
                       height: constraints.maxHeight * 0.16,
                       child: _buildPriceSection(context),
                     ),
-                    Divider(height: 1, color: context.colors.primary1),
-                    SizedBox(
-                      height: constraints.maxHeight * 0.1,
-                      child: _buildSizeSection(context, constraints),
-                    ),
+                    // Divider(height: 1, color: context.colors.primary1),
+                    // SizedBox(
+                    //   height: constraints.maxHeight * 0.1,
+                    //   child: _buildSizeSection(context, constraints),
+                    // ),
                     SizedBox(
                       height: constraints.maxHeight * 0.12,
                       child: _buildApplyButton(context),
@@ -177,7 +177,7 @@ class _FilterSheetContentState extends State<_FilterSheetContent>
   }
 
   Widget _buildSortOptions(BuildContext context) {
-    return BlocBuilder<HomeLayoutBloc, HomeLayoutState>(
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return ListView.builder(
           shrinkWrap: true,
@@ -185,17 +185,18 @@ class _FilterSheetContentState extends State<_FilterSheetContent>
           scrollDirection: Axis.horizontal,
           itemCount: sortOptions.length,
           itemBuilder: (context, index) {
-            final isSelected = state.selectedSortIndex == index;
+            final isSelected = state.selectedSortType.index == index;
             return CustomInkWell(
               onTap: () =>
-                  context.read<HomeLayoutBloc>()..add(SelectSortEvent(index)),
+                  context.read<HomeBloc>()
+                    ..add(SelectSortEvent(sortOptions[index])),
               child: AnimatedContainer(
                 alignment: AlignmentGeometry.center,
                 duration: const Duration(milliseconds: 220),
                 padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width * 0.04,
                 ),
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: const EdgeInsets.symmetric(horizontal: 5),
                 decoration: BoxDecoration(
                   color: isSelected
                       ? context.colors.primary9
@@ -206,7 +207,7 @@ class _FilterSheetContentState extends State<_FilterSheetContent>
                       : Border.all(color: context.colors.primary1),
                 ),
                 child: Text(
-                  sortOptions[index],
+                  sortOptions[index].name.replaceAll('_', ' '),
                   style: context.typography.bodyMedium.copyWith(
                     color: isSelected
                         ? context.colors.primary0
@@ -222,10 +223,10 @@ class _FilterSheetContentState extends State<_FilterSheetContent>
   }
 
   Widget _buildPriceSection(BuildContext context) {
-    return BlocBuilder<HomeLayoutBloc, HomeLayoutState>(
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        final min = state.priceRange.start.round();
-        final max = state.priceRange.end.round();
+        final min = state.rangeValues.start.round();
+        final max = state.rangeValues.end.round();
 
         return Column(
           children: [
@@ -269,13 +270,13 @@ class _FilterSheetContentState extends State<_FilterSheetContent>
                 valueIndicatorTextStyle: context.typography.bodySmall,
               ),
               child: RangeSlider(
-                values: state.priceRange,
-                min: 0,
-                max: 1000,
+                values: state.rangeValues,
+                min: 10,
+                max: 10000,
                 divisions: 100,
                 labels: RangeLabels('\$${min}', '\$${max}'),
                 onChanged: (values) {
-                  context.read<HomeLayoutBloc>().add(UpdateRangeEvent(values));
+                  context.read<HomeBloc>().add(UpdateRangeEvent(values));
                 },
               ),
             ),
@@ -286,8 +287,42 @@ class _FilterSheetContentState extends State<_FilterSheetContent>
     );
   }
 
-  Widget _buildSizeSection(BuildContext context, BoxConstraints constraints) {
-    return BlocBuilder<HomeLayoutBloc, HomeLayoutState>(
+  Widget _buildApplyButton(BuildContext context) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        switch (state.filterProductsState) {
+          case RequestStates.loading:
+            return Center(
+              child: CircularProgressIndicator.adaptive(
+                backgroundColor: context.colors.primary5,
+              ),
+            );
+          case RequestStates.error:
+            return Center(
+              child: Text(
+                state.filterProductsMessage,
+                style: context.typography.bodyMedium,
+              ),
+            );
+          case RequestStates.initial || RequestStates.loaded:
+            return DefaultButtonWidget(
+              label: 'Apply filters',
+              onPressed: () {
+                widget.contextGlob.read<HomeBloc>().add(
+                  const FilterProductsEvent(),
+                );
+                RouteManager.rPopRoute(context);
+              },
+            );
+          default:
+            return SizedBox();
+        }
+      },
+    );
+  }
+
+  /* Widget _buildSizeSection(BuildContext context, BoxConstraints constraints) {
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -315,7 +350,7 @@ class _FilterSheetContentState extends State<_FilterSheetContent>
                       )
                       .toList(),
                   onChanged: (val) {
-                    context.read<HomeLayoutBloc>().add(SelectSizeEvent(val));
+                    context.read<HomeBloc>().add(SelectSizeEvent(val));
                   },
 
                   // شكل النص الظاهر (القيمة المختارة)
@@ -346,20 +381,5 @@ class _FilterSheetContentState extends State<_FilterSheetContent>
         );
       },
     );
-  }
-
-  Widget _buildApplyButton(BuildContext context) {
-    return BlocBuilder<HomeLayoutBloc, HomeLayoutState>(
-      builder: (context, state) {
-        return DefaultButtonWidget(
-          label: 'Apply filters',
-          onPressed: () {
-            // invoke cubit apply (updates state), then close and return final filter state
-            context.read<HomeLayoutBloc>().add(ApplyFiltersEvent());
-            Navigator.of(context).pop(state);
-          },
-        );
-      },
-    );
-  }
+  }*/
 }

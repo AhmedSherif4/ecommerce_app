@@ -8,19 +8,13 @@ class HomeLayoutBloc extends Bloc<HomeLayoutEvent, HomeLayoutState> {
     : super(const HomeLayoutState()) {
     on<ChangeBottomNavBarIndexEvent>(_changeBottomNavBar);
     on<CheckChildIsSubscribedEvent>(_checkChildIsSubscribed);
-    on<SelectSortEvent>(_onSelectSort);
-    on<UpdateRangeEvent>(_onUpdateRange);
-    on<SelectSizeEvent>(_onSelectSize);
-    on<ApplyFiltersEvent>(_onApplyFilters);
   }
   List<Widget> appFlow = [
     const HomeScreen(),
     const SearchScreen(value: ''),
-    const UserOrdersScreen(), // save
-    const CreateOrderScreen(), // cart
-    CreatePaymentScreen(
-      orderId: '13223412-7eaa-4907-947e-d14da980bb0c',
-    ), // account
+    const SavedScreen(), // save
+    const CartScreen(), // cart
+    AccountScreen(), // account
   ];
   void _changeBottomNavBar(
     ChangeBottomNavBarIndexEvent event,
@@ -46,28 +40,5 @@ class HomeLayoutBloc extends Bloc<HomeLayoutEvent, HomeLayoutState> {
         ),
       ),
     );
-  }
-
-  void _onSelectSort(SelectSortEvent event, Emitter<HomeLayoutState> emit) {
-    if (state.selectedSortIndex != event.index) {
-      emit(state.copyWith(selectedSortIndex: event.index));
-    }
-  }
-
-  void _onUpdateRange(UpdateRangeEvent event, Emitter<HomeLayoutState> emit) {
-    emit(state.copyWith(priceRange: event.values));
-  }
-
-  void _onSelectSize(SelectSizeEvent event, Emitter<HomeLayoutState> emit) {
-    emit(state.copyWith(selectedSize: event.size));
-  }
-
-  Future<void> _onApplyFilters(
-    ApplyFiltersEvent event,
-    Emitter<HomeLayoutState> emit,
-  ) async {
-    emit(state.copyWith(isApplying: true));
-    await Future.delayed(const Duration(milliseconds: 300)); // simulate work
-    emit(state.copyWith(isApplying: false));
   }
 }

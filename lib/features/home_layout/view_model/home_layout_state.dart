@@ -6,11 +6,6 @@ class HomeLayoutState extends Equatable {
   final RequestStates checkChildIsSubscribedState;
   final SubscribeChildWithTopicEntity subscribeChildWithTopicEntity;
 
-  final int? selectedSortIndex;
-  final RangeValues priceRange; // values in currency units
-  final String? selectedSize; // s, m, l, xl, xxl
-  final bool isApplying;
-
   const HomeLayoutState({
     this.index = 0,
     this.checkChildIsSubscribedState = RequestStates.initial,
@@ -18,10 +13,6 @@ class HomeLayoutState extends Equatable {
       isSubscribed: false,
       topic: '',
     ),
-    this.selectedSortIndex = 0,
-    this.priceRange = const RangeValues(10, 250),
-    this.selectedSize = 'L',
-    this.isApplying = false,
   });
 
   HomeLayoutState copyWith({
@@ -29,10 +20,6 @@ class HomeLayoutState extends Equatable {
     int? index,
     RequestStates? checkChildIsSubscribedState,
     SubscribeChildWithTopicEntity? subscribeChildWithTopicEntity,
-    int? selectedSortIndex,
-    RangeValues? priceRange,
-    String? selectedSize,
-    bool? isApplying,
   }) {
     return HomeLayoutState(
       index: index ?? this.index,
@@ -40,10 +27,6 @@ class HomeLayoutState extends Equatable {
           checkChildIsSubscribedState ?? this.checkChildIsSubscribedState,
       subscribeChildWithTopicEntity:
           subscribeChildWithTopicEntity ?? this.subscribeChildWithTopicEntity,
-      selectedSortIndex: selectedSortIndex ?? this.selectedSortIndex,
-      priceRange: priceRange ?? this.priceRange,
-      selectedSize: selectedSize ?? this.selectedSize,
-      isApplying: isApplying ?? this.isApplying,
     );
   }
 
@@ -52,9 +35,5 @@ class HomeLayoutState extends Equatable {
     index,
     checkChildIsSubscribedState,
     subscribeChildWithTopicEntity,
-    selectedSize,
-    priceRange,
-    isApplying,
-    selectedSortIndex,
   ];
 }

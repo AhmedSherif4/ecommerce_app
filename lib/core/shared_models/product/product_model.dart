@@ -1,3 +1,4 @@
+import '../../enum/enum_generation.dart';
 import '../pagination/pagination_model.dart';
 import 'product_entity.dart';
 
@@ -13,6 +14,12 @@ class ProductModel extends ProductEntity {
     required super.stock,
     required super.categoryId,
     required super.createdAt,
+    required super.favoritesCount,
+    required super.reviewsCount,
+    required super.averageRate,
+    required super.isFavorite,
+    required super.reviews,
+    super.userReview,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -27,6 +34,21 @@ class ProductModel extends ProductEntity {
       stock: json['stock'] as int,
       categoryId: json['category_id'] as String,
       createdAt: json['created_at'] as String,
+      favoritesCount: json['favorites_count'] as int? ?? 0,
+      reviewsCount: json['reviews_count'] as int? ?? 0,
+      averageRate: (json['average_rate'] as num?)?.toDouble() ?? 0.0,
+      isFavorite: json['is_favorite'] as bool? ?? false,
+      reviews:
+          (json['reviews'] as List<dynamic>?)
+              ?.map(
+                (review) =>
+                    ReviewModel.fromJson(review as Map<String, dynamic>),
+              )
+              .toList() ??
+          [],
+      userReview: json['user_review'] != null
+          ? ReviewModel.fromJson(json['user_review'] as Map<String, dynamic>)
+          : null,
     );
   }
 
@@ -41,6 +63,40 @@ class ProductModel extends ProductEntity {
       'price_after_offer': priceAfterOffer,
       'stock': stock,
       'category_id': categoryId,
+      'created_at': createdAt,
+      'favorites_count': favoritesCount,
+      'reviews_count': reviewsCount,
+      'average_rate': averageRate,
+      'is_favorite': isFavorite,
+      'reviews': reviews.map((r) => (r as ReviewModel).toJson()).toList(),
+      if (userReview != null)
+        'user_review': (userReview as ReviewModel).toJson(),
+    };
+  }
+}
+
+class ReviewModel extends ReviewEntity {
+  const ReviewModel({
+    required super.id,
+    required super.rate,
+    required super.comment,
+    required super.createdAt,
+  });
+
+  factory ReviewModel.fromJson(Map<String, dynamic> json) {
+    return ReviewModel(
+      id: json['id'] as String,
+      rate: json['rate'] as int,
+      comment: json['comment'] as String,
+      createdAt: json['created_at'] as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'rate': rate,
+      'comment': comment,
       'created_at': createdAt,
     };
   }
@@ -113,14 +169,14 @@ class GetProductsByCategoryRequest {
 class FilterProductsRequest {
   final double minPrice;
   final double maxPrice;
-  final String sortBy;
+  final FilterSortTypes sortBy;
   final int page;
   final int limitPerPage;
 
   const FilterProductsRequest({
-    required this.minPrice,
-    required this.maxPrice,
-    this.sortBy = 'relevance',
+    this.minPrice = 10,
+    this.maxPrice = 10000,
+    this.sortBy = FilterSortTypes.relevance,
     this.page = 1,
     this.limitPerPage = 20,
   });
@@ -129,7 +185,7 @@ class FilterProductsRequest {
     return {
       'min_price': minPrice,
       'max_price': maxPrice,
-      'sort_by': sortBy,
+      'sort_by': sortBy.name,
       'page': page,
       'limit_per_page': limitPerPage,
     };

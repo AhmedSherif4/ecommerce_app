@@ -1,7 +1,6 @@
 import 'package:ecommerce_app/features/auth/forget_password/forget_password.dart';
 import 'package:ecommerce_app/features/checkout/checkout.dart';
 import 'package:ecommerce_app/features/help_center/help_center.dart';
-import 'package:ecommerce_app/features/home/home.dart';
 import 'package:ecommerce_app/features/home_layout/home_layout.dart';
 import 'package:ecommerce_app/features/intro/onboarding/on_boarding_screen.dart';
 import 'package:ecommerce_app/features/intro/splash/presentation/view/splash_screen.dart';
@@ -13,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/services/services_locator.dart';
+import '../../core/shared_models/product/product_model.dart';
 import '../../core/shared_models/user/user_entity/user_entity.dart';
 import '../../features/address/address.dart';
 import '../../features/auth/complete_profile_screen/complete_profile_screen.dart';
@@ -24,6 +24,7 @@ import '../../features/auth/sign_up/sign_up.dart';
 import '../../features/auth/verification/verification.dart';
 import '../../features/details_product/details_product.dart';
 import '../../features/faqs/faqs.dart';
+import '../../features/home/view_model/home_bloc.dart';
 import '../../features/my_orders/my_orders.dart';
 import '../../features/payment/payment.dart';
 import '../../features/search/search.dart';
@@ -112,8 +113,17 @@ class AppRouteGenerator {
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => getIt<SearchCubit>()),
               BlocProvider(create: (context) => getIt<HomeLayoutBloc>()),
+              BlocProvider(
+                create: (context) => getIt<HomeBloc>()
+                  ..add(const GetAllCategoriesEvent())
+                  ..add(
+                    const GetAllProductsEvent(
+                      getAllProductsRequest: GetAllProductsRequest(),
+                    ),
+                  ),
+              ),
+              BlocProvider(create: (context) => getIt<SearchCubit>()),
               BlocProvider(
                 create: (context) => getIt<SavedCubit>()..getAllFavourites(),
               ),

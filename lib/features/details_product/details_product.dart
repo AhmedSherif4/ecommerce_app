@@ -22,9 +22,9 @@ import '../../../../config/base_remote_data_source/base_remote_data_source.dart'
 import '../../../../config/base_repository/base_repository.dart';
 import '../../app_assets/app_assets.dart';
 import '../../core/responsive_manager/spacing_facade.dart';
+import '../../core/shared_models/product/product_model.dart';
 import '../../core/shared_widget/custom_inkwell.dart';
 import '../../core/shared_widget/responsive_widget.dart';
-import '../home/home.dart';
 import '../saved/saved.dart';
 
 part 'data/details_product_data_source/details_product_local_data_source.dart';

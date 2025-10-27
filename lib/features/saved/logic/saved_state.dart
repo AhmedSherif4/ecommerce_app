@@ -1,7 +1,7 @@
 part of '../saved.dart';
 
 class SavedState extends Equatable {
-  final List<ProductModel> favourites;
+  final List<ProductEntity> favourites;
   final RequestStates favouriteState;
   final String errorMessage;
 
@@ -12,7 +12,7 @@ class SavedState extends Equatable {
   });
 
   SavedState copyWith({
-    List<ProductModel>? favourites,
+    List<ProductEntity>? favourites,
     RequestStates? favouriteState,
     String? errorMessage,
   }) {

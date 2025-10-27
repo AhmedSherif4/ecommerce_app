@@ -5,6 +5,7 @@ class HomeState extends Equatable {
   final RequestStates getAllCategoriesState;
   final List<CategoryEntity> categories;
   final String getAllCategoriesMessage;
+  final int selectedCategoryIndex;
 
   // Get All Products
   final RequestStates getAllProductsState;
@@ -13,42 +14,44 @@ class HomeState extends Equatable {
 
   // Get Products By Category
   final RequestStates getProductsByCategoryState;
-  final List<ProductEntity> categoryProducts;
   final String getProductsByCategoryMessage;
 
   // Filter Products
   final RequestStates filterProductsState;
-  final List<ProductEntity> filteredProducts;
   final String filterProductsMessage;
+  final FilterSortTypes selectedSortType;
+  final RangeValues rangeValues;
 
   const HomeState({
     this.getAllCategoriesState = RequestStates.initial,
     this.categories = const [],
     this.getAllCategoriesMessage = '',
+    this.selectedCategoryIndex = 0,
     this.getAllProductsState = RequestStates.initial,
     this.products = const [],
     this.getAllProductsMessage = '',
     this.getProductsByCategoryState = RequestStates.initial,
-    this.categoryProducts = const [],
     this.getProductsByCategoryMessage = '',
     this.filterProductsState = RequestStates.initial,
-    this.filteredProducts = const [],
     this.filterProductsMessage = '',
+    this.selectedSortType = FilterSortTypes.relevance,
+    this.rangeValues = const RangeValues(10, 10000),
   });
 
   HomeState copyWith({
     RequestStates? getAllCategoriesState,
     List<CategoryEntity>? categories,
     String? getAllCategoriesMessage,
+    int? selectedCategoryIndex,
     RequestStates? getAllProductsState,
     List<ProductEntity>? products,
     String? getAllProductsMessage,
     RequestStates? getProductsByCategoryState,
-    List<ProductEntity>? categoryProducts,
     String? getProductsByCategoryMessage,
     RequestStates? filterProductsState,
-    List<ProductEntity>? filteredProducts,
     String? filterProductsMessage,
+    FilterSortTypes? selectedSortType,
+    RangeValues? rangeValues,
   }) {
     return HomeState(
       getAllCategoriesState:
@@ -56,19 +59,21 @@ class HomeState extends Equatable {
       categories: categories ?? this.categories,
       getAllCategoriesMessage:
           getAllCategoriesMessage ?? this.getAllCategoriesMessage,
+      selectedCategoryIndex:
+          selectedCategoryIndex ?? this.selectedCategoryIndex,
       getAllProductsState: getAllProductsState ?? this.getAllProductsState,
       products: products ?? this.products,
       getAllProductsMessage:
           getAllProductsMessage ?? this.getAllProductsMessage,
       getProductsByCategoryState:
           getProductsByCategoryState ?? this.getProductsByCategoryState,
-      categoryProducts: categoryProducts ?? this.categoryProducts,
       getProductsByCategoryMessage:
           getProductsByCategoryMessage ?? this.getProductsByCategoryMessage,
       filterProductsState: filterProductsState ?? this.filterProductsState,
-      filteredProducts: filteredProducts ?? this.filteredProducts,
       filterProductsMessage:
           filterProductsMessage ?? this.filterProductsMessage,
+      selectedSortType: selectedSortType ?? this.selectedSortType,
+      rangeValues: rangeValues ?? this.rangeValues,
     );
   }
 
@@ -77,14 +82,15 @@ class HomeState extends Equatable {
     getAllCategoriesState,
     categories,
     getAllCategoriesMessage,
+    selectedCategoryIndex,
     getAllProductsState,
     products,
     getAllProductsMessage,
     getProductsByCategoryState,
-    categoryProducts,
     getProductsByCategoryMessage,
     filterProductsState,
-    filteredProducts,
     filterProductsMessage,
+    selectedSortType,
+    rangeValues,
   ];
 }

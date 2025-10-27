@@ -172,10 +172,10 @@ class _ProductsSliver extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               NullableNetworkImage(
-                imagePath: product.image,
+                imagePath: product.imageUrl,
                 height: Spacing.s50,
                 width: Spacing.s50,
-                notHaveImage: product.image.isEmpty,
+                notHaveImage: product.imageUrl.isEmpty,
                 fit: BoxFit.contain,
               ),
               Spacing.spaceSW10,
@@ -193,13 +193,14 @@ class _ProductsSliver extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: '${format.format(product.priceAfter)}جم/',
+                              text:
+                                  '${format.format(product.priceAfterOffer)}جم/',
                               style: context.typography.caption.copyWith(
                                 color: context.colors.red,
                               ),
                             ),
                             TextSpan(
-                              text: '${format.format(product.priceBefore)}جم',
+                              text: '${format.format(product.price)}جم',
                               style: context.typography.caption.copyWith(
                                 color: context.colors.primary5,
                                 decoration: TextDecoration.lineThrough,

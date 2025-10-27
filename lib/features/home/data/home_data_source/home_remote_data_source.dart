@@ -51,6 +51,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         getProductsByCategoryRequest.limitPerPage,
       ),
     );
+    response.log();
     return GetAllProductsResponseModel.fromJson(response);
   }
 
@@ -58,6 +59,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   Future<GetAllProductsResponseModel> filterProducts({
     required FilterProductsRequest filterProductsRequest,
   }) async {
+    filterProductsRequest.toJson().log();
     final response = await baseDataSource.postData(
       url: EndPoints.filterProducts,
       body: filterProductsRequest.toJson(),
