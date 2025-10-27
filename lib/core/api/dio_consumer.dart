@@ -60,14 +60,14 @@ class DioConsumer implements ApiConsumer {
             ),
       );
       if (response.statusCode == 401) {
-        if (await getIt<BaseAppSecurityData>().getToken() == '') {
-          getIt<BaseAppSecurityData>().deleteToken();
-        }
-        // if( navigatorKey.currentWidget != AppRoutesNames.rSplashScreen)
-        navigatorKey.currentState?.pushNamedAndRemoveUntil(
-          AppRoutesNames.rLoginScreen,
-          (route) => false,
-        );
+        // if (await getIt<BaseAppSecurityData>().getToken() == '') {
+        //   getIt<BaseAppSecurityData>().deleteToken();
+        // }
+        // // if( navigatorKey.currentWidget != AppRoutesNames.rSplashScreen)
+        // navigatorKey.currentState?.pushNamedAndRemoveUntil(
+        //   AppRoutesNames.rLoginScreen,
+        //   (route) => false,
+        // );
       } else {
         return response;
       }

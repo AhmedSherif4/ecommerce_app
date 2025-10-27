@@ -18,6 +18,21 @@ class EndPoints {
       '/verify_code'; // (at verification screen) before signup
 
   //------------------------------------------
+  //! payment apis
+  static const String createOrder = '/create_order';
+  static const String createPayment =
+      'https://ucyrylmtzpvglhqeztpn.supabase.co/functions/v1/create-payment';
+  static const String initiatePayment = '/initiate_payment';
+  static const String getUserOrders = '/get_user_orders';
+  //------------------------------------------
+  static const String getAllCategories = '/get_all_categories';
+  static const String filterProducts = '/filter_products';
+  static String getAllProductsWithStats(page, limitPerPage) =>
+      '/get_all_products_with_stats?&page=$page&limit_per_page=$limitPerPage';
+  static String getAllProductsByCategory(id, page, limitPerPage) =>
+      '/get_products_by_category?category_id=$id&page=$page&limit_per_page=$limitPerPage';
+
+  //------------------------------------------
 
   static const String forgotPasswordPath = '/api/forget-password';
 

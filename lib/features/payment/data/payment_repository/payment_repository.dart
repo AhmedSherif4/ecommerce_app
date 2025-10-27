@@ -1,0 +1,100 @@
+part of '../../payment.dart';
+
+abstract class PaymentBaseRepository {
+  Future<Either<Failure, CreateOrderEntity>> createOrder({
+    required CreateOrderRequest createOrderRequest,
+  });
+
+  Future<Either<Failure, PaymentEntity>> createPayment({
+    required CreatePaymentRequest createPaymentRequest,
+  });
+
+  Future<Either<Failure, InitiatePaymentEntity>> initiatePayment({
+    required InitiatePaymentRequest initiatePaymentRequest,
+  });
+
+  Future<Either<Failure, List<OrderEntity>>> getUserOrders({
+    required GetUserOrdersRequest getUserOrdersRequest,
+  });
+}
+
+@LazySingleton(as: PaymentBaseRepository)
+class PaymentRepository implements PaymentBaseRepository {
+  final PaymentRemoteDataSource remoteDataSource;
+  final BaseRepository baseRepository;
+
+  PaymentRepository({
+    required this.remoteDataSource,
+    required this.baseRepository,
+  });
+
+  @override
+  Future<Either<Failure, CreateOrderEntity>> createOrder({
+    required CreateOrderRequest createOrderRequest,
+  }) async {
+    final jsonFromRemoteData = remoteDataSource.createOrder(
+      createOrderRequest: createOrderRequest,
+    );
+    final data = await baseRepository.checkExceptionForRemoteData(
+      jsonFromRemoteData,
+    );
+    return data.fold((failure) => Left(failure), (response) {
+      final entity = CreateOrderEntity(
+        orderId: response.data.orderId,
+        totalAmount: response.data.totalAmount,
+        itemsCount: response.data.itemsCount,
+      );
+      return Right(entity);
+    });
+  }
+
+  @override
+  Future<Either<Failure, PaymentEntity>> createPayment({
+    required CreatePaymentRequest createPaymentRequest,
+  }) async {
+    final jsonFromRemoteData = remoteDataSource.createPayment(
+      createPaymentRequest: createPaymentRequest,
+    );
+    final data = await baseRepository.checkExceptionForRemoteData(
+      jsonFromRemoteData,
+    );
+    return data.fold((failure) => Left(failure), (paymentModel) {
+      return Right(paymentModel);
+    });
+  }
+
+  @override
+  Future<Either<Failure, InitiatePaymentEntity>> initiatePayment({
+    required InitiatePaymentRequest initiatePaymentRequest,
+  }) async {
+    final jsonFromRemoteData = remoteDataSource.initiatePayment(
+      initiatePaymentRequest: initiatePaymentRequest,
+    );
+    final data = await baseRepository.checkExceptionForRemoteData(
+      jsonFromRemoteData,
+    );
+    return data.fold((failure) => Left(failure), (response) {
+      final entity = InitiatePaymentEntity(
+        orderId: response.data.orderId,
+        transactionId: response.data.transactionId,
+        status: response.data.status,
+      );
+      return Right(entity);
+    });
+  }
+
+  @override
+  Future<Either<Failure, List<OrderEntity>>> getUserOrders({
+    required GetUserOrdersRequest getUserOrdersRequest,
+  }) async {
+    final jsonFromRemoteData = remoteDataSource.getUserOrders(
+      getUserOrdersRequest: getUserOrdersRequest,
+    );
+    final data = await baseRepository.checkExceptionForRemoteData(
+      jsonFromRemoteData,
+    );
+    return data.fold((failure) => Left(failure), (response) {
+      return Right(response.data);
+    });
+  }
+}

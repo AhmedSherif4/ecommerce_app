@@ -7,11 +7,9 @@ import 'package:ecommerce_app/core/services/services_locator.dart';
 import 'package:ecommerce_app/core/shared_widget/dialogs/exit_dialog.dart';
 import 'package:ecommerce_app/core/text_styling/extensions/app_text_theme.dart';
 import 'package:ecommerce_app/core/theme_manager/service/app_colors.dart';
-import 'package:ecommerce_app/features/account/account.dart';
-import 'package:ecommerce_app/features/cart/cart.dart';
 import 'package:ecommerce_app/features/home/home.dart';
 import 'package:ecommerce_app/features/home_layout/domain/entity/subscribe_child_entity.dart';
-import 'package:ecommerce_app/features/saved/saved.dart';
+import 'package:ecommerce_app/features/payment/ui/payment_screen/create_order_screen.dart';
 import 'package:ecommerce_app/features/search/search.dart';
 import 'package:ecommerce_app/my_app/notification/i_notification_service.dart';
 import 'package:equatable/equatable.dart';
@@ -22,6 +20,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../core/enum/enum_generation.dart';
 import '../../my_app/app_reference.dart';
+import '../payment/ui/payment_screen/create_payment_screen.dart';
+import '../payment/ui/payment_screen/user_orders_screen.dart';
 import 'domain/usecase/check_chils_is_subscribe_use_usecase.dart';
 
 part 'view/home_layout_view.dart';

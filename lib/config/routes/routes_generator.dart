@@ -25,6 +25,7 @@ import '../../features/auth/verification/verification.dart';
 import '../../features/details_product/details_product.dart';
 import '../../features/faqs/faqs.dart';
 import '../../features/my_orders/my_orders.dart';
+import '../../features/payment/payment.dart';
 import '../../features/search/search.dart';
 import '../../features/shared_features/contact_us/presentations/view_model/contact_us_bloc.dart';
 import '../../features/shared_features/notification/presentation/view/notification_manager_screen.dart';
@@ -116,6 +117,7 @@ class AppRouteGenerator {
               BlocProvider(
                 create: (context) => getIt<SavedCubit>()..getAllFavourites(),
               ),
+              BlocProvider(create: (context) => getIt<PaymentBloc>()),
 
               // ..add(
               //   CheckChildIsSubscribedEvent(
