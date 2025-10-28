@@ -26,7 +26,23 @@ class ProductImageWithFavourite extends StatelessWidget {
           right: -10,
           child: CustomInkWell(
             onTap: () {
-              context.read<SavedCubit>().toggleFavourite(product);
+              if (product.isFavorite) {
+                context.read<SavedBloc>().add(
+                  RemoveFromFavoritesEvent(
+                    removeFromFavoritesRequest: RemoveFromFavoritesRequest(
+                      productId: product.id,
+                    ),
+                  ),
+                );
+              } else {
+                context.read<SavedBloc>().add(
+                  AddToFavoritesEvent(
+                    addToFavoritesRequest: AddToFavoritesRequest(
+                      productId: product.id,
+                    ),
+                  ),
+                );
+              }
             },
             child: SvgPicture.asset(
               product.isFavorite

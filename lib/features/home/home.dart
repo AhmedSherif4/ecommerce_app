@@ -38,6 +38,7 @@ import '../../../../config/base_local_data_source/base_local_data_source.dart';
 import '../../../../config/base_remote_data_source/base_remote_data_source.dart';
 import '../../../../config/base_repository/base_repository.dart';
 import '../../config/resources/app_strings.dart';
+import '../../core/shared_models/pagination/pagination_model.dart';
 
 part 'data/home_data_source/home_local_data_source.dart';
 part 'data/home_data_source/home_remote_data_source.dart';

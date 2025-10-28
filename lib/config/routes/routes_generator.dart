@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/features/auth/forget_password/forget_password.dart';
 import 'package:ecommerce_app/features/checkout/checkout.dart';
 import 'package:ecommerce_app/features/help_center/help_center.dart';
+import 'package:ecommerce_app/features/home/home.dart';
 import 'package:ecommerce_app/features/home_layout/home_layout.dart';
 import 'package:ecommerce_app/features/intro/onboarding/on_boarding_screen.dart';
 import 'package:ecommerce_app/features/intro/splash/presentation/view/splash_screen.dart';
@@ -125,7 +126,12 @@ class AppRouteGenerator {
               ),
               BlocProvider(create: (context) => getIt<SearchBloc>()),
               BlocProvider(
-                create: (context) => getIt<SavedCubit>()..getAllFavourites(),
+                create: (context) => getIt<SavedBloc>()
+                  ..add(
+                    const GetUserFavoritesEvent(
+                      getUserFavoritesRequest: GetUserFavoritesRequest(),
+                    ),
+                  ),
               ),
               BlocProvider(create: (context) => getIt<PaymentBloc>()),
 

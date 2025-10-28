@@ -184,7 +184,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i159.FaqsCubit>(() => _i159.FaqsCubit());
     gh.factory<_i723.HelpCenterCubit>(() => _i723.HelpCenterCubit());
     gh.factory<_i363.MyOrdersCubit>(() => _i363.MyOrdersCubit());
-    gh.factory<_i577.SavedCubit>(() => _i577.SavedCubit());
     gh.factory<_i954.LanguageBloc>(() => _i954.LanguageBloc());
     gh.lazySingleton<_i348.AppInterceptors>(() => _i348.AppInterceptors());
     gh.lazySingleton<_i361.Dio>(() => injectableModule.dio);
@@ -320,9 +319,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i504.OnBoardingLocalData>(() =>
         _i504.OnBoardingLocalDataImpl(
             baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
-    gh.lazySingleton<_i577.SavedRemoteDataSource>(() =>
-        _i577.SavedRemoteDataSourceImpl(
-            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i537.SimulatedRemoteDataSource>(() =>
         _i537.SimulatedRemoteDataSourceImpl(
             baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
@@ -475,6 +471,9 @@ extension GetItInjectableX on _i174.GetIt {
           remoteDataSource: gh<_i879.UnLinkRemoteDataSource>(),
           baseRepository: gh<_i407.BaseRepository>(),
         ));
+    gh.lazySingleton<_i577.SavedRemoteDataSource>(() =>
+        _i577.SavedRemoteDataSourceImpl(
+            baseDataSource: gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i724.HomeBaseRepository>(() => _i724.HomeRepository(
           remoteDataSource: gh<_i724.HomeRemoteDataSource>(),
           baseRepository: gh<_i407.BaseRepository>(),
@@ -562,6 +561,8 @@ extension GetItInjectableX on _i174.GetIt {
               baseRepository: gh<_i407.BaseRepository>(),
               userLocalDataSource: gh<_i183.UserLocalDataSource>(),
             ));
+    gh.factory<_i577.SavedBloc>(
+        () => _i577.SavedBloc(gh<_i577.SavedBaseRepository>()));
     gh.factory<_i673.HomeBloc>(
         () => _i673.HomeBloc(gh<_i724.HomeBaseRepository>()));
     gh.lazySingleton<_i733.ForgetPasswordBaseRepository>(

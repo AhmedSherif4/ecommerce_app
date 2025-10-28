@@ -8,18 +8,38 @@ class SavedScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              HeaderForMore(title: AppStrings.saved),
-              BlocBuilder<SavedCubit, SavedState>(
+              const HeaderForMore(title: AppStrings.saved),
+              BlocConsumer<SavedBloc, SavedState>(
+                listener: (context, state) {
+                  // عرض رسالة عند الإضافة للـ favorites
+                  if (state.addToFavoritesState == RequestStates.loaded) {
+                    showSnackBar(
+                      description: state.addToFavoritesMessage,
+                      state: ToastStates.congrats,
+                      context: context,
+                    );
+                  }
+
+                  // عرض رسالة عند الحذف من الـ favorites
+                  if (state.removeFromFavoritesState == RequestStates.loaded) {
+                    showSnackBar(
+                      description: state.removeFromFavoritesMessage,
+                      state: ToastStates.warning,
+                      context: context,
+                    );
+                  }
+                },
                 builder: (context, state) {
-                  state.favourites.log();
-                  state.favouriteState.log();
-                  switch (state.favouriteState) {
+                  switch (state.getUserFavoritesState) {
                     case RequestStates.loaded:
-                      switch (state.favourites.isEmpty) {
+                      switch (state.favoriteProducts.isEmpty) {
                         case true:
-                          return EmptyListWidgets(message: 'No Saved Items!');
+                          return const EmptyListWidgets(
+                            message: 'No Saved Items!',
+                          );
                         case false:
                           return GridView.builder(
                             gridDelegate:
@@ -35,21 +55,56 @@ class SavedScreen extends StatelessWidget {
                                       : 0.9,
                                 ),
                             shrinkWrap: true,
-                            itemCount: state.favourites.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: state.favoriteProducts.length,
                             itemBuilder: (context, index) {
                               return ProductCard(
-                                product: state.favourites[index],
+                                product: state.favoriteProducts[index],
                               );
                             },
                           );
                       }
 
                     case RequestStates.loading:
-                      return LoadingShimmerList();
+                      return const LoadingShimmerList();
+
                     case RequestStates.error:
-                      return Center(child: Text(state.errorMessage ?? ''));
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.error_outline,
+                              size: 64,
+                              color: Theme.of(context).colorScheme.error,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              state.getUserFavoritesMessage,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 16),
+                            ElevatedButton(
+                              onPressed: () {
+                                context.read<SavedBloc>().add(
+                                  const GetUserFavoritesEvent(
+                                    getUserFavoritesRequest:
+                                        GetUserFavoritesRequest(
+                                          page: 1,
+                                          limitPerPage: 20,
+                                        ),
+                                  ),
+                                );
+                              },
+                              child: const Text('Retry'),
+                            ),
+                          ],
+                        ),
+                      );
+
                     default:
-                      return SizedBox.shrink();
+                      return const SizedBox.shrink();
                   }
                 },
               ),

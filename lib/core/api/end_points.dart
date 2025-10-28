@@ -34,6 +34,12 @@ class EndPoints {
       '/get_products_by_category?category_id=$id&page=$page&limit_per_page=$limitPerPage';
 
   //------------------------------------------
+  static const String getUserFavorites = '/get_user_favorites';
+
+  static const String addToFavorites = '/add_to_favorites';
+
+  static const String removeFromFavorites = '/remove_from_favorites';
+  //------------------------------------------
 
   static const String forgotPasswordPath = '/api/forget-password';
 
