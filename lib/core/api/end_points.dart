@@ -27,6 +27,7 @@ class EndPoints {
   //------------------------------------------
   static const String getAllCategories = '/get_all_categories';
   static const String filterProducts = '/filter_products';
+  static const String searchProducts = '/search_products';
   static String getAllProductsWithStats(page, limitPerPage) =>
       '/get_all_products_with_stats?&page=$page&limit_per_page=$limitPerPage';
   static String getAllProductsByCategory(id, page, limitPerPage) =>

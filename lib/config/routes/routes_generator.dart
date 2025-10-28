@@ -123,7 +123,7 @@ class AppRouteGenerator {
                     ),
                   ),
               ),
-              BlocProvider(create: (context) => getIt<SearchCubit>()),
+              BlocProvider(create: (context) => getIt<SearchBloc>()),
               BlocProvider(
                 create: (context) => getIt<SavedCubit>()..getAllFavourites(),
               ),

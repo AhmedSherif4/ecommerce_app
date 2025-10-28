@@ -1,8 +1,13 @@
 part of '../../home.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final bool tablet = AppReference.deviceIsTablet;
@@ -68,13 +73,18 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  final TextEditingController _controller = TextEditingController();
+
   Widget _buildSearchAndFilterRow(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: CustomSearchField(
-            onSearchTap: (value) {
-              context.read<SearchCubit>().changeValue(value);
+            controller: _controller,
+            onComplete: () {
+              context.read<SearchBloc>().add(
+                ChangeSearchValueEvent(_controller.text),
+              );
               context.read<HomeLayoutBloc>().add(
                 ChangeBottomNavBarIndexEvent(1),
               );
@@ -308,17 +318,22 @@ class CategoriesListWidget extends StatelessWidget {
 }
 
 class CustomSearchField extends StatefulWidget {
-  final Function(String text) onSearchTap;
+  final Function() onComplete;
+  final Function(bool)? emptyText;
+  final TextEditingController controller;
 
-  const CustomSearchField({super.key, required this.onSearchTap});
+  const CustomSearchField({
+    super.key,
+    required this.onComplete,
+    this.emptyText,
+    required this.controller,
+  });
 
   @override
   State<CustomSearchField> createState() => _CustomSearchFieldState();
 }
 
 class _CustomSearchFieldState extends State<CustomSearchField> {
-  final TextEditingController _controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -333,10 +348,18 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
       ),
       child: TextFormField(
         onChanged: (value) {
-          widget.onSearchTap(value);
+          switch (widget.emptyText) {
+            case _?:
+              if (value.isEmpty) {
+                widget.emptyText!(true);
+              } else {
+                widget.emptyText!(false);
+              }
+          }
         },
+        onEditingComplete: widget.onComplete,
         cursorColor: context.colors.primary9,
-        controller: _controller,
+        controller: widget.controller,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.only(
             top: AppConstants.appPaddingR20,
@@ -349,9 +372,7 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
           errorBorder: InputBorder.none,
           focusedErrorBorder: InputBorder.none,
           prefixIcon: CustomInkWell(
-            onTap: () {
-              widget.onSearchTap(_controller.text);
-            },
+            onTap: widget.onComplete,
             child: SvgPicture.asset(
               Assets.projectIconSearchDuotone,
               height: Spacing.iconSizeS24,

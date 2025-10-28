@@ -1,31 +1,40 @@
 part of '../search.dart';
 
 class SearchState extends Equatable {
-  final String value;
+  final RequestStates searchProductsState;
+  final List<ProductEntity> searchedProducts;
+  final String searchProductsMessage;
+  final String searchQuery;
   final List<String> recentSearches;
-  final List<ProductModel> searchedProducts;
   final bool showRecent;
   final bool noResultsFound;
 
   const SearchState({
-    this.value = '',
-    this.recentSearches = const [],
+    this.searchProductsState = RequestStates.initial,
     this.searchedProducts = const [],
+    this.searchProductsMessage = '',
+    this.searchQuery = '',
+    this.recentSearches = const [],
     this.showRecent = true,
     this.noResultsFound = false,
   });
 
   SearchState copyWith({
-    String? value,
+    RequestStates? searchProductsState,
+    List<ProductEntity>? searchedProducts,
+    String? searchProductsMessage,
+    String? searchQuery,
     List<String>? recentSearches,
-    List<ProductModel>? searchedProducts,
     bool? showRecent,
     bool? noResultsFound,
   }) {
     return SearchState(
-      value: value ?? this.value,
-      recentSearches: recentSearches ?? this.recentSearches,
+      searchProductsState: searchProductsState ?? this.searchProductsState,
       searchedProducts: searchedProducts ?? this.searchedProducts,
+      searchProductsMessage:
+          searchProductsMessage ?? this.searchProductsMessage,
+      searchQuery: searchQuery ?? this.searchQuery,
+      recentSearches: recentSearches ?? this.recentSearches,
       showRecent: showRecent ?? this.showRecent,
       noResultsFound: noResultsFound ?? this.noResultsFound,
     );
@@ -33,9 +42,11 @@ class SearchState extends Equatable {
 
   @override
   List<Object> get props => [
-    value,
-    recentSearches,
+    searchProductsState,
     searchedProducts,
+    searchProductsMessage,
+    searchQuery,
+    recentSearches,
     showRecent,
     noResultsFound,
   ];

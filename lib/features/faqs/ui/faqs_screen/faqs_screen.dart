@@ -1,8 +1,14 @@
 part of '../../faqs.dart';
 
-class FaqsScreen extends StatelessWidget {
+class FaqsScreen extends StatefulWidget {
   const FaqsScreen({super.key});
 
+  @override
+  State<FaqsScreen> createState() => _FaqsScreenState();
+}
+
+class _FaqsScreenState extends State<FaqsScreen> {
+  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +18,7 @@ class FaqsScreen extends StatelessWidget {
             children: [
               HeaderForMore(title: 'FAQs'),
               Spacing.spaceHS32,
-              CustomSearchField(onSearchTap: (text) {}),
+              CustomSearchField(onComplete: () {}, controller: _controller),
               Spacing.spaceHS32,
               ListView.separated(
                 shrinkWrap: true,

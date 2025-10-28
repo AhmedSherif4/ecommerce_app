@@ -12,9 +12,9 @@ class HomeLayoutBloc extends Bloc<HomeLayoutEvent, HomeLayoutState> {
   List<Widget> appFlow = [
     const HomeScreen(),
     const SearchScreen(value: ''),
-    const SavedScreen(), // save
-    const CartScreen(), // cart
-    AccountScreen(), // account
+    const SavedScreen(),
+    const CartScreen(),
+    AccountScreen(),
   ];
   void _changeBottomNavBar(
     ChangeBottomNavBarIndexEvent event,

@@ -185,7 +185,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i723.HelpCenterCubit>(() => _i723.HelpCenterCubit());
     gh.factory<_i363.MyOrdersCubit>(() => _i363.MyOrdersCubit());
     gh.factory<_i577.SavedCubit>(() => _i577.SavedCubit());
-    gh.factory<_i923.SearchCubit>(() => _i923.SearchCubit());
     gh.factory<_i954.LanguageBloc>(() => _i954.LanguageBloc());
     gh.lazySingleton<_i348.AppInterceptors>(() => _i348.AppInterceptors());
     gh.lazySingleton<_i361.Dio>(() => injectableModule.dio);
@@ -551,6 +550,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i167.UpdateNotificationUseCase>(() =>
         _i167.UpdateNotificationUseCase(
             repository: gh<_i799.NotificationRepository>()));
+    gh.factory<_i923.SearchBloc>(
+        () => _i923.SearchBloc(gh<_i923.SearchBaseRepository>()));
     gh.lazySingleton<_i49.SocialLoginUseCase>(() =>
         _i49.SocialLoginUseCase(repository: gh<_i569.LoginBaseRepository>()));
     gh.lazySingleton<_i569.LoginUseCase>(

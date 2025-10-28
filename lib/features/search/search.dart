@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 
+import 'package:dartz/dartz.dart' hide State;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ecommerce_app/config/extensions/log_extension.dart';
 import 'package:ecommerce_app/core/responsive_manager/responsive_extensions.dart';
@@ -18,7 +19,12 @@ import '../../../../config/base_remote_data_source/base_remote_data_source.dart'
 import '../../../../config/base_repository/base_repository.dart';
 import '../../config/resources/app_constants.dart';
 import '../../config/resources/app_strings.dart';
+import '../../core/api/end_points.dart';
+import '../../core/enum/enum_generation.dart';
+import '../../core/failure/failure.dart';
 import '../../core/responsive_manager/spacing_facade.dart';
+import '../../core/shared_models/pagination/pagination_model.dart';
+import '../../core/shared_models/product/product_entity.dart';
 import '../../core/shared_models/product/product_model.dart';
 import '../../my_app/app_reference.dart';
 import '../home/home.dart';
@@ -28,7 +34,8 @@ part 'data/search_data_source/search_remote_data_source.dart';
 part 'data/search_models/search_entity.dart';
 part 'data/search_models/search_model.dart';
 part 'data/search_repository/search_repository.dart';
-part 'logic/search_cubit.dart';
+part 'logic/search_bloc.dart';
+part 'logic/search_event.dart';
 part 'logic/search_state.dart';
 part 'ui/search_screen/search_screen.dart';
 part 'ui/search_widgets/search_widgets.dart';
