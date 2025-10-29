@@ -174,16 +174,6 @@ class PaginationModel extends PaginationEntity {
 }
 
 // Request Models
-class CartItemRequest {
-  final String productId;
-  final int quantity;
-
-  const CartItemRequest({required this.productId, required this.quantity});
-
-  Map<String, dynamic> toJson() {
-    return {'product_id': productId, 'quantity': quantity};
-  }
-}
 
 class CreateOrderRequest {
   final List<CartItemRequest> cartItems;

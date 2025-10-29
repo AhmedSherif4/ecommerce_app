@@ -10,9 +10,9 @@ import 'package:ecommerce_app/core/api/end_points.dart';
 import 'package:ecommerce_app/core/api/network_info.dart';
 import 'package:ecommerce_app/core/enum/enum_generation.dart';
 import 'package:ecommerce_app/core/exceptions/exceptions.dart';
+import 'package:ecommerce_app/features/payment/data/payment_models/cart_item_request.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../core/usecase/base_usecase.dart';

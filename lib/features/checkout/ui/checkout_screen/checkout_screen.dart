@@ -1,7 +1,8 @@
 part of '../../checkout.dart';
 
 class CheckoutScreen extends StatelessWidget {
-  const CheckoutScreen({super.key});
+  final CreateOrderEntity createOrderEntity;
+  const CheckoutScreen(this.createOrderEntity, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,23 +14,57 @@ class CheckoutScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    HeaderForMore(title: 'Checkout'),
-                    Divider(thickness: 1, color: context.colors.primary1),
-                    DeliveryAddress(),
+                    const HeaderForMore(title: 'Checkout'),
+                    Spacing.spaceHS10,
+                    const PaymentMethod(),
                     Spacing.spaceHS10,
                     Divider(thickness: 1, color: context.colors.primary1),
                     Spacing.spaceHS10,
-                    PaymentMethod(),
+                    const DiscountWidget(),
                     Spacing.spaceHS10,
                     Divider(thickness: 1, color: context.colors.primary1),
-                    Spacing.spaceHS10,
-                    SubTotal(),
-                    DiscountWidget(),
+                    _TotalWidget(createOrderEntity.totalAmount),
                   ],
                 ),
               ),
             ),
-            DefaultButtonWidget(label: 'Place Order', onPressed: () {}),
+            BlocListener<PaymentBloc, PaymentState>(
+              listener: (context, state) {
+                switch (state.createPaymentState) {
+                  case RequestStates.loading:
+                    showLoadingDialog(context);
+                  case RequestStates.loaded:
+                    RouteManager.rPopRoute(context);
+                    RouteManager.rPushNamedAndRemoveUntil(
+                      context: context,
+                      rName: AppRoutesNames.rHomeLayoutView,
+                    );
+                  case RequestStates.error:
+                    RouteManager.rPopRoute(context);
+                    showSnackBar(
+                      description: state.createPaymentMessage,
+                      state: ToastStates.error,
+                      context: context,
+                    );
+                  default:
+                }
+              },
+              child: DefaultButtonWidget(
+                label: 'Place Order',
+                onPressed: () {
+                  context.read<PaymentBloc>().add(
+                    CreatePaymentEvent(
+                      createPaymentRequest: CreatePaymentRequest(
+                        orderId: createOrderEntity.orderId,
+                        amount: createOrderEntity.totalAmount,
+                        currency: 'EGP',
+                        paymentGateway: 'stripe',
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ).paddingBody(),
@@ -37,66 +72,9 @@ class CheckoutScreen extends StatelessWidget {
   }
 }
 
-class DeliveryAddress extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Delivery Address', style: context.typography.titleMedium),
-            TextButton(
-              onPressed: () {
-                RouteManager.rPushNamed(
-                  context: context,
-                  rName: AppRoutesNames.rAddressScreen,
-                );
-              },
-              child: Text(
-                'Change',
-                textAlign: TextAlign.right,
-                style: context.typography.bodyMedium.copyWith(
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Spacing.spaceHS5,
-
-        Row(
-          children: [
-            SvgPicture.asset(
-              Assets.projectIconLocation,
-              height: Spacing.iconSizeS24,
-              width: Spacing.iconSizeS24,
-            ),
-            Spacing.spaceSW5,
-
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 4,
-              children: [
-                Text('Home', style: context.typography.bodyMedium),
-                Text(
-                  '925 S Chugach St #APT 10, Alaska 99645',
-                  style: context.typography.bodyMedium.copyWith(
-                    color: context.colors.primary5,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
 class PaymentMethod extends StatelessWidget {
+  const PaymentMethod({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -242,11 +220,11 @@ class PaymentMethod extends StatelessWidget {
                         height: 14,
                         clipBehavior: Clip.antiAlias,
                       ),
-                      Flexible(
+                      const Flexible(
                         child: Text(
                           '**** **** **** 2512',
                           style: TextStyle(
-                            color: const Color(0xFF191919),
+                            color: Color(0xFF191919),
                             fontSize: 16,
                             fontFamily: 'General Sans',
                             fontWeight: FontWeight.w500,
@@ -272,70 +250,20 @@ class PaymentMethod extends StatelessWidget {
   }
 }
 
-class SubTotal extends StatelessWidget {
+class _TotalWidget extends StatelessWidget {
+  final double total;
+  const _TotalWidget(this.total, {super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Sub-total',
-              style: context.typography.titleMedium.copyWith(
-                color: context.colors.primary5,
-              ),
-            ),
-            Text(
-              '\$ 5,870',
-              textAlign: TextAlign.right,
-              style: context.typography.titleLarge,
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'VAT (%)',
-              style: context.typography.titleMedium.copyWith(
-                color: context.colors.primary5,
-              ),
-            ),
-            Text(
-              '\$ 0.00',
-              textAlign: TextAlign.right,
-              style: context.typography.titleLarge,
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Shipping fee',
-              style: context.typography.titleMedium.copyWith(
-                color: context.colors.primary5,
-              ),
-            ),
-            Text(
-              '\$ 80',
-              textAlign: TextAlign.right,
-              style: context.typography.titleLarge,
-            ),
-          ],
-        ),
-        Divider(thickness: 1, color: context.colors.primary1),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Total', style: context.typography.titleMedium),
-            Text(
-              '\$ 5,950',
-              textAlign: TextAlign.right,
-              style: context.typography.titleLarge,
-            ),
-          ],
+        Text('Total', style: context.typography.titleMedium),
+        Text(
+          '\$ $total',
+          textAlign: TextAlign.right,
+          style: context.typography.titleLarge,
         ),
       ],
     );

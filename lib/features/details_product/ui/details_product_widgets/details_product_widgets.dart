@@ -183,12 +183,16 @@ class ProductPriceAndCart extends StatelessWidget {
                   ? 'Remove From Cart'
                   : 'Add to Cart',
               onPressed: () {
+                final cartItemRequest = CartItemRequest(
+                  product: product,
+                  quantity: 1,
+                );
                 context.read<PaymentBloc>().state.isProductInCart
                     ? context.read<PaymentBloc>().add(
-                        RemoveProductFromCartEvent(product),
+                        RemoveProductFromCartEvent(cartItemRequest),
                       )
                     : context.read<PaymentBloc>().add(
-                        AddProductToCartEvent(product),
+                        AddProductToCartEvent(cartItemRequest),
                       );
               },
               width: AppReference.deviceWidth(context) * 0.5,

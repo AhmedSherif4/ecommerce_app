@@ -44,7 +44,7 @@ class GetUserOrdersEvent extends PaymentEvent {
 }
 
 class AddProductToCartEvent extends PaymentEvent {
-  final ProductEntity product;
+  final CartItemRequest product;
 
   const AddProductToCartEvent(this.product);
 
@@ -53,7 +53,7 @@ class AddProductToCartEvent extends PaymentEvent {
 }
 
 class RemoveProductFromCartEvent extends PaymentEvent {
-  final ProductEntity product;
+  final CartItemRequest product;
 
   const RemoveProductFromCartEvent(this.product);
 
@@ -74,6 +74,14 @@ class LoadCartProductsEvent extends PaymentEvent {
   const LoadCartProductsEvent();
   @override
   List<Object> get props => [];
+}
+
+class UpdateCartQuantityEvent extends PaymentEvent {
+  final CartItemRequest cartItemRequest;
+  final int index;
+  const UpdateCartQuantityEvent(this.cartItemRequest, this.index);
+  @override
+  List<Object> get props => [CartItemRequest, index];
 }
 
 class ClearCartEvent extends PaymentEvent {

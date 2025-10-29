@@ -48,7 +48,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
     RouteManager.rPushNamedAndRemoveUntil(
       context: context,
       rName: AppRoutesNames.rHomeLayoutView,
-      arguments: getIt<UserLocalDataSource>().getUserData(),
     );
   }
 

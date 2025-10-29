@@ -17,11 +17,15 @@ abstract class PaymentBaseRepository {
     required GetUserOrdersRequest getUserOrdersRequest,
   });
 
-  Future<void> saveProductAtCart(ProductEntity product);
-  Future<void> removeProductFromCart(ProductEntity product);
-  Future<List<ProductEntity>> getProductsCart();
+  Future<void> saveProductAtCart(CartItemRequest product);
+  Future<void> removeProductFromCart(CartItemRequest product);
+  Future<List<CartItemRequest>> getProductsCart();
   Future<void> clearProductsCart();
   Future<bool> isProductInCart(String productId);
+  Future<List<CartItemRequest>> updateProductAtCart(
+    CartItemRequest product,
+    int index,
+  );
 }
 
 @LazySingleton(as: PaymentBaseRepository)
@@ -107,17 +111,17 @@ class PaymentRepository implements PaymentBaseRepository {
   }
 
   @override
-  Future<void> saveProductAtCart(ProductEntity product) async {
+  Future<void> saveProductAtCart(CartItemRequest product) async {
     await paymentLocalDataSource.saveProductAtCart(product);
   }
 
   @override
-  Future<void> removeProductFromCart(ProductEntity product) async {
+  Future<void> removeProductFromCart(CartItemRequest product) async {
     await paymentLocalDataSource.removeProductFromCart(product);
   }
 
   @override
-  Future<List<ProductEntity>> getProductsCart() async {
+  Future<List<CartItemRequest>> getProductsCart() async {
     return await paymentLocalDataSource.getProductsCart();
   }
 
@@ -129,5 +133,13 @@ class PaymentRepository implements PaymentBaseRepository {
   @override
   Future<bool> isProductInCart(String productId) async {
     return await paymentLocalDataSource.isProductInCart(productId);
+  }
+
+  @override
+  Future<List<CartItemRequest>> updateProductAtCart(
+    CartItemRequest product,
+    int index,
+  ) async {
+    return await paymentLocalDataSource.updateProductAtCart(product, index);
   }
 }

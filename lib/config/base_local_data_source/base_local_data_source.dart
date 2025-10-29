@@ -138,7 +138,7 @@ class BaseLocalDataSourceImpl implements BaseLocalDataSource {
     ),
   }) async {
     try {
-      await _saveExpirationTime(labelKey, expirationDuration);
+      // await _saveExpirationTime(labelKey, expirationDuration);
 
       final dataBox = _getDataBox<T>(labelKey);
       await dataBox.put(labelKey, data);
@@ -155,11 +155,11 @@ class BaseLocalDataSourceImpl implements BaseLocalDataSource {
 
       if (data == null) return null;
 
-      // التحقق من انتهاء الصلاحية
-      if (await isDataExpired(labelKey)) {
-        await dataBox.delete(labelKey);
-        return null;
-      }
+      // // التحقق من انتهاء الصلاحية
+      // if (await isDataExpired(labelKey)) {
+      //   await dataBox.delete(labelKey);
+      //   return null;
+      // }
 
       return data;
     } on HiveError {
@@ -183,7 +183,7 @@ class BaseLocalDataSourceImpl implements BaseLocalDataSource {
         throw RangeError('Index out of range');
       }
 
-      await _saveExpirationTime(labelKey, expirationDuration);
+      // await _saveExpirationTime(labelKey, expirationDuration);
       await dataBox.putAt(index, updatedData);
     } on HiveError {
       rethrow;
@@ -193,10 +193,10 @@ class BaseLocalDataSourceImpl implements BaseLocalDataSource {
   @override
   Future<void> deleteDataAt<T>(String labelKey) async {
     try {
-      final expirationBox = _getExpirationBox(labelKey);
+      // final expirationBox = _getExpirationBox(labelKey);
       final dataBox = _getDataBox<T>(labelKey);
 
-      await expirationBox.clear();
+      // await expirationBox.clear();
       await dataBox.clear();
     } on HiveError {
       rethrow;

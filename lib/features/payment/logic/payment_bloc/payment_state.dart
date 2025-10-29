@@ -21,7 +21,7 @@ class PaymentState extends Equatable {
   final List<OrderEntity> userOrders;
   final String getUserOrdersMessage;
   // local cart
-  final List<ProductEntity> localProductsCart;
+  final List<CartItemRequest> localProductsCart;
   final RequestStates localProductsCartState;
   final String localProductsCartMessage;
   final bool isProductInCart;
@@ -59,7 +59,7 @@ class PaymentState extends Equatable {
     List<OrderEntity>? userOrders,
     String? getUserOrdersMessage,
     RequestStates? localProductsCartState,
-    List<ProductEntity>? localProductsCart,
+    List<CartItemRequest>? localProductsCart,
     String? localProductsCartMessage,
     bool? isProductInCart,
   }) {

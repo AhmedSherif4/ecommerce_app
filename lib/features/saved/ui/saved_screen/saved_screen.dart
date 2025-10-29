@@ -11,7 +11,7 @@ class SavedScreen extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              const HeaderForMore(title: AppStrings.saved),
+              const HeaderForMore(title: AppStrings.saved, hasBack: false),
               BlocConsumer<SavedBloc, SavedState>(
                 listener: (context, state) {
                   // عرض رسالة عند الإضافة للـ favorites

@@ -133,8 +133,6 @@ class AppRouteGenerator {
                     ),
                   ),
               ),
-              BlocProvider(create: (context) => getIt<PaymentBloc>()),
-
               // ..add(
               //   CheckChildIsSubscribedEvent(
               //     childId: getIt<UserLocalDataSource>()
@@ -178,10 +176,12 @@ class AppRouteGenerator {
           ),
         );
       case AppRoutesNames.rCheckoutScreen:
+        final CreateOrderEntity arguments =
+            settings.arguments as CreateOrderEntity;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<CheckoutCubit>(),
-            child: const CheckoutScreen(),
+          builder: (_) => BlocProvider.value(
+            value: getIt<PaymentBloc>(),
+            child: CheckoutScreen(arguments),
           ),
         );
       case AppRoutesNames.rPaymentMethodsScreen:

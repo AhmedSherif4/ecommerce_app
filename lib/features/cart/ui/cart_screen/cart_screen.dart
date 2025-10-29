@@ -1,49 +1,173 @@
 part of '../../cart.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
   @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  late final TextEditingController _noteController;
+
+  @override
+  void initState() {
+    _noteController = TextEditingController();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
+    return BlocProvider(
+      create: (context) =>
+          getIt<PaymentBloc>()..add(const LoadCartProductsEvent()),
+      child: Scaffold(
+        body: SafeArea(
+          child: BlocBuilder<PaymentBloc, PaymentState>(
+            builder: (context, state) {
+              if (state.localProductsCartState == RequestStates.loaded) {
+                if (state.localProductsCart.isEmpty) {
+                  return const EmptyListWidgets(
+                    message: 'No Product Added Yet!',
+                  );
+                }
+
+                return Column(
                   children: [
-                    const HeaderForMore(title: AppStrings.cart),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 3,
-                      itemBuilder: (context, index) {
-                        return ProductCardCart();
-                      },
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            const HeaderForMore(
+                              title: AppStrings.cart,
+                              hasBack: false,
+                            ),
+                            Spacing.spaceHS10,
+                            const _DeliveryAddress(),
+                            Divider(
+                              thickness: 1,
+                              color: context.colors.primary1,
+                            ),
+                            Spacing.spaceHS10,
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: state.localProductsCart.length,
+                              itemBuilder: (context, index) {
+                                return ProductCardCart(
+                                  product: state.localProductsCart[index],
+                                  onQuantityChanged: (quantity) {
+                                    context.read<PaymentBloc>().add(
+                                      UpdateCartQuantityEvent(
+                                        CartItemRequest(
+                                          product: state
+                                              .localProductsCart[index]
+                                              .product,
+                                          quantity: quantity,
+                                        ),
+                                        index,
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                            Spacing.spaceHS10,
+                            Divider(
+                              thickness: 1,
+                              color: context.colors.primary1,
+                            ),
+                            SubTotal(
+                              cartSummary: CartSummary.builder()
+                                  .withProducts(state.localProductsCart)
+                                  .calculate(),
+                            ),
+                            Spacing.spaceHS10,
+                            Divider(
+                              thickness: 1,
+                              color: context.colors.primary1,
+                            ),
+                            TextFormFieldWidget(
+                              controller: _noteController,
+                              keyboardType: TextInputType.text,
+                              inputAction: TextInputAction.done,
+                              onFieldSubmitted: (String p1) {},
+                              label: 'Note',
+                              hintText: 'Note',
+                              maxLine: 3,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    SubTotal(),
+                    BlocListener<PaymentBloc, PaymentState>(
+                      listener: (context, state) {
+                        switch (state.createOrderState) {
+                          case RequestStates.loading:
+                            showLoadingDialog(context);
+                          case RequestStates.loaded:
+                            RouteManager.rPopRoute(context);
+                            context.read<PaymentBloc>().add(
+                              const ClearCartEvent(),
+                            );
+                            RouteManager.rPushNamed(
+                              context: context,
+                              rName: AppRoutesNames.rCheckoutScreen,
+                              arguments: state.createOrderEntity,
+                            );
+                          case RequestStates.error:
+                            showSnackBar(
+                              description: state.createOrderMessage,
+                              state: ToastStates.error,
+                              context: context,
+                            );
+                          default:
+                        }
+                      },
+                      child: DefaultButtonWidget(
+                        label: 'Go To Checkout',
+                        onPressed: () {
+                          context.read<PaymentBloc>().add(
+                            CreateOrderEvent(
+                              createOrderRequest: CreateOrderRequest(
+                                cartItems: state.localProductsCart,
+                                shippingAddress: const ShippingAddressModel(
+                                  city: 'city',
+                                  country: 'country',
+                                  phone: 'phone',
+                                  postalCode: '11723',
+                                  street: 'street',
+                                ),
+                                notes: '_noteController.text',
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ],
-                ),
-              ),
-            ),
-            DefaultButtonWidget(
-              label: 'Go To Checkout',
-              onPressed: () {
-                RouteManager.rPushNamed(
-                  context: context,
-                  rName: AppRoutesNames.rCheckoutScreen,
                 );
-              },
-            ),
-          ],
-        ),
-      ).paddingBody(),
+              } else {
+                return const Center(child: Text('Something went wrong...'));
+              }
+            },
+          ),
+        ).paddingBody(),
+      ),
     );
   }
 }
 
 class ProductCardCart extends StatelessWidget {
+  final Function(int quantity) onQuantityChanged;
+  final CartItemRequest product;
+
+  const ProductCardCart({
+    super.key,
+    required this.product,
+    required this.onQuantityChanged,
+  });
+
   @override
   Widget build(BuildContext context) {
     return CustomInkWell(
@@ -77,15 +201,15 @@ class ProductCardCart extends StatelessWidget {
                     width: Spacing.s100,
                     height: Spacing.s100,
                     fit: BoxFit.contain,
-                    imagePath:
-                        'https://i.etsystatic.com/42377391/r/il/f4c4b5/5133648322/il_570xN.5133648322_3fx8.jpg',
-                    notHaveImage: false,
+                    imagePath: product.product.imageUrl,
+                    notHaveImage: product.product.imageUrl.isEmpty,
                   ),
                 ),
                 SizedBox(
                   width: constraints.maxWidth * 0.6,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,20 +222,27 @@ class ProductCardCart extends StatelessWidget {
                             spacing: 1,
                             children: [
                               Text(
-                                'Classic Sneakers',
+                                product.product.name,
                                 style: context.typography.bodyMedium,
                               ),
                               Text(
-                                'Size L',
+                                '${product.product.averageRate}/5',
                                 style: context.typography.caption.copyWith(
                                   color: context.colors.primary5,
                                 ),
                               ),
                             ],
                           ),
-                          Icon(
-                            Icons.restore_from_trash_rounded,
-                            size: Spacing.iconSizeS24,
+                          CustomInkWell(
+                            onTap: () {
+                              context.read<PaymentBloc>().add(
+                                RemoveProductFromCartEvent(product),
+                              );
+                            },
+                            child: Icon(
+                              Icons.restore_from_trash_rounded,
+                              size: Spacing.iconSizeS24,
+                            ),
                           ),
                         ],
                       ),
@@ -119,34 +250,50 @@ class ProductCardCart extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
-                            '\$ 59.99',
-                            style: context.typography.bodyMedium,
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            spacing: 9,
-                            children: [
-                              CustomInkWell(
-                                onTap: () {},
-                                child: Icon(
-                                  Icons.remove,
-                                  size: Spacing.iconSizeS20,
+                          if (product.product.hasOffer)
+                            Flexible(
+                              child: Directionality(
+                                textDirection: ui.TextDirection.rtl,
+                                child: Text.rich(
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            '${NumberFormat('#,###', 'en').format(product.product.priceAfterOffer)}جم/',
+                                        style: context.typography.bodyLarge
+                                            .copyWith(
+                                              color: context.colors.red,
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text:
+                                            '${NumberFormat('#,###', 'en').format(product.product.price)}جم',
+                                        style: context.typography.labelLarge
+                                            .copyWith(
+                                              color: context.colors.primary5,
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                              decorationThickness: 3,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              Text('2', style: context.typography.caption),
-                              CustomInkWell(
-                                onTap: () {},
-                                child: Icon(
-                                  Icons.add,
-                                  size: Spacing.iconSizeS20,
-                                ),
-                              ),
-                            ],
+                            ),
+                          QuantitySelector(
+                            initialQuantity: product.quantity,
+                            onQuantityChanged: onQuantityChanged,
+                            minQuantity: 1,
+                            maxQuantity: 99,
                           ),
                         ],
+                      ),
+                      Text(
+                        'Total Price: ${product.totalPrice}',
+                        style: context.typography.bodyMedium,
                       ),
                     ],
                   ),
@@ -161,6 +308,9 @@ class ProductCardCart extends StatelessWidget {
 }
 
 class SubTotal extends StatelessWidget {
+  final CartSummary cartSummary;
+  const SubTotal({super.key, required this.cartSummary});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -175,7 +325,7 @@ class SubTotal extends StatelessWidget {
               ),
             ),
             Text(
-              '\$ 5,870',
+              '\$ ${cartSummary.subTotal}',
               textAlign: TextAlign.right,
               style: context.typography.titleLarge,
             ),
@@ -191,7 +341,7 @@ class SubTotal extends StatelessWidget {
               ),
             ),
             Text(
-              '\$ 0.00',
+              '\$ ${cartSummary.vat}',
               textAlign: TextAlign.right,
               style: context.typography.titleLarge,
             ),
@@ -207,19 +357,19 @@ class SubTotal extends StatelessWidget {
               ),
             ),
             Text(
-              '\$ 80',
+              '\$ ${cartSummary.shippingFee}',
               textAlign: TextAlign.right,
               style: context.typography.titleLarge,
             ),
           ],
         ),
-        Divider(thickness: 1, color: context.colors.primary1),
+        Divider(thickness: 0.5, color: context.colors.primary1),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Total', style: context.typography.titleMedium),
             Text(
-              '\$ 5,950',
+              '\$ ${cartSummary.total}',
               textAlign: TextAlign.right,
               style: context.typography.titleLarge,
             ),

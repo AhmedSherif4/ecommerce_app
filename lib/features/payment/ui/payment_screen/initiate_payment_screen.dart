@@ -226,11 +226,11 @@ class _InitiatePaymentScreenState extends State<InitiatePaymentScreen> {
                                   pStatus: _selectedStatus,
                                 );
 
-                                context.read<PaymentBloc>().add(
+                                /* context.read<PaymentBloc>().add(
                                   InitiatePaymentEvent(
                                     initiatePaymentRequest: request,
                                   ),
-                                );
+                                );*/
                               },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange,

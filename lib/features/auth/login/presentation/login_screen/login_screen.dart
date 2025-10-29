@@ -18,7 +18,6 @@ import '../../../../../core/base_widgets/loading_shimmer_widget.dart';
 import '../../../../../core/base_widgets/loading_widget.dart';
 import '../../../../../core/base_widgets/snackbar_widget.dart';
 import '../../../../../core/enum/enum_generation.dart';
-import '../../../../../core/shared_models/user/data/user_local_data_source/user_local_data_source.dart';
 import '../../../../../core/shared_widget/app_input_field/email_filed.dart';
 import '../../../../../core/shared_widget/app_input_field/password_filed.dart';
 import '../../../../../core/shared_widget/buttons/button_widget.dart';
@@ -278,7 +277,6 @@ class _LoginScreenState extends State<LoginScreen> {
               RouteManager.rPushNamed(
                 context: context,
                 rName: AppRoutesNames.rHomeLayoutView,
-                arguments: getIt<UserLocalDataSource>().getUserData(),
               );
             }
           });
@@ -309,7 +307,6 @@ class _LoginScreenState extends State<LoginScreen> {
     RouteManager.rPushNamedAndRemoveUntil(
       context: context,
       rName: AppRoutesNames.rHomeLayoutView,
-      arguments: context.read<LoginBloc>().userData,
     );
   }
 

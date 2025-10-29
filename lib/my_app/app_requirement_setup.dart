@@ -6,6 +6,7 @@ import 'package:hive_flutter/adapters.dart';
 import '../config/storages/keys.dart';
 import '../core/services/services_locator.dart';
 import '../core/shared_models/user/user_entity/user_entity.dart';
+import '../features/payment/data/payment_models/cart_item_request.dart';
 import 'notification/i_notification_service.dart';
 
 class AppRequirementSetup {
@@ -19,7 +20,7 @@ class AppRequirementSetup {
     await Future.wait([
       //
       Hive.openBox<UserEntity>(AppKeys.userData),
-      Hive.openBox<ProductEntity>(AppKeys.cartBoxKey),
+      Hive.openBox<CartItemRequest>(AppKeys.cartBoxKey),
       Hive.openBox<String>(AppKeys.getExpirationKey(AppKeys.showcaseViewed)),
       Hive.openBox<bool>(AppKeys.showcaseViewed),
       Hive.openBox<String>(AppKeys.getExpirationKey(AppKeys.contactUs)),
@@ -34,6 +35,7 @@ class AppRequirementSetup {
     Hive.registerAdapter(UserEntityAdapter());
     Hive.registerAdapter(TermsAndConditionsEntityAdapter());
     Hive.registerAdapter(ContactUsEntityAdapter());
+    Hive.registerAdapter(CartItemRequestAdapter());
     Hive.registerAdapter(ProductEntityAdapter());
     Hive.registerAdapter(ReviewEntityAdapter());
   }

@@ -51,7 +51,19 @@ class PaymentRemoteDataSourceImpl implements PaymentRemoteDataSource {
 
     '$response'.log();
 
-    return PaymentModel.fromJson(response);
+    final paymentModel = PaymentModel.fromJson(response);
+
+    await initiatePayment(
+      initiatePaymentRequest: InitiatePaymentRequest(
+        pTransactionId: paymentModel.transactionId,
+        pStatus: 'pending' /*paymentModel.status*/,
+        pPaymentMethod: 'card',
+        pPaymentGateway: createPaymentRequest.paymentGateway,
+        pOrderId: createPaymentRequest.orderId,
+        pAmount: paymentModel.amount,
+      ),
+    );
+    return paymentModel;
   }
 
   @override

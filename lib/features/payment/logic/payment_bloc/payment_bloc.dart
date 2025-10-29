@@ -27,6 +27,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
 
     on<ClearCartEvent>(_clearCart);
     on<IsProductInCartEvent>(_isProductInCart);
+    on<UpdateCartQuantityEvent>(_updateCartQuantity);
   }
 
   void _createOrder(CreateOrderEvent event, Emitter<PaymentState> emit) async {
@@ -158,15 +159,13 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   FutureOr<void> _addProductToCart(event, emit) async {
     try {
       await _repository.saveProductAtCart(event.product);
-      final products = await _repository.getProductsCart();
+      add(const LoadCartProductsEvent());
       emit(
         state.copyWith(
           localProductsCartState: RequestStates.loaded,
-          localProductsCart: products,
           isProductInCart: true,
         ),
       );
-      products.log();
     } catch (e) {
       e.toString().log();
       emit(
@@ -181,15 +180,13 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   FutureOr<void> _removeProductFromCart(event, emit) async {
     try {
       await _repository.removeProductFromCart(event.product);
-      final products = await _repository.getProductsCart();
+      add(const LoadCartProductsEvent());
       emit(
         state.copyWith(
           localProductsCartState: RequestStates.loaded,
-          localProductsCart: products,
           isProductInCart: false,
         ),
       );
-      products.log();
     } catch (e) {
       e.toString().log();
       emit(
@@ -234,6 +231,32 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
       e.toString().log();
       "there's error at Is Product In Cart Function".log();
       emit(state.copyWith(isProductInCart: false));
+    }
+  }
+
+  FutureOr<void> _updateCartQuantity(
+    UpdateCartQuantityEvent event,
+    Emitter<PaymentState> emit,
+  ) async {
+    try {
+      final products = await _repository.updateProductAtCart(
+        event.cartItemRequest,
+        event.index,
+      );
+      emit(
+        state.copyWith(
+          localProductsCartState: RequestStates.loaded,
+          localProductsCart: products,
+        ),
+      );
+    } catch (e) {
+      e.toString().log();
+      emit(
+        state.copyWith(
+          localProductsCartState: RequestStates.error,
+          localProductsCartMessage: 'Failed to load cart',
+        ),
+      );
     }
   }
 }
