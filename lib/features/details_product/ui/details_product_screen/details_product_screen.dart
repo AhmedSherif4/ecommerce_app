@@ -1,11 +1,23 @@
 part of '../../details_product.dart';
 
-class DetailsProductScreen extends StatelessWidget {
+class DetailsProductScreen extends StatefulWidget {
   final ProductModel product;
 
   DetailsProductScreen(this.product, {super.key});
 
+  @override
+  State<DetailsProductScreen> createState() => _DetailsProductScreenState();
+}
+
+class _DetailsProductScreenState extends State<DetailsProductScreen> {
   final List<String> avaliableSizes = ['S', 'L', 'M', 'X', 'XL', 'XXL'];
+
+  late final bool isProductInCart;
+  @override
+  void initState() {
+    isProductInCart = context.read<PaymentBloc>().state.isProductInCart;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +25,14 @@ class DetailsProductScreen extends StatelessWidget {
       body: SafeArea(
         child: OrientationItem(
           portraitWidget: _PortraitLayout(
-            product: product,
+            product: widget.product,
             avaliableSizes: avaliableSizes,
+            isProductInCart: isProductInCart,
           ),
           landscapeWidget: _LandscapeLayout(
-            product: product,
+            product: widget.product,
             avaliableSizes: avaliableSizes,
+            isProductInCart: isProductInCart,
           ),
         ),
       ).paddingBody(),
@@ -27,10 +41,15 @@ class DetailsProductScreen extends StatelessWidget {
 }
 
 class _PortraitLayout extends StatelessWidget {
+  final bool isProductInCart;
   final ProductModel product;
   final List<String> avaliableSizes;
 
-  const _PortraitLayout({required this.product, required this.avaliableSizes});
+  const _PortraitLayout({
+    required this.product,
+    required this.avaliableSizes,
+    required this.isProductInCart,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +74,10 @@ class _PortraitLayout extends StatelessWidget {
           height: AppReference.deviceHeight(context) * 0.15,
           color: context.colors.primary0,
           padding: EdgeInsets.all(Spacing.s12.r),
-          child: ProductPriceAndCart(product: product),
+          child: ProductPriceAndCart(
+            product: product,
+            isProductInCart: isProductInCart,
+          ),
         ),
       ],
     );
@@ -63,10 +85,15 @@ class _PortraitLayout extends StatelessWidget {
 }
 
 class _LandscapeLayout extends StatelessWidget {
+  final bool isProductInCart;
   final ProductModel product;
   final List<String> avaliableSizes;
 
-  const _LandscapeLayout({required this.product, required this.avaliableSizes});
+  const _LandscapeLayout({
+    required this.product,
+    required this.avaliableSizes,
+    required this.isProductInCart,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +129,10 @@ class _LandscapeLayout extends StatelessWidget {
           height: AppReference.deviceWidth(context) * 0.1,
           color: context.colors.primary0,
           padding: EdgeInsets.all(Spacing.s12.r),
-          child: ProductPriceAndCart(product: product),
+          child: ProductPriceAndCart(
+            product: product,
+            isProductInCart: isProductInCart,
+          ),
         ),
       ],
     );

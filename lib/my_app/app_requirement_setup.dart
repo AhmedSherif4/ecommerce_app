@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/shared_models/product/product_entity.dart';
 import 'package:ecommerce_app/features/shared_features/contact_us/domain/entity/contact_us_entity.dart';
 import 'package:ecommerce_app/features/shared_features/terms_and_conditions/domain/entity/terms_and_conditions_entity.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -16,7 +17,9 @@ class AppRequirementSetup {
 
   static Future<void> initialFutures() async {
     await Future.wait([
+      //
       Hive.openBox<UserEntity>(AppKeys.userData),
+      Hive.openBox<ProductEntity>(AppKeys.cartBoxKey),
       Hive.openBox<String>(AppKeys.getExpirationKey(AppKeys.showcaseViewed)),
       Hive.openBox<bool>(AppKeys.showcaseViewed),
       Hive.openBox<String>(AppKeys.getExpirationKey(AppKeys.contactUs)),
@@ -31,5 +34,7 @@ class AppRequirementSetup {
     Hive.registerAdapter(UserEntityAdapter());
     Hive.registerAdapter(TermsAndConditionsEntityAdapter());
     Hive.registerAdapter(ContactUsEntityAdapter());
+    Hive.registerAdapter(ProductEntityAdapter());
+    Hive.registerAdapter(ReviewEntityAdapter());
   }
 }

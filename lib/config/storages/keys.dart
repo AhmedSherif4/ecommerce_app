@@ -1,4 +1,6 @@
 class AppKeys {
+  static const String cartBoxKey = 'cart_products';
+
   static const keyDark = 'isDark';
   static const completeProfile = 'completeProfile';
   static const keyLocale = 'locale';

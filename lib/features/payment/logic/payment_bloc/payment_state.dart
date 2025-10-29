@@ -20,6 +20,11 @@ class PaymentState extends Equatable {
   final RequestStates getUserOrdersState;
   final List<OrderEntity> userOrders;
   final String getUserOrdersMessage;
+  // local cart
+  final List<ProductEntity> localProductsCart;
+  final RequestStates localProductsCartState;
+  final String localProductsCartMessage;
+  final bool isProductInCart;
 
   const PaymentState({
     this.createOrderState = RequestStates.initial,
@@ -34,6 +39,10 @@ class PaymentState extends Equatable {
     this.getUserOrdersState = RequestStates.initial,
     this.userOrders = const [],
     this.getUserOrdersMessage = '',
+    this.localProductsCartState = RequestStates.initial,
+    this.localProductsCart = const [],
+    this.localProductsCartMessage = '',
+    this.isProductInCart = false,
   });
 
   PaymentState copyWith({
@@ -49,6 +58,10 @@ class PaymentState extends Equatable {
     RequestStates? getUserOrdersState,
     List<OrderEntity>? userOrders,
     String? getUserOrdersMessage,
+    RequestStates? localProductsCartState,
+    List<ProductEntity>? localProductsCart,
+    String? localProductsCartMessage,
+    bool? isProductInCart,
   }) {
     return PaymentState(
       createOrderState: createOrderState ?? this.createOrderState,
@@ -65,6 +78,12 @@ class PaymentState extends Equatable {
       getUserOrdersState: getUserOrdersState ?? this.getUserOrdersState,
       userOrders: userOrders ?? this.userOrders,
       getUserOrdersMessage: getUserOrdersMessage ?? this.getUserOrdersMessage,
+      localProductsCart: localProductsCart ?? this.localProductsCart,
+      localProductsCartMessage:
+          localProductsCartMessage ?? this.localProductsCartMessage,
+      localProductsCartState:
+          localProductsCartState ?? this.localProductsCartState,
+      isProductInCart: isProductInCart ?? this.isProductInCart,
     );
   }
 
@@ -82,5 +101,9 @@ class PaymentState extends Equatable {
     getUserOrdersState,
     userOrders,
     getUserOrdersMessage,
+    localProductsCartMessage,
+    localProductsCart,
+    localProductsCartState,
+    isProductInCart,
   ];
 }

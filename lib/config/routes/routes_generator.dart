@@ -166,8 +166,14 @@ class AppRouteGenerator {
         ProductModel product = settings.arguments as ProductModel;
 
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<DetailsProductCubit>(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => getIt<DetailsProductCubit>()),
+              BlocProvider(
+                create: (context) =>
+                    getIt<PaymentBloc>()..add(IsProductInCartEvent(product.id)),
+              ),
+            ],
             child: DetailsProductScreen(product),
           ),
         );

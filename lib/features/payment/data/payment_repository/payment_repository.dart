@@ -16,16 +16,24 @@ abstract class PaymentBaseRepository {
   Future<Either<Failure, List<OrderEntity>>> getUserOrders({
     required GetUserOrdersRequest getUserOrdersRequest,
   });
+
+  Future<void> saveProductAtCart(ProductEntity product);
+  Future<void> removeProductFromCart(ProductEntity product);
+  Future<List<ProductEntity>> getProductsCart();
+  Future<void> clearProductsCart();
+  Future<bool> isProductInCart(String productId);
 }
 
 @LazySingleton(as: PaymentBaseRepository)
 class PaymentRepository implements PaymentBaseRepository {
   final PaymentRemoteDataSource remoteDataSource;
+  final PaymentLocalDataSource paymentLocalDataSource;
   final BaseRepository baseRepository;
 
   PaymentRepository({
     required this.remoteDataSource,
     required this.baseRepository,
+    required this.paymentLocalDataSource,
   });
 
   @override
@@ -96,5 +104,30 @@ class PaymentRepository implements PaymentBaseRepository {
     return data.fold((failure) => Left(failure), (response) {
       return Right(response.data);
     });
+  }
+
+  @override
+  Future<void> saveProductAtCart(ProductEntity product) async {
+    await paymentLocalDataSource.saveProductAtCart(product);
+  }
+
+  @override
+  Future<void> removeProductFromCart(ProductEntity product) async {
+    await paymentLocalDataSource.removeProductFromCart(product);
+  }
+
+  @override
+  Future<List<ProductEntity>> getProductsCart() async {
+    return await paymentLocalDataSource.getProductsCart();
+  }
+
+  @override
+  Future<void> clearProductsCart() async {
+    await paymentLocalDataSource.clearProductsCart();
+  }
+
+  @override
+  Future<bool> isProductInCart(String productId) async {
+    return await paymentLocalDataSource.isProductInCart(productId);
   }
 }

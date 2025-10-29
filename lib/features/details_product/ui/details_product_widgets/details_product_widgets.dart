@@ -123,8 +123,12 @@ class ProductSizeSelector extends StatelessWidget {
 
 class ProductPriceAndCart extends StatelessWidget {
   final ProductModel product;
+  final bool isProductInCart;
 
-  const ProductPriceAndCart({required this.product});
+  const ProductPriceAndCart({
+    required this.product,
+    required this.isProductInCart,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -170,10 +174,26 @@ class ProductPriceAndCart extends StatelessWidget {
             ),
           ],
         ),
-        DefaultButtonWidget(
-          label: 'Add to Cart',
-          onPressed: () {},
-          width: AppReference.deviceWidth(context) * 0.5,
+        BlocBuilder<PaymentBloc, PaymentState>(
+          builder: (context, state) {
+            'at ui'.log();
+            state.isProductInCart.log();
+            return DefaultButtonWidget(
+              label: context.read<PaymentBloc>().state.isProductInCart
+                  ? 'Remove From Cart'
+                  : 'Add to Cart',
+              onPressed: () {
+                context.read<PaymentBloc>().state.isProductInCart
+                    ? context.read<PaymentBloc>().add(
+                        RemoveProductFromCartEvent(product),
+                      )
+                    : context.read<PaymentBloc>().add(
+                        AddProductToCartEvent(product),
+                      );
+              },
+              width: AppReference.deviceWidth(context) * 0.5,
+            );
+          },
         ),
       ],
     );

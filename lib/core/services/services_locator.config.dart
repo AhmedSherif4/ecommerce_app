@@ -238,6 +238,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i724.HomeLocalDataSource>(() =>
         _i724.HomeLocalDataSourceImpl(
             baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
+    gh.lazySingleton<_i969.PaymentLocalDataSource>(() =>
+        _i969.PaymentLocalDataSourceImpl(
+            baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
     gh.lazySingleton<_i176.ApiConsumer>(
         () => _i190.DioConsumer(client: gh<_i361.Dio>()));
     gh.lazySingleton<_i510.GetContactUsLocalDataSource>(() =>
@@ -329,27 +332,12 @@ extension GetItInjectableX on _i174.GetIt {
               remoteDataSource: gh<_i914.CheckoutRemoteDataSource>(),
               baseRepository: gh<_i407.BaseRepository>(),
             ));
-    gh.lazySingleton<_i969.PaymentBaseRepository>(() => _i969.PaymentRepository(
-          remoteDataSource: gh<_i969.PaymentRemoteDataSource>(),
-          baseRepository: gh<_i407.BaseRepository>(),
-        ));
     gh.lazySingleton<_i687.ContactUsBaseRepository>(
         () => _i614.ContactUsRepository(
               localDataSource: gh<_i510.GetContactUsLocalDataSource>(),
               remoteDataSource: gh<_i793.ContactUsRemoteDataSource>(),
               baseRepository: gh<_i407.BaseRepository>(),
             ));
-    gh.lazySingleton<_i969.CreateOrderUseCase>(() => _i969.CreateOrderUseCase(
-        repository: gh<_i969.PaymentBaseRepository>()));
-    gh.lazySingleton<_i969.CreatePaymentUseCase>(() =>
-        _i969.CreatePaymentUseCase(
-            repository: gh<_i969.PaymentBaseRepository>()));
-    gh.lazySingleton<_i969.InitiatePaymentUseCase>(() =>
-        _i969.InitiatePaymentUseCase(
-            repository: gh<_i969.PaymentBaseRepository>()));
-    gh.lazySingleton<_i969.GetUserOrdersUseCase>(() =>
-        _i969.GetUserOrdersUseCase(
-            repository: gh<_i969.PaymentBaseRepository>()));
     gh.lazySingleton<_i109.GetContactUsUseCase>(() => _i109.GetContactUsUseCase(
         repository: gh<_i687.ContactUsBaseRepository>()));
     gh.lazySingleton<_i613.SignUpBaseRepository>(() => _i613.SignUpRepository(
@@ -383,12 +371,6 @@ extension GetItInjectableX on _i174.GetIt {
             baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i879.UnLinkRemoteDataSource>(() =>
         _i879.UnLinkRemoteDataSourceImpl(gh<_i831.BaseRemoteDataSource>()));
-    gh.factory<_i969.PaymentBloc>(() => _i969.PaymentBloc(
-          gh<_i969.CreateOrderUseCase>(),
-          gh<_i969.CreatePaymentUseCase>(),
-          gh<_i969.InitiatePaymentUseCase>(),
-          gh<_i969.GetUserOrdersUseCase>(),
-        ));
     gh.lazySingleton<_i1042.GlobalBaseRemoteDataSource>(
         () => _i1042.GlobalRemoteDataSourceImpl(
               networkInfo: gh<_i405.NetworkInfo>(),
@@ -460,6 +442,11 @@ extension GetItInjectableX on _i174.GetIt {
               remoteDataSource: gh<_i363.MyOrdersRemoteDataSource>(),
               baseRepository: gh<_i407.BaseRepository>(),
             ));
+    gh.lazySingleton<_i969.PaymentBaseRepository>(() => _i969.PaymentRepository(
+          remoteDataSource: gh<_i969.PaymentRemoteDataSource>(),
+          baseRepository: gh<_i407.BaseRepository>(),
+          paymentLocalDataSource: gh<_i969.PaymentLocalDataSource>(),
+        ));
     gh.lazySingleton<_i834.HomeLayoutRemoteDataSource>(() =>
         _i834.HomeLayoutRemoteDataSourceImpl(gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i80.HomeLayoutRepository>(() =>
@@ -539,6 +526,17 @@ extension GetItInjectableX on _i174.GetIt {
           baseRepository: gh<_i407.BaseRepository>(),
           userLocalDataSource: gh<_i183.UserLocalDataSource>(),
         ));
+    gh.lazySingleton<_i969.CreateOrderUseCase>(() => _i969.CreateOrderUseCase(
+        repository: gh<_i969.PaymentBaseRepository>()));
+    gh.lazySingleton<_i969.CreatePaymentUseCase>(() =>
+        _i969.CreatePaymentUseCase(
+            repository: gh<_i969.PaymentBaseRepository>()));
+    gh.lazySingleton<_i969.InitiatePaymentUseCase>(() =>
+        _i969.InitiatePaymentUseCase(
+            repository: gh<_i969.PaymentBaseRepository>()));
+    gh.lazySingleton<_i969.GetUserOrdersUseCase>(() =>
+        _i969.GetUserOrdersUseCase(
+            repository: gh<_i969.PaymentBaseRepository>()));
     gh.factory<_i409.SplashBloc>(
         () => _i409.SplashBloc(gh<_i390.CheckUserTokenUseCase>()));
     gh.lazySingleton<_i167.NotificationUseCase>(() => _i167.NotificationUseCase(
@@ -599,6 +597,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i567.GetTermsAndConditionsUseCase>(() =>
         _i567.GetTermsAndConditionsUseCase(
             repository: gh<_i567.TermsAndConditionsBaseRepository>()));
+    gh.factory<_i969.PaymentBloc>(() => _i969.PaymentBloc(
+          gh<_i969.CreateOrderUseCase>(),
+          gh<_i969.CreatePaymentUseCase>(),
+          gh<_i969.InitiatePaymentUseCase>(),
+          gh<_i969.GetUserOrdersUseCase>(),
+          gh<_i969.PaymentBaseRepository>(),
+        ));
     gh.lazySingleton<_i1065.GetGuestDataUseCase>(
         () => _i1065.GetGuestDataUseCase(gh<_i764.GlobalBaseRepository>()));
     gh.lazySingleton<_i1054.CheckVerificationCodeUseCase>(() =>

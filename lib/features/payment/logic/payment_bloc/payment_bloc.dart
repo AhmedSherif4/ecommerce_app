@@ -6,17 +6,27 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   final CreatePaymentUseCase createPaymentUseCase;
   final InitiatePaymentUseCase initiatePaymentUseCase;
   final GetUserOrdersUseCase getUserOrdersUseCase;
+  final PaymentBaseRepository _repository;
 
   PaymentBloc(
     this.createOrderUseCase,
     this.createPaymentUseCase,
     this.initiatePaymentUseCase,
     this.getUserOrdersUseCase,
+    this._repository,
   ) : super(const PaymentState()) {
     on<CreateOrderEvent>(_createOrder);
     on<CreatePaymentEvent>(_createPayment);
     on<InitiatePaymentEvent>(_initiatePayment);
     on<GetUserOrdersEvent>(_getUserOrders);
+    on<LoadCartProductsEvent>(_loadCartProducts);
+
+    on<AddProductToCartEvent>(_addProductToCart);
+
+    on<RemoveProductFromCartEvent>(_removeProductFromCart);
+
+    on<ClearCartEvent>(_clearCart);
+    on<IsProductInCartEvent>(_isProductInCart);
   }
 
   void _createOrder(CreateOrderEvent event, Emitter<PaymentState> emit) async {
@@ -123,5 +133,107 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         );
       },
     );
+  }
+
+  FutureOr<void> _loadCartProducts(event, emit) async {
+    try {
+      final products = await _repository.getProductsCart();
+      emit(
+        state.copyWith(
+          localProductsCartState: RequestStates.loaded,
+          localProductsCart: products,
+        ),
+      );
+    } catch (e) {
+      e.toString().log();
+      emit(
+        state.copyWith(
+          localProductsCartState: RequestStates.error,
+          localProductsCartMessage: 'Failed to load cart',
+        ),
+      );
+    }
+  }
+
+  FutureOr<void> _addProductToCart(event, emit) async {
+    try {
+      await _repository.saveProductAtCart(event.product);
+      final products = await _repository.getProductsCart();
+      emit(
+        state.copyWith(
+          localProductsCartState: RequestStates.loaded,
+          localProductsCart: products,
+          isProductInCart: true,
+        ),
+      );
+      products.log();
+    } catch (e) {
+      e.toString().log();
+      emit(
+        state.copyWith(
+          localProductsCartState: RequestStates.error,
+          localProductsCartMessage: 'Failed to add product',
+        ),
+      );
+    }
+  }
+
+  FutureOr<void> _removeProductFromCart(event, emit) async {
+    try {
+      await _repository.removeProductFromCart(event.product);
+      final products = await _repository.getProductsCart();
+      emit(
+        state.copyWith(
+          localProductsCartState: RequestStates.loaded,
+          localProductsCart: products,
+          isProductInCart: false,
+        ),
+      );
+      products.log();
+    } catch (e) {
+      e.toString().log();
+      emit(
+        state.copyWith(
+          localProductsCartState: RequestStates.error,
+          localProductsCartMessage: 'Failed to remove product',
+        ),
+      );
+    }
+  }
+
+  FutureOr<void> _clearCart(event, emit) async {
+    try {
+      await _repository.clearProductsCart();
+      emit(
+        state.copyWith(
+          localProductsCartState: RequestStates.loaded,
+          localProductsCart: [],
+        ),
+      );
+    } catch (e) {
+      e.toString().log();
+      emit(
+        state.copyWith(
+          localProductsCartState: RequestStates.error,
+          localProductsCartMessage: 'Failed to clear cart',
+        ),
+      );
+    }
+  }
+
+  FutureOr<void> _isProductInCart(
+    IsProductInCartEvent event,
+    Emitter<PaymentState> emit,
+  ) async {
+    try {
+      final result = await _repository.isProductInCart(event.productId);
+      emit(state.copyWith(isProductInCart: result));
+      'result: $result'.log();
+      'isProductInCart: ${state.isProductInCart}'.log();
+    } catch (e) {
+      e.toString().log();
+      "there's error at Is Product In Cart Function".log();
+      emit(state.copyWith(isProductInCart: false));
+    }
   }
 }

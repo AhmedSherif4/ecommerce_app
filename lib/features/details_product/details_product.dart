@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ecommerce_app/config/extensions/log_extension.dart';
 import 'package:ecommerce_app/config/resources/app_animations.dart';
 import 'package:ecommerce_app/config/resources/app_shadow.dart';
 import 'package:ecommerce_app/config/resources/app_strings.dart';
@@ -9,6 +10,7 @@ import 'package:ecommerce_app/core/shared_widget/buttons/button_widget.dart';
 import 'package:ecommerce_app/core/shared_widget/nullable_network_image.dart';
 import 'package:ecommerce_app/core/text_styling/extensions/app_text_theme.dart';
 import 'package:ecommerce_app/core/theme_manager/service/app_colors.dart';
+import 'package:ecommerce_app/features/payment/payment.dart';
 import 'package:ecommerce_app/features/shared_features/header_for_more.dart';
 import 'package:ecommerce_app/my_app/app_reference.dart';
 import 'package:equatable/equatable.dart';
