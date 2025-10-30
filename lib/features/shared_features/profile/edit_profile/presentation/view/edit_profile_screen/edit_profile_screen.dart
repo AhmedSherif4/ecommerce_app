@@ -2,7 +2,7 @@ part of '../../../edit_profile.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final DataToGoToEditProfileScreen data;
-  EditProfileScreen({super.key, required this.data});
+  const EditProfileScreen({super.key, required this.data});
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -54,7 +54,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             },
             child: Column(
               children: [
-                HeaderForMore(title: AppStrings.edit).paddingBody(),
+                const HeaderForMore(title: AppStrings.edit).paddingBody(),
                 ResponsiveWidgetForTablet(
                   mobile: Column(
                     children: [

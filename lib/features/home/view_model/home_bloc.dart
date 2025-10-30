@@ -42,7 +42,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       ),
       (categories) {
         final finalCategories = [
-          CategoryEntity(id: '0', name: 'ALL', createdAt: 'now'),
+          const CategoryEntity(id: '0', name: 'ALL', createdAt: 'now'),
           ...categories,
         ];
         return emit(

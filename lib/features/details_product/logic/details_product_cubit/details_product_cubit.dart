@@ -3,5 +3,5 @@ part of '../../details_product.dart';
 @Injectable()
 
 class DetailsProductCubit extends Cubit<DetailsProductState> {
-  DetailsProductCubit() : super(DetailsProductState());
+  DetailsProductCubit() : super(const DetailsProductState());
 }

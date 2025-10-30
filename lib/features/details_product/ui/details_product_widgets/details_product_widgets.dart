@@ -3,7 +3,7 @@ part of '../../details_product.dart';
 class ProductImageWithFavourite extends StatelessWidget {
   final ProductModel product;
 
-  const ProductImageWithFavourite({required this.product});
+  const ProductImageWithFavourite({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class ProductImageWithFavourite extends StatelessWidget {
 class ProductTitleAndDescription extends StatelessWidget {
   final ProductModel product;
 
-  const ProductTitleAndDescription({required this.product});
+  const ProductTitleAndDescription({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class ProductTitleAndDescription extends StatelessWidget {
 }
 
 class ChooseSizeTitle extends StatelessWidget {
-  const ChooseSizeTitle();
+  const ChooseSizeTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class ChooseSizeTitle extends StatelessWidget {
 class ProductSizeSelector extends StatelessWidget {
   final List<String> avaliableSizes;
 
-  const ProductSizeSelector({required this.avaliableSizes});
+  const ProductSizeSelector({super.key, required this.avaliableSizes});
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +109,7 @@ class ProductSizeSelector extends StatelessWidget {
           decoration: ShapeDecoration(
             shape: const ContinuousRectangleBorder(),
             color: context.colors.primary0,
-            shadows: [AppShadow.outerShadow],
+            shadows: const [AppShadow.outerShadow],
           ),
           child: Text(
             avaliableSizes[index],
@@ -125,7 +125,7 @@ class ProductPriceAndCart extends StatelessWidget {
   final ProductModel product;
   final bool isProductInCart;
 
-  const ProductPriceAndCart({
+  const ProductPriceAndCart({super.key, 
     required this.product,
     required this.isProductInCart,
   });

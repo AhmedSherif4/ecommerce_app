@@ -10,11 +10,11 @@ class HelpCenterScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              HeaderForMore(title: 'Help Center'),
+              const HeaderForMore(title: 'Help Center'),
               Spacing.spaceHS32,
               ListView.separated(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) => _TileWidget(),
                 separatorBuilder: (context, index) =>
                     Divider(thickness: 1, color: context.colors.primary1),

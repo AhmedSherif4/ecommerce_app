@@ -5,7 +5,7 @@ class HelpCenterState extends Equatable{
 
     const HelpCenterState();
 
-    HelpCenterState copyWith(){return HelpCenterState();}
+    HelpCenterState copyWith(){return const HelpCenterState();}
 
       @override
   List<Object> get props => [];

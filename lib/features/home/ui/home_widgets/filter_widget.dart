@@ -36,7 +36,7 @@ class FilterBottomSheet {
 
 class _FilterSheetContent extends StatefulWidget {
   final BuildContext contextGlob;
-  const _FilterSheetContent(this.contextGlob, {super.key});
+  const _FilterSheetContent(this.contextGlob);
 
   @override
   State<_FilterSheetContent> createState() => _FilterSheetContentState();
@@ -274,7 +274,7 @@ class _FilterSheetContentState extends State<_FilterSheetContent>
                 min: 10,
                 max: 10000,
                 divisions: 100,
-                labels: RangeLabels('\$${min}', '\$${max}'),
+                labels: RangeLabels('\$$min', '\$$max'),
                 onChanged: (values) {
                   context.read<HomeBloc>().add(UpdateRangeEvent(values));
                 },
@@ -315,7 +315,7 @@ class _FilterSheetContentState extends State<_FilterSheetContent>
               },
             );
           default:
-            return SizedBox();
+            return const SizedBox();
         }
       },
     );

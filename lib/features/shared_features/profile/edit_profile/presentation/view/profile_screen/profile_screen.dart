@@ -57,7 +57,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              HeaderForMore(title: 'My Details'),
+              const HeaderForMore(title: 'My Details'),
               PickImageInkWell(
                 pickImageWidget: ImageAccountMoreWidget(
                   withCamera: true,
@@ -104,7 +104,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                 physics: const NeverScrollableScrollPhysics(),
               ),
               Spacing.spaceHS32,
-              ChangePasswordUpdateUserDataWidget(
+              const ChangePasswordUpdateUserDataWidget(
                 title: AppStrings.changePassword,
                 icon: Assets.iconsPasswordChange,
                 routeTo: AppRoutesNames.rChangePasswordScreen,

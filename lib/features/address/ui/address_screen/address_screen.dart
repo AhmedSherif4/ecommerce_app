@@ -13,9 +13,9 @@ class AddressScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    HeaderForMore(title: 'Address'),
+                    const HeaderForMore(title: 'Address'),
                     Divider(thickness: 1, color: context.colors.primary1),
-                    AddressListScreen(),
+                    const AddressListScreen(),
                     DefaultButtonWidget(
                       label: 'Add New Address',
                       buttonColor: context.colors.primary0,
@@ -65,7 +65,7 @@ class AddressListScreen extends StatelessWidget {
       builder: (context, state) {
         return ListView.separated(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           padding: const EdgeInsets.all(16),
           itemCount: state.addresses.length,
           separatorBuilder: (_, __) => const SizedBox(height: 10),

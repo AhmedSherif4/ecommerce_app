@@ -14,7 +14,7 @@ class HomeLayoutBloc extends Bloc<HomeLayoutEvent, HomeLayoutState> {
     const SearchScreen(value: ''),
     const SavedScreen(),
     const CartScreen(),
-    AccountScreen(),
+    const AccountScreen(),
   ];
   void _changeBottomNavBar(
     ChangeBottomNavBarIndexEvent event,

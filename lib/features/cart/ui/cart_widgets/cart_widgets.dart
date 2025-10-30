@@ -9,14 +9,14 @@ class QuantitySelector extends StatefulWidget {
   final Color? inactiveColor;
 
   const QuantitySelector({
-    Key? key,
+    super.key,
     required this.onQuantityChanged,
     this.initialQuantity = 1,
     this.minQuantity = 1,
     this.maxQuantity = 99,
     this.activeColor,
     this.inactiveColor,
-  }) : super(key: key);
+  });
 
   @override
   State<QuantitySelector> createState() => _QuantitySelectorState();
@@ -70,7 +70,7 @@ class _QuantitySelectorState extends State<QuantitySelector> {
                 AppConstants.appBorderRadiusR10,
               ),
             ),
-            shadows: [AppShadow.outerShadow],
+            shadows: const [AppShadow.outerShadow],
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -101,7 +101,7 @@ class _QuantitySelectorState extends State<QuantitySelector> {
     return CustomInkWell(
       onTap: onPressed ?? () {},
       child: Container(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Icon(
           icon,
           size: Spacing.iconSizeS20,

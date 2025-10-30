@@ -5,7 +5,7 @@ class DetailsProductState extends Equatable{
 
     const DetailsProductState();
 
-    DetailsProductState copyWith(){return DetailsProductState();}
+    DetailsProductState copyWith(){return const DetailsProductState();}
 
       @override
   List<Object> get props => [];

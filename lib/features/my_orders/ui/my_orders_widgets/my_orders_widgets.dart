@@ -23,7 +23,7 @@ class _ProductCardCart extends StatelessWidget {
               AppConstants.appBorderRadiusR10,
             ),
           ),
-          shadows: [AppShadow.outerShadow],
+          shadows: const [AppShadow.outerShadow],
         ),
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -81,7 +81,7 @@ class _ProductCardCart extends StatelessWidget {
                             ),
                             decoration: ShapeDecoration(
                               color: isCompleted
-                                  ? Color(0x190C9409)
+                                  ? const Color(0x190C9409)
                                   : context.colors.primary1,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(6.r),

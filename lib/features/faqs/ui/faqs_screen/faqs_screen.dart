@@ -16,14 +16,14 @@ class _FaqsScreenState extends State<FaqsScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              HeaderForMore(title: 'FAQs'),
+              const HeaderForMore(title: 'FAQs'),
               Spacing.spaceHS32,
               CustomSearchField(onComplete: () {}, controller: _controller),
               Spacing.spaceHS32,
               ListView.separated(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => CustomExpansionTile(),
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) => const CustomExpansionTile(),
                 separatorBuilder: (context, index) =>
                     Divider(thickness: 1, color: context.colors.primary1),
                 itemCount: 3,

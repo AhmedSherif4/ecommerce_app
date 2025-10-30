@@ -22,7 +22,6 @@ import '../../../../core/failure/failure.dart';
 import '../../config/base_local_data_source/base_local_data_source.dart';
 import '../../config/storages/keys.dart';
 import '../../core/services/services_locator.dart';
-import '../../core/shared_models/product/product_entity.dart';
 
 part 'data/payment_data_source/payment_local_data_source.dart';
 part 'data/payment_data_source/payment_remote_data_source.dart';

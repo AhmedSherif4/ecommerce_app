@@ -252,7 +252,7 @@ class PaymentMethod extends StatelessWidget {
 
 class _TotalWidget extends StatelessWidget {
   final double total;
-  const _TotalWidget(this.total, {super.key});
+  const _TotalWidget(this.total);
 
   @override
   Widget build(BuildContext context) {

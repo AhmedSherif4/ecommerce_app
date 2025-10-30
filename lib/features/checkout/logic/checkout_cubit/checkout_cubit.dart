@@ -2,7 +2,7 @@ part of '../../checkout.dart';
 
 @Injectable()
 class CheckoutCubit extends Cubit<CheckoutState> {
-  CheckoutCubit() : super(CheckoutState());
+  CheckoutCubit() : super(const CheckoutState());
   void addPaymentMethod(PaymentMethodModel address) {
     final updated = List<PaymentMethodModel>.from(state.cards)..add(address);
     emit(state.copyWith(cards: updated));

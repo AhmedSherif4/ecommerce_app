@@ -242,7 +242,7 @@ class _StickyHorizontalListDelegate extends SliverPersistentHeaderDelegate {
 }
 
 class CategoriesListWidget extends StatelessWidget {
-  const CategoriesListWidget({Key? key}) : super(key: key);
+  const CategoriesListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

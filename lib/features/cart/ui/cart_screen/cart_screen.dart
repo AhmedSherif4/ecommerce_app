@@ -186,7 +186,7 @@ class ProductCardCart extends StatelessWidget {
               AppConstants.appBorderRadiusR10,
             ),
           ),
-          shadows: [AppShadow.outerShadow],
+          shadows: const [AppShadow.outerShadow],
         ),
         child: LayoutBuilder(
           builder: (context, constraints) {

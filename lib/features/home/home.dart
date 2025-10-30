@@ -3,7 +3,6 @@ import 'dart:ui' as ui;
 import 'package:dartz/dartz.dart' hide State;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ecommerce_app/app_assets/app_assets.dart';
-import 'package:ecommerce_app/config/extensions/log_extension.dart';
 import 'package:ecommerce_app/config/resources/app_constants.dart';
 import 'package:ecommerce_app/config/routes/route_manager.dart';
 import 'package:ecommerce_app/config/routes/routes_names.dart';
@@ -38,7 +37,6 @@ import '../../../../config/base_local_data_source/base_local_data_source.dart';
 import '../../../../config/base_remote_data_source/base_remote_data_source.dart';
 import '../../../../config/base_repository/base_repository.dart';
 import '../../config/resources/app_strings.dart';
-import '../../core/base_widgets/loading_widget.dart';
 import '../../core/shared_models/pagination/pagination_model.dart';
 
 part 'data/home_data_source/home_local_data_source.dart';

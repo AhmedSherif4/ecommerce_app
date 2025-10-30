@@ -12,7 +12,7 @@ class _ListTileModel {
 }
 
 class AccountScreen extends StatelessWidget {
-  AccountScreen({super.key});
+  const AccountScreen({super.key});
 
   List<_ListTileModel> tiles(BuildContext context) => [
     _ListTileModel(
@@ -100,10 +100,10 @@ class AccountScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              HeaderForMore(title: 'Account'),
+              const HeaderForMore(title: 'Account'),
               ListView.separated(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 padding: const EdgeInsets.all(16),
                 itemCount: tiles(context).length,
 
@@ -133,7 +133,6 @@ class _ListTileWidget extends StatelessWidget {
   final bool isLast;
 
   const _ListTileWidget({
-    super.key,
     required this.onTap,
     required this.iconSvg,
     required this.title,
@@ -150,7 +149,7 @@ class _ListTileWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               height: Spacing.iconSizeS24,
               width: Spacing.iconSizeS24,
               child: SvgPicture.asset(

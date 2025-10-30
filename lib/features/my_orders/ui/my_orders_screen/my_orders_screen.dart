@@ -40,7 +40,7 @@ class OngoingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemBuilder: (context, index) => _ProductCardCart(isCompleted: false),
+      itemBuilder: (context, index) => const _ProductCardCart(isCompleted: false),
       itemCount: 3,
     );
   }
@@ -52,7 +52,7 @@ class CompletedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemBuilder: (context, index) => _ProductCardCart(isCompleted: true),
+      itemBuilder: (context, index) => const _ProductCardCart(isCompleted: true),
       itemCount: 3,
     );
   }

@@ -3,7 +3,7 @@ part of '../../details_product.dart';
 class DetailsProductScreen extends StatefulWidget {
   final ProductModel product;
 
-  DetailsProductScreen(this.product, {super.key});
+  const DetailsProductScreen(this.product, {super.key});
 
   @override
   State<DetailsProductScreen> createState() => _DetailsProductScreenState();

@@ -13,9 +13,9 @@ class PaymentMethodScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    HeaderForMore(title: 'Payment Methods'),
+                    const HeaderForMore(title: 'Payment Methods'),
                     Divider(thickness: 1, color: context.colors.primary1),
-                    PaymentMethodListScreen(),
+                    const PaymentMethodListScreen(),
                     DefaultButtonWidget(
                       label: 'Add New Card',
                       buttonColor: context.colors.primary0,
@@ -66,7 +66,7 @@ class PaymentMethodListScreen extends StatelessWidget {
       builder: (context, state) {
         return ListView.separated(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           padding: const EdgeInsets.all(16),
           itemCount: state.cards.length,
           separatorBuilder: (_, __) => const SizedBox(height: 10),
