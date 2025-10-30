@@ -78,12 +78,6 @@ class _PhoneInputFiledState extends State<PhoneInputFiled> {
               } else if (code == '+20') {
                 selectedFlag = Assets.imagesEgyptFlag;
                 isSvg = true;
-              } else if (code == '+971') {
-                selectedFlag = Assets.imagesUA;
-                isSvg = false;
-              } else if (code == '+974') {
-                selectedFlag = Assets.imagesQatar;
-                isSvg = false;
               }
             });
           },
@@ -95,8 +89,6 @@ class _PhoneInputFiledState extends State<PhoneInputFiled> {
               Assets.imagesSaudiFlag,
               true,
             ),
-            _buildPopupMenuItem('+971', 'الإمارات', Assets.imagesUA, false),
-            _buildPopupMenuItem('+974', 'قطر', Assets.imagesQatar, false),
           ],
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppBorders.appBorderWidthR15),

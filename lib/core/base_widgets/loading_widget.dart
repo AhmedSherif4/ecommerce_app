@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import 'package:ecommerce_app/core/responsive_manager/spacing_facade.dart';
-import 'package:ecommerce_app/core/theme_manager/service/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../config/resources/app_constants.dart';
@@ -23,16 +21,16 @@ class LoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        width: Spacing.loadingDialogWidth,
-        height: Spacing.loadingDialogHeight,
+        // width: Spacing.loadingDialogWidth,
+        // height: Spacing.loadingDialogHeight,
         padding: EdgeInsets.all(AppPadding.screenPaddingP10),
         decoration: BoxDecoration(
-          color: context.colors.primary5,
+          color: Colors.transparent,
           borderRadius: BorderRadius.circular(AppConstants.appBorderRadiusR10),
         ),
         child: const PopScope(
           canPop: false,
-          child: ColorLoader5(dotType: DotType.diamond),
+          child: ColorLoader5(dotType: DotType.circle),
         ),
       ),
     );

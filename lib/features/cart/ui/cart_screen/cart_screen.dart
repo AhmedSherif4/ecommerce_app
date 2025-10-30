@@ -250,39 +250,13 @@ class ProductCardCart extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          if (product.product.hasOffer)
-                            Flexible(
-                              child: Directionality(
-                                textDirection: ui.TextDirection.rtl,
-                                child: Text.rich(
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text:
-                                            '${NumberFormat('#,###', 'en').format(product.product.priceAfterOffer)}جم/',
-                                        style: context.typography.bodyLarge
-                                            .copyWith(
-                                              color: context.colors.red,
-                                            ),
-                                      ),
-                                      TextSpan(
-                                        text:
-                                            '${NumberFormat('#,###', 'en').format(product.product.price)}جم',
-                                        style: context.typography.labelLarge
-                                            .copyWith(
-                                              color: context.colors.primary5,
-                                              decoration:
-                                                  TextDecoration.lineThrough,
-                                              decorationThickness: 3,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                          Flexible(
+                            child: PriceWidget(
+                              hasOffer: product.product.hasOffer,
+                              price: product.product.price,
+                              priceAfterOffer: product.product.priceAfterOffer,
                             ),
+                          ),
                           QuantitySelector(
                             initialQuantity: product.quantity,
                             onQuantityChanged: onQuantityChanged,

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../config/resources/app_strings.dart';
 import '../../../../../core/services/services_locator.dart';
-import '../../../header_for_more.dart';
+import '../../../../../core/shared_widget/header_for_more.dart';
 import '../view_model/contact_us_bloc.dart';
 
 class ContactUsScreen extends StatefulWidget {

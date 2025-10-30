@@ -12,7 +12,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../config/base_local_data_source/base_local_data_source.dart';
 import '../../../../config/base_remote_data_source/base_remote_data_source.dart';
 import '../../../../config/base_repository/base_repository.dart';
-import '../shared_features/header_for_more.dart';
+import '../../core/shared_widget/header_for_more.dart';
 
 part 'data/help_center_data_source/help_center_local_data_source.dart';
 part 'data/help_center_data_source/help_center_remote_data_source.dart';

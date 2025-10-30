@@ -267,6 +267,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void dispose() {
+    _controller.clear();
     _controller.dispose();
     super.dispose();
   }
@@ -463,31 +464,10 @@ class _ProductsSliver extends StatelessWidget {
                   children: [
                     Text(product.name, style: context.typography.bodyLarge),
                     Spacing.spaceHS5,
-                    Directionality(
-                      textDirection: ui.TextDirection.rtl,
-                      child: Text.rich(
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text:
-                                  '${format.format(product.priceAfterOffer.toInt())}جم/',
-                              style: context.typography.caption.copyWith(
-                                color: context.colors.red,
-                              ),
-                            ),
-                            TextSpan(
-                              text: '${format.format(product.price.toInt())}جم',
-                              style: context.typography.caption.copyWith(
-                                color: context.colors.primary5,
-                                decoration: TextDecoration.lineThrough,
-                                decorationThickness: 3,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    PriceWidget(
+                      hasOffer: product.hasOffer,
+                      price: product.price,
+                      priceAfterOffer: product.priceAfterOffer,
                     ),
                     Spacing.spaceHS10,
                     Divider(color: context.colors.primary1, height: 1),

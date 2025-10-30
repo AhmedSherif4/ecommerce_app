@@ -1,5 +1,3 @@
-import 'package:ecommerce_app/core/responsive_manager/app_borders.dart';
-import 'package:ecommerce_app/core/responsive_manager/app_padding.dart';
 import 'package:ecommerce_app/core/responsive_manager/spacing_facade.dart';
 import 'package:ecommerce_app/core/text_styling/extensions/app_text_theme.dart';
 import 'package:ecommerce_app/core/text_styling/factory/i_typography_factory.dart';
@@ -104,87 +102,75 @@ class AppThemeFactory implements IAppThemeFactory {
       ),
 
       inputDecorationTheme: InputDecorationTheme(
-        // content padding
-        contentPadding: EdgeInsets.all(AppPadding.screenPaddingP10),
-        // hint style
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
+
+        filled: true,
+        fillColor: colors.primary0, // الخلفية الافتراضية للفيلد
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12,
+        ),
+
+        // ✨ النص الداخلي (hint)
         hintStyle: styles.titleMedium.copyWith(
-          color: colors.primary4,
+          color: colors.primary4.withValues(alpha: 0.7),
           fontWeight: MobileAppFontWeightsConfig().regular,
         ),
-        labelStyle: styles.titleMedium,
-        // focused hint style
-        counterStyle: styles.titleMedium.copyWith(
-          color: colors.primary4.withValues(alpha: 0.5),
-        ),
-        //error style
-        errorStyle: styles.bodyMedium.copyWith(color: colors.red),
-        constraints: BoxConstraints(
-          minHeight: Spacing.s50,
-          maxHeight: Spacing.s50,
-        ),
-        helperMaxLines: 2,
-        errorMaxLines: 2,
 
-        fillColor: colors.primary0,
-        filled: true,
-        activeIndicatorBorder: BorderSide(
-          color: colors.primary4,
-          strokeAlign: BorderSide.strokeAlignOutside,
-          width: AppBorders.appBorderWidthR1,
-          style: BorderStyle.solid,
+        // ✨ النص الخارجي (label)
+        labelStyle: styles.titleMedium.copyWith(
+          color: colors.primary5,
+          fontWeight: FontWeight.w500,
         ),
-        // enabled border style
+
+        // ✨ النص في حالة error
+        errorStyle: styles.bodyMedium.copyWith(
+          color: colors.red.withValues(alpha: 0.9),
+          fontWeight: FontWeight.w500,
+        ),
+
+        // ✨ شكل الإطار في الحالات المختلفة
         enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(
-            color: colors.primary4.withValues(alpha: 0.5),
-            width: AppBorders.appBorderWidthR1,
+            color: colors.primary4.withValues(alpha: 0.3),
+            width: 1.2,
           ),
-          borderRadius: BorderRadius.circular(AppBorders.appBorderWidthR15),
         ),
 
-        // focused border style
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: colors.primary9,
-            width: AppBorders.appBorderWidthR1,
-          ),
-          borderRadius: BorderRadius.circular(AppBorders.appBorderWidthR15),
-        ),
-
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: colors.primary4.withValues(alpha: 0.5),
-            width: AppBorders.appBorderWidthR1,
-          ),
-          borderRadius: BorderRadius.circular(AppBorders.appBorderWidthR15),
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide(color: colors.primary9, width: 1.6),
         ),
 
         disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(
-            color: colors.primary4.withValues(alpha: 0.5),
-            width: AppBorders.appBorderWidthR1,
+            color: colors.primary4.withValues(alpha: 0.15),
+            width: 1.2,
           ),
-          borderRadius: BorderRadius.circular(AppBorders.appBorderWidthR15),
         ),
 
-        // error border style
+        // ❌ في حالة الخطأ
         errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(
-            color: colors.red,
-            width: AppBorders.appBorderWidthR1,
+            color: colors.red.withValues(alpha: 0.8),
+            width: 1.3,
           ),
-          borderRadius: BorderRadius.circular(AppBorders.appBorderWidthR15),
         ),
 
-        // focused border style
+        // ❌ في حالة الخطأ مع focus
         focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(
-            strokeAlign: 1,
-            color: colors.red,
-            width: AppBorders.appBorderWidthR1,
+            color: colors.red.withValues(alpha: 0.9),
+            width: 1.6,
           ),
-          borderRadius: BorderRadius.circular(AppBorders.appBorderWidthR15),
         ),
+
+        // ✨ إضافي: ظل بسيط (soft shadow)
+        constraints: BoxConstraints(minHeight: Spacing.s50),
       ),
 
       elevatedButtonTheme: ElevatedButtonThemeData(

@@ -64,33 +64,10 @@ class ProductCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Flexible(
-                            child: Directionality(
-                              textDirection: ui.TextDirection.rtl,
-                              child: Text.rich(
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text:
-                                          '${NumberFormat('#,###', 'en').format(product.priceAfterOffer)}جم/',
-                                      style: context.typography.bodyLarge
-                                          .copyWith(color: context.colors.red),
-                                    ),
-                                    TextSpan(
-                                      text:
-                                          '${NumberFormat('#,###', 'en').format(product.price)}جم',
-                                      style: context.typography.labelLarge
-                                          .copyWith(
-                                            color: context.colors.primary5,
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                            decorationThickness: 3,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            child: PriceWidget(
+                              hasOffer: product.hasOffer,
+                              price: product.price,
+                              priceAfterOffer: product.priceAfterOffer,
                             ),
                           ),
                           CustomInkWell(
@@ -131,17 +108,68 @@ class ProductCard extends StatelessWidget {
               },
             ),
           ),
-          // if (product.hasOffer)
-          Positioned(
-            top: -10,
-            right: -10,
-            child: SvgPicture.asset(
-              Assets.iconsOffer,
-              width: Spacing.iconSizeS24,
-              height: Spacing.iconSizeS24,
+          if (product.hasOffer)
+            Positioned(
+              top: -10,
+              right: -10,
+              child: SvgPicture.asset(
+                Assets.iconsOffer,
+                width: Spacing.iconSizeS24,
+                height: Spacing.iconSizeS24,
+              ),
             ),
-          ),
         ],
+      ),
+    );
+  }
+}
+
+class PriceWidget extends StatelessWidget {
+  final double priceAfterOffer;
+  final double price;
+  final bool hasOffer;
+  const PriceWidget({
+    super.key,
+    required this.priceAfterOffer,
+    required this.price,
+    required this.hasOffer,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: ui.TextDirection.rtl,
+      child: Text.rich(
+        overflow: TextOverflow.ellipsis,
+        maxLines: 1,
+        TextSpan(
+          children: (hasOffer)
+              ? [
+                  TextSpan(
+                    text:
+                        '${NumberFormat('#,###', 'en').format(priceAfterOffer)}جم/',
+                    style: context.typography.bodyLarge.copyWith(
+                      color: context.colors.red,
+                    ),
+                  ),
+                  TextSpan(
+                    text: '${NumberFormat('#,###', 'en').format(price)}جم',
+                    style: context.typography.labelLarge.copyWith(
+                      color: context.colors.primary5,
+                      decoration: TextDecoration.lineThrough,
+                      decorationThickness: 3,
+                    ),
+                  ),
+                ]
+              : [
+                  TextSpan(
+                    text: '${NumberFormat('#,###', 'en').format(price)}جم',
+                    style: context.typography.bodyLarge.copyWith(
+                      color: context.colors.red,
+                    ),
+                  ),
+                ],
+        ),
       ),
     );
   }

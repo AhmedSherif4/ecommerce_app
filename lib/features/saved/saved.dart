@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart' hide State;
 import 'package:ecommerce_app/config/resources/app_strings.dart';
+import 'package:ecommerce_app/config/routes/route_manager.dart';
 import 'package:ecommerce_app/core/api/end_points.dart';
+import 'package:ecommerce_app/core/base_widgets/loading_widget.dart';
 import 'package:ecommerce_app/core/base_widgets/snackbar_widget.dart';
 import 'package:ecommerce_app/core/enum/enum_generation.dart';
 import 'package:ecommerce_app/core/failure/failure.dart';
@@ -9,8 +11,8 @@ import 'package:ecommerce_app/core/shared_models/pagination/pagination_model.dar
 import 'package:ecommerce_app/core/shared_models/product/product_entity.dart';
 import 'package:ecommerce_app/core/shared_models/product/product_model.dart';
 import 'package:ecommerce_app/core/shared_widget/empty_list_widget.dart';
+import 'package:ecommerce_app/core/shared_widget/header_for_more.dart';
 import 'package:ecommerce_app/core/shared_widget/loading_shimmer_list.dart';
-import 'package:ecommerce_app/features/shared_features/header_for_more.dart';
 import 'package:ecommerce_app/my_app/app_reference.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';

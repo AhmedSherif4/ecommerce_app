@@ -14,8 +14,8 @@ import '../../../../../core/base_widgets/snackbar_widget.dart';
 import '../../../../../core/enum/enum_generation.dart';
 import '../../../../../core/services/services_locator.dart';
 import '../../../../../core/shared_models/user/data/user_local_data_source/user_local_data_source.dart';
+import '../../../../../core/shared_widget/header_for_more.dart';
 import '../../../../../my_app/app_reference.dart';
-import '../../../header_for_more.dart';
 import '../../domain/repository/notification_repository.dart';
 import '../view_model/notification_bloc.dart';
 

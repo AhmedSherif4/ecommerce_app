@@ -122,50 +122,10 @@ class AppReference {
       actionLabel: 'تسجيل',
       onPressed: () {
         // RouteManager.rPushNamedAndRemoveUntil(
-        //     context: context, rName: AppRoutesNames.rWelcome);
+        //     context: context, rName: AppRoutesNames.rLoginScreen);
       },
     );
-    // showSnackBar(description: 'يجب تسجيل الدخول أولا', state: ToastStates.warning, context: context);
   }
-
-  // static bool isProtection(context){
-  //  // bool isProtection = context.read<GlobalBloc>().state.appVersionModel.appRepairing;
-  // //  return isProtection;
-  // }
-
-  static StringType detectStringType(String input) {
-    bool isArabic = RegExp(r'[\u0600-\u06FF]').hasMatch(input);
-    bool isEnglish = RegExp(r'[A-Za-z]').hasMatch(input);
-
-    if (isArabic && isEnglish) {
-      return StringType.unknown;
-    } else if (isArabic) {
-      if (isQuranicArabic(input)) {
-        return StringType.quranicArabic;
-      }
-      return StringType.arabic;
-    } else if (isEnglish) {
-      return StringType.english;
-    } else {
-      return StringType.unknown;
-    }
-  }
-
-  static bool isQuranicArabic(String input) {
-    return RegExp(r'[\u0610-\u061A\u064B-\u065F]').hasMatch(input);
-  }
-
-  // static String formatSaudiNumber(String phoneNumber) {
-  //   final RegExp saudiNumberRegExp = RegExp(r'^(?:\+9660?|00966|009660?|9660?|0)?5(\d{8})$');
-  //   final match = saudiNumberRegExp.firstMatch(phoneNumber);
-  //
-  //   if (match != null) {
-  //     // Extract the last 8 digits and prepend with '05'
-  //     return '05${match.group(1)}';
-  //   } else {
-  //     return "Invalid number";
-  //   }
-  // }
 
   static String formatPhoneNumber(String phoneNumber) {
     if (countryCode == '+966') {

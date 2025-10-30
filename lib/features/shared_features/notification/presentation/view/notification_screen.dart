@@ -14,7 +14,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../config/resources/app_constants.dart';
 import '../../../../../config/resources/app_strings.dart';
 import '../../../../../core/services/services_locator.dart';
-import '../../../header_for_more.dart';
+import '../../../../../core/shared_widget/header_for_more.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});

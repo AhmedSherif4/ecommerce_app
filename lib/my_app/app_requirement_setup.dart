@@ -1,7 +1,9 @@
 import 'package:ecommerce_app/core/shared_models/product/product_entity.dart';
 import 'package:ecommerce_app/features/shared_features/contact_us/domain/entity/contact_us_entity.dart';
 import 'package:ecommerce_app/features/shared_features/terms_and_conditions/domain/entity/terms_and_conditions_entity.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../config/storages/keys.dart';
 import '../core/services/services_locator.dart';
@@ -18,7 +20,12 @@ class AppRequirementSetup {
 
   static Future<void> initialFutures() async {
     await Future.wait([
-      //
+      Supabase.initialize(
+        // settings => Data API
+        url: dotenv.env[AppKeys.supabaseURL]!,
+        // settings => API Key
+        anonKey: dotenv.env[AppKeys.supabaseAnonKey]!,
+      ),
       Hive.openBox<UserEntity>(AppKeys.userData),
       Hive.openBox<CartItemRequest>(AppKeys.cartBoxKey),
       Hive.openBox<String>(AppKeys.getExpirationKey(AppKeys.showcaseViewed)),

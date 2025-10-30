@@ -21,6 +21,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../core/enum/enum_generation.dart';
+import '../../core/shared_widget/custom_inkwell.dart';
 import '../../my_app/app_reference.dart';
 import 'domain/usecase/check_chils_is_subscribe_use_usecase.dart';
 

@@ -15,7 +15,6 @@ import '../core/theme_manager/factory/app_theme_factory.dart';
 import '../core/theme_manager/theme_bloc/theme_bloc.dart';
 import '../core/theme_manager/theme_bloc/theme_event.dart';
 import '../core/theme_manager/theme_bloc/theme_state.dart';
-import '../features/intro/splash/presentation/splash_view_model/splash_bloc.dart';
 import 'app_requirement_setup.dart';
 import 'deep_link_manager.dart';
 
@@ -60,7 +59,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         BlocProvider<ThemeBloc>(
           create: (_) => getIt<ThemeBloc>()..add(LoadFromStorage()),
         ),
-        BlocProvider(create: (context) => getIt<SplashBloc>()),
         BlocProvider(
           create: (context) => getIt<GlobalBloc>(),
           //todo: uncomment these lines if you want to fetch app info and version on app start

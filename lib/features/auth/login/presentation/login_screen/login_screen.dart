@@ -167,14 +167,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     DefaultButtonWidget(
                       label: AppStrings.login,
-                      onPressed: () {
-                        _login();
-                      },
-                      buttonColor:
-                          (_formKey.currentState != null &&
-                              _formKey.currentState!.validate())
-                          ? context.colors.primary9
-                          : context.colors.primary2,
+                      onPressed: _login,
+                      buttonColor: context.colors.primary9,
                     ),
 
                     Spacing.spaceHS24,
@@ -311,18 +305,19 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _login() {
-    if (_emailController.text.isEmpty) {
-      showSnackBar(
-        description: AppStrings.loginMailRequired,
-        state: ToastStates.warning,
-        context: context,
-      );
-    } else if (_formKey.currentState!.validate()) {
+    FocusScope.of(context).unfocus();
+    if (_formKey.currentState?.validate() ?? false) {
       context.read<LoginBloc>().add(
         LoggedIn(
           email: _emailController.text,
           password: _passwordController.text,
         ),
+      );
+    } else {
+      showSnackBar(
+        description: "Please fill in all required fields correctly.",
+        state: ToastStates.warning,
+        context: context,
       );
     }
   }

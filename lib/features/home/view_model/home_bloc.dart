@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:ecommerce_app/config/extensions/log_extension.dart';
 import 'package:ecommerce_app/core/enum/enum_generation.dart';
 import 'package:ecommerce_app/core/shared_models/category/category_entity.dart';
 import 'package:ecommerce_app/core/shared_models/product/product_entity.dart';
-import 'package:ecommerce_app/core/shared_models/product/product_model.dart';
 import 'package:ecommerce_app/features/home/home.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -79,6 +79,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ),
       ),
       (products) {
+        products[0].log();
         return emit(
           state.copyWith(
             getAllProductsState: RequestStates.loaded,

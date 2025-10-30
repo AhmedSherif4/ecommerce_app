@@ -22,12 +22,8 @@ class BottomNavBarItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return CustomInkWell(
       onTap: onTap,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      splashColor: Colors.transparent,
       child: SizedBox(
         width: constrains.maxWidth * widthRatio,
         child: Column(

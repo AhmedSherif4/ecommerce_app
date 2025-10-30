@@ -1,5 +1,3 @@
-import '../../enum/enum_generation.dart';
-import '../pagination/pagination_model.dart';
 import 'product_entity.dart';
 
 class ProductModel extends ProductEntity {
@@ -30,8 +28,8 @@ class ProductModel extends ProductEntity {
       imageUrl: json['image_url'] as String,
       price: (json['price'] as num).toDouble(),
       hasOffer: json['has_offer'] as bool,
-      priceAfterOffer: (json['price_after_offer'] as num).toDouble(),
-      stock: json['stock'] as int,
+      priceAfterOffer: (json['price_after_offer'] as num?)?.toDouble() ?? 00,
+      stock: json['stock'] as int? ?? 0,
       categoryId: json['category_id'] as String,
       createdAt: json['created_at'] as String,
       favoritesCount: json['favorites_count'] as int? ?? 0,

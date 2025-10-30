@@ -1,9 +1,9 @@
 import 'package:ecommerce_app/core/responsive_manager/responsive_extensions.dart';
 import 'package:ecommerce_app/core/responsive_manager/spacing_facade.dart';
 import 'package:ecommerce_app/core/shared_widget/buttons/button_widget.dart';
+import 'package:ecommerce_app/core/shared_widget/header_for_more.dart';
 import 'package:ecommerce_app/core/text_styling/extensions/app_text_theme.dart';
 import 'package:ecommerce_app/core/theme_manager/service/app_colors.dart';
-import 'package:ecommerce_app/features/shared_features/header_for_more.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

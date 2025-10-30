@@ -64,13 +64,8 @@ class PaymentService {
   void _navigateToSuccessScreen() {
     // RouteManager.rPushNamedAndRemoveUntil(
     //   context: _context,
-    //   rName: AppRoutesNames.rPaymentSuccessForNafeesScreen,
-    // arguments: const RequiredDataAfterNafeesPayment(
-    //   isNafees: true,
-    //   totalPrice: 1,
-    //   nafeesId: 0,
-    //   childId: 0,
-    // ),
+    //   rName: ,
+    // arguments:
     // );
   }
 

@@ -36,8 +36,8 @@ import '../../../../core/shared_models/user/data/user_local_data_source/user_loc
 import '../../../../core/shared_widget/app_input_field/password_filed.dart';
 import '../../../../core/shared_widget/buttons/button_widget.dart';
 import '../../../../core/shared_widget/custom_inkwell.dart';
+import '../../../../core/shared_widget/header_for_more.dart';
 import '../../../../core/shared_widget/responsive_widget.dart';
-import '../../header_for_more.dart';
 
 part 'data/edit_profile_data_source/edit_profile_remote_data_source.dart';
 part 'data/edit_profile_models/edit_profile_model.dart';

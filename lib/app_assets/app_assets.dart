@@ -2,176 +2,118 @@
 class Assets {
   Assets._();
 
-  static const String generalSansGeneralSansBold =
-      'assets/fonts/general-sans/GeneralSans-Bold.otf';
-  static const String generalSansGeneralSansBoldItalic =
-      'assets/fonts/general-sans/GeneralSans-BoldItalic.otf';
-  static const String generalSansGeneralSansExtralight =
-      'assets/fonts/general-sans/GeneralSans-Extralight.otf';
-  static const String generalSansGeneralSansExtralightItalic =
-      'assets/fonts/general-sans/GeneralSans-ExtralightItalic.otf';
-  static const String generalSansGeneralSansItalic =
-      'assets/fonts/general-sans/GeneralSans-Italic.otf';
-  static const String generalSansGeneralSansLight =
-      'assets/fonts/general-sans/GeneralSans-Light.otf';
-  static const String generalSansGeneralSansLightItalic =
-      'assets/fonts/general-sans/GeneralSans-LightItalic.otf';
-  static const String generalSansGeneralSansMedium =
-      'assets/fonts/general-sans/GeneralSans-Medium.otf';
-  static const String generalSansGeneralSansMediumItalic =
-      'assets/fonts/general-sans/GeneralSans-MediumItalic.otf';
-  static const String generalSansGeneralSansRegular =
-      'assets/fonts/general-sans/GeneralSans-Regular.otf';
-  static const String generalSansGeneralSansSemibold =
-      'assets/fonts/general-sans/GeneralSans-Semibold.otf';
-  static const String generalSansGeneralSansSemiboldItalic =
-      'assets/fonts/general-sans/GeneralSans-SemiboldItalic.otf';
+  static const String assets = 'assets/.env';
+  static const String generalSansGeneralSansBold = 'assets/fonts/general-sans/GeneralSans-Bold.otf';
+  static const String generalSansGeneralSansBoldItalic = 'assets/fonts/general-sans/GeneralSans-BoldItalic.otf';
+  static const String generalSansGeneralSansExtralight = 'assets/fonts/general-sans/GeneralSans-Extralight.otf';
+  static const String generalSansGeneralSansExtralightItalic = 'assets/fonts/general-sans/GeneralSans-ExtralightItalic.otf';
+  static const String generalSansGeneralSansItalic = 'assets/fonts/general-sans/GeneralSans-Italic.otf';
+  static const String generalSansGeneralSansLight = 'assets/fonts/general-sans/GeneralSans-Light.otf';
+  static const String generalSansGeneralSansLightItalic = 'assets/fonts/general-sans/GeneralSans-LightItalic.otf';
+  static const String generalSansGeneralSansMedium = 'assets/fonts/general-sans/GeneralSans-Medium.otf';
+  static const String generalSansGeneralSansMediumItalic = 'assets/fonts/general-sans/GeneralSans-MediumItalic.otf';
+  static const String generalSansGeneralSansRegular = 'assets/fonts/general-sans/GeneralSans-Regular.otf';
+  static const String generalSansGeneralSansSemibold = 'assets/fonts/general-sans/GeneralSans-Semibold.otf';
+  static const String generalSansGeneralSansSemiboldItalic = 'assets/fonts/general-sans/GeneralSans-SemiboldItalic.otf';
   static const String homeAccount = 'assets/icons/home/account.svg';
   static const String homeDeleteRed = 'assets/icons/home/delete_red.svg';
   static const String homeFavourite = 'assets/icons/home/favourite.svg';
   static const String homeHomeNavBar = 'assets/icons/home/home_nav_bar.svg';
-  static const String homeHomeNavBarActive =
-      'assets/icons/home/home_nav_bar_active.svg';
   static const String homeSearch = 'assets/icons/home/search.svg';
   static const String homeShopNavBar = 'assets/icons/home/shop_nav_bar.svg';
-  static const String homeShopNavBarActive =
-      'assets/icons/home/shop_nav_bar_active.svg';
   static const String iconsArrowDown = 'assets/icons/arrow_down.svg';
   static const String iconsFacebook = 'assets/icons/Facebook.svg';
-  static const String iconsFilter = 'assets/icons/filter.svg';
-  static const String iconsGoogleIcon = 'assets/icons/google_icon.svg';
   static const String iconsInstagram = 'assets/icons/Instagram.svg';
   static const String iconsLinkedin = 'assets/icons/Linkedin.svg';
   static const String iconsMailUs = 'assets/icons/MailUs.svg';
   static const String iconsMessages = 'assets/icons/messages.svg';
   static const String iconsOffer = 'assets/icons/offer.svg';
   static const String iconsPasswordChange = 'assets/icons/PasswordChange.svg';
-  static const String iconsSnapchat = 'assets/icons/Snapchat.svg';
   static const String iconsTelegram = 'assets/icons/telegram.svg';
-  static const String iconsThreads = 'assets/icons/Threads.svg';
-  static const String iconsTiktok = 'assets/icons/Tiktok.svg';
-  static const String iconsUpdate = 'assets/icons/update.svg';
   static const String iconsWhatsapp = 'assets/icons/Whatsapp.svg';
-  static const String iconsX = 'assets/icons/X.svg';
   static const String iconsYoutube = 'assets/icons/youtube.svg';
   static const String imagesAlertDialog = 'assets/images/alert_dialog.svg';
   static const String imagesBackground1 = 'assets/images/background1.svg';
   static const String imagesBackground2 = 'assets/images/background2.svg';
   static const String imagesEgyptFlag = 'assets/images/EgyptFlag.svg';
   static const String imagesEmptyList = 'assets/images/empty_list.svg';
-  static const String imagesEyeClosedBold = 'assets/images/eye-closed-bold.svg';
-  static const String imagesEyeOpened = 'assets/images/eye_opened.svg';
   static const String imagesFailedDialog = 'assets/images/failed_dialog.svg';
-  static const String imagesLogoWithoutName =
-      'assets/images/logo_without_name.svg';
-  static const String imagesMyTime = 'assets/images/myTime.svg';
   static const String imagesOnboarding1 = 'assets/images/onboarding1.svg';
   static const String imagesOnboarding2 = 'assets/images/onboarding2.png';
-  static const String imagesQatar = 'assets/images/Qatar.png';
   static const String imagesSaudiFlag = 'assets/images/SaudiFlag.svg';
-  static const String imagesSplashBackgroundMobile =
-      'assets/images/splash_background_mobile.png';
-  static const String imagesSplashBackgroundTablet =
-      'assets/images/splash_background_tablet.png';
   static const String imagesSuccussDialog = 'assets/images/succuss_dialog.svg';
-  static const String imagesUA = 'assets/images/UA.png';
   static const String imagesWarningDialog = 'assets/images/warning_dialog.svg';
-  static const String lottieSplashIntro = 'assets/lottie/splash_intro.json';
   static const String projectIconAddress = 'assets/projectIcon/Address.svg';
   static const String projectIconArrow = 'assets/projectIcon/Arrow.svg';
   static const String projectIconBag = 'assets/projectIcon/Bag.svg';
   static const String projectIconBell = 'assets/projectIcon/Bell.svg';
-  static const String projectIconBellDuotone =
-      'assets/projectIcon/Bell-duotone.svg';
+  static const String projectIconBellDuotone = 'assets/projectIcon/Bell-duotone.svg';
   static const String projectIconBox = 'assets/projectIcon/Box.svg';
-  static const String projectIconBoxDuotone =
-      'assets/projectIcon/Box-duotone.svg';
+  static const String projectIconBoxDuotone = 'assets/projectIcon/Box-duotone.svg';
   static const String projectIconBxlVisa = 'assets/projectIcon/bxl_visa.svg';
   static const String projectIconCalendar = 'assets/projectIcon/Calendar.svg';
   static const String projectIconCancel = 'assets/projectIcon/Cancel.svg';
-  static const String projectIconCancelCircle =
-      'assets/projectIcon/Cancel-circle.svg';
+  static const String projectIconCancelCircle = 'assets/projectIcon/Cancel-circle.svg';
   static const String projectIconCard = 'assets/projectIcon/Card.svg';
-  static const String projectIconCardDuotone =
-      'assets/projectIcon/Card-duotone.svg';
+  static const String projectIconCardDuotone = 'assets/projectIcon/Card-duotone.svg';
   static const String projectIconCart = 'assets/projectIcon/Cart.svg';
-  static const String projectIconCartDuotone =
-      'assets/projectIcon/Cart-duotone.svg';
+  static const String projectIconCartDuotone = 'assets/projectIcon/Cart-duotone.svg';
   static const String projectIconCash = 'assets/projectIcon/Cash.svg';
   static const String projectIconChat = 'assets/projectIcon/Chat.svg';
   static const String projectIconCheck = 'assets/projectIcon/Check.svg';
   static const String projectIconCheck1 = 'assets/projectIcon/Check-1.svg';
-  static const String projectIconCheckDuotone =
-      'assets/projectIcon/Check-duotone.svg';
+  static const String projectIconCheckDuotone = 'assets/projectIcon/Check-duotone.svg';
   static const String projectIconChevron = 'assets/projectIcon/Chevron.svg';
   static const String projectIconCircle = 'assets/projectIcon/Circle.svg';
   static const String projectIconDetails = 'assets/projectIcon/Details.svg';
   static const String projectIconDiscount = 'assets/projectIcon/Discount.svg';
-  static const String projectIconDiscountDuotone =
-      'assets/projectIcon/Discount-duotone.svg';
+  static const String projectIconDiscountDuotone = 'assets/projectIcon/Discount-duotone.svg';
   static const String projectIconEdit = 'assets/projectIcon/Edit.svg';
   static const String projectIconEye = 'assets/projectIcon/Eye.svg';
   static const String projectIconEyeOff = 'assets/projectIcon/eye-off.svg';
   static const String projectIconFacebook = 'assets/projectIcon/Facebook.svg';
   static const String projectIconFilter = 'assets/projectIcon/Filter.svg';
-  static const String projectIconHeadphones =
-      'assets/projectIcon/Headphones.svg';
+  static const String projectIconHeadphones = 'assets/projectIcon/Headphones.svg';
   static const String projectIconHeart = 'assets/projectIcon/Heart.svg';
-  static const String projectIconHeartDuotone =
-      'assets/projectIcon/Heart-duotone.svg';
-  static const String projectIconHeartFilled =
-      'assets/projectIcon/Heart-filled.svg';
+  static const String projectIconHeartDuotone = 'assets/projectIcon/Heart-duotone.svg';
+  static const String projectIconHeartFilled = 'assets/projectIcon/Heart-filled.svg';
   static const String projectIconHome = 'assets/projectIcon/Home.svg';
   static const String projectIconImage = 'assets/projectIcon/Image.svg';
   static const String projectIconInstagram = 'assets/projectIcon/Instagram.svg';
   static const String projectIconLocation = 'assets/projectIcon/Location.svg';
-  static const String projectIconLocationDuotone =
-      'assets/projectIcon/Location-duotone.svg';
-  static const String projectIconLocationFilled =
-      'assets/projectIcon/Location-filled.svg';
-  static const String projectIconLogosApplePay =
-      'assets/projectIcon/logos_apple-pay.svg';
-  static const String projectIconLogosFacebook =
-      'assets/projectIcon/logos_facebook.svg';
-  static const String projectIconLogosGoogleIcon =
-      'assets/projectIcon/logos_google-icon.svg';
+  static const String projectIconLocationDuotone = 'assets/projectIcon/Location-duotone.svg';
+  static const String projectIconLocationFilled = 'assets/projectIcon/Location-filled.svg';
+  static const String projectIconLogosApplePay = 'assets/projectIcon/logos_apple-pay.svg';
+  static const String projectIconLogosFacebook = 'assets/projectIcon/logos_facebook.svg';
+  static const String projectIconLogosGoogleIcon = 'assets/projectIcon/logos_google-icon.svg';
   static const String projectIconLogout = 'assets/projectIcon/Logout.svg';
   static const String projectIconMic = 'assets/projectIcon/Mic.svg';
   static const String projectIconMinus = 'assets/projectIcon/Minus.svg';
   static const String projectIconPhone = 'assets/projectIcon/Phone.svg';
-  static const String projectIconPhoneFilled =
-      'assets/projectIcon/Phone-filled.svg';
+  static const String projectIconPhoneFilled = 'assets/projectIcon/Phone-filled.svg';
   static const String projectIconPlus = 'assets/projectIcon/Plus.svg';
   static const String projectIconQuestion = 'assets/projectIcon/Question.svg';
   static const String projectIconReturn = 'assets/projectIcon/Return.svg';
-  static const String projectIconRiMastercardFill =
-      'assets/projectIcon/ri_mastercard-fill.svg';
+  static const String projectIconRiMastercardFill = 'assets/projectIcon/ri_mastercard-fill.svg';
   static const String projectIconSearch = 'assets/projectIcon/Search.svg';
-  static const String projectIconSearchDuotone =
-      'assets/projectIcon/Search-duotone.svg';
+  static const String projectIconSearchDuotone = 'assets/projectIcon/Search-duotone.svg';
   static const String projectIconSettings = 'assets/projectIcon/Settings.svg';
-  static const String projectIconSplashLogo =
-      'assets/projectIcon/splash_logo.svg';
+  static const String projectIconSplashLogo = 'assets/projectIcon/splash_logo.svg';
   static const String projectIconStar = 'assets/projectIcon/Star.svg';
   static const String projectIconTrash = 'assets/projectIcon/Trash.svg';
-  static const String projectIconTruckFilled =
-      'assets/projectIcon/Truck-filled.svg';
+  static const String projectIconTruckFilled = 'assets/projectIcon/Truck-filled.svg';
   static const String projectIconTwitter = 'assets/projectIcon/Twitter.svg';
-  static const String projectIconUnitedStates =
-      'assets/projectIcon/united_states.svg';
+  static const String projectIconUnitedStates = 'assets/projectIcon/united_states.svg';
   static const String projectIconUser = 'assets/projectIcon/User.svg';
-  static const String projectIconUserDuotone =
-      'assets/projectIcon/User-duotone.svg';
+  static const String projectIconUserDuotone = 'assets/projectIcon/User-duotone.svg';
   static const String projectIconUsers = 'assets/projectIcon/Users.svg';
-  static const String projectIconWalletDuotone =
-      'assets/projectIcon/Wallet-duotone.svg';
-  static const String projectIconWarehouseFilled =
-      'assets/projectIcon/Warehouse-filled.svg';
+  static const String projectIconWalletDuotone = 'assets/projectIcon/Wallet-duotone.svg';
+  static const String projectIconWarehouseFilled = 'assets/projectIcon/Warehouse-filled.svg';
   static const String projectIconWarning = 'assets/projectIcon/Warning.svg';
-  static const String projectIconWarningCircle =
-      'assets/projectIcon/WarningCircle.svg';
+  static const String projectIconWarningCircle = 'assets/projectIcon/WarningCircle.svg';
   static const String projectIconWeb = 'assets/projectIcon/Web.svg';
   static const String projectIconWhatsapp = 'assets/projectIcon/Whatsapp.svg';
   static const String translationsArEG = 'assets/translations/ar-EG.json';
   static const String translationsEnUS = 'assets/translations/en-US.json';
+
 }

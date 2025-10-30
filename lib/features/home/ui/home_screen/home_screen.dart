@@ -143,18 +143,22 @@ class _HomeScreenState extends State<HomeScreen> {
           previous.filterProductsState != current.filterProductsState,
       builder: (context, state) {
         if (_isLoading(state)) {
-          return const SliverToBoxAdapter(child: LoadingShimmerList());
+          return SliverFillRemaining(
+            child: LoadingShimmerList(
+              height: AppReference.deviceHeight(context) * 0.15,
+            ),
+          );
         }
 
         if (_hasError(state)) {
-          return SliverToBoxAdapter(
+          return SliverFillRemaining(
             child: EmptyListWidgets(message: _errorMessage(state)),
           );
         }
 
         final finalProducts = state.products;
         if (finalProducts.isEmpty) {
-          return const SliverToBoxAdapter(
+          return const SliverFillRemaining(
             child: EmptyListWidgets(message: 'لا توجد منتجات'),
           );
         }
@@ -190,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             final product = finalProducts[index];
-            return ProductCard(key: ValueKey(product.id), product: product);
+            return ProductCard(product: product);
           },
           childCount: finalProducts.length,
           findChildIndexCallback: (Key key) {

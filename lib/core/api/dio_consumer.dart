@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../config/resources/app_strings.dart';
 import '../../config/routes/routes_names.dart';
+import '../../config/storages/keys.dart';
 import '../../config/storages/secure_storage.dart';
 import '../../my_app/my_app.dart';
 import '../exceptions/exceptions.dart';
@@ -34,8 +36,7 @@ class DioConsumer implements ApiConsumer {
     }
   }
 
-  String api =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjeXJ5bG10enB2Z2xocWV6dHBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg5NzM2NzQsImV4cCI6MjA3NDU0OTY3NH0.b2z88RMbCwM_nujGMlteljohzXtJyWafQ7s7jaHmuzo';
+  String api = dotenv.env[AppKeys.supabaseAnonKey]!;
   String apiKey = 'apiKey';
 
   @override

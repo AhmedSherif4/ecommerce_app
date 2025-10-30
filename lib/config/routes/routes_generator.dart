@@ -4,6 +4,7 @@ import 'package:ecommerce_app/features/help_center/help_center.dart';
 import 'package:ecommerce_app/features/home/home.dart';
 import 'package:ecommerce_app/features/home_layout/home_layout.dart';
 import 'package:ecommerce_app/features/intro/onboarding/on_boarding_screen.dart';
+import 'package:ecommerce_app/features/intro/splash/presentation/splash_view_model/splash_bloc.dart';
 import 'package:ecommerce_app/features/intro/splash/presentation/view/splash_screen.dart';
 import 'package:ecommerce_app/features/saved/saved.dart';
 import 'package:ecommerce_app/features/shared_features/notification/presentation/view/notification_screen.dart';
@@ -40,9 +41,10 @@ class AppRouteGenerator {
     switch (settings.name) {
       case AppRoutesNames.rSplashScreen:
         return PageRouteBuilder(
-          pageBuilder: (_, __, ___) {
-            return const SplashScreen();
-          },
+          pageBuilder: (_, __, ___) => BlocProvider(
+            create: (context) => getIt<SplashBloc>(),
+            child: const SplashScreen(),
+          ),
         );
 
       case AppRoutesNames.rForgotPasswordScreen:

@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:ecommerce_app/config/resources/app_animations.dart';
 import 'package:ecommerce_app/config/routes/route_manager.dart';
 import 'package:ecommerce_app/config/routes/routes_names.dart';
 import 'package:ecommerce_app/config/storages/secure_storage.dart';
 import 'package:ecommerce_app/core/api/network_info.dart';
-import 'package:ecommerce_app/core/base_widgets/snackbar_widget.dart';
 import 'package:ecommerce_app/core/enum/enum_generation.dart';
 import 'package:ecommerce_app/core/responsive_manager/spacing_facade.dart';
 import 'package:ecommerce_app/core/services/services_locator.dart';
@@ -36,127 +36,71 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
-  late AnimationController scaleController;
-  late Animation<double> scaleAnimation;
-
-  double opacity = 0;
-  bool value = true;
   bool onBoardingStatus = false;
-  // final newVersion=NewVersionPlus(
-  //   androidId: "com.edu_tasses.ecommerce_app",
-  // );
+
   String appStoreVersion = "Default";
   String currentVersion = "current version";
 
   UserEntity? userData;
 
+  bool _isExiting = false; // ✅ نتحكم بيها في أنيميشن الخروج
+
   @override
   void initState() {
     super.initState();
-    scaleController =
-        AnimationController(
-          vsync: this,
-          duration: const Duration(seconds: 2),
-        )..addStatusListener((status) async {
-          if (status == AnimationStatus.completed) {
-            // final updateService = AppUpdateService(
-            //   androidPackageId:
-            //       'com.example.ecommerce_app', // ✅ استبدلها بالـ Android package ID الخاص بتطبيقك
-            //   iosBundleId:
-            //       'com.example.ecommerceApp', // ✅ استبدلها بالـ iOS bundle ID الخاص بتطبيقك
-            // );
-            // check Update Here
-            // if (await updateService.isUpdateAvailable()) {
-            // if (false) {
-            //   if (mounted) {
-            //     showDialog(
-            //       context: context,
-            //       barrierDismissible: false,
-            //       builder: (_) => _UpdateDialog(
-            //         onTap: (value) {
-            //           _updateDialogOnTap(
-            //             androidLink: BlocProvider.of<GlobalBloc>(
-            //               context,
-            //             ).state.appVersionModel.androidLink,
-            //             iosLink: BlocProvider.of<GlobalBloc>(
-            //               context,
-            //             ).state.appVersionModel.iosLink,
-            //           );
-            //         },
-            //         canPop: false,
-            //       ),
-            //     );
-            //   }
-            // } else {
-            userData = await _getUserData();
-            if (mounted && await _internetConnectionStatus()) {
-              onBoardingStatus = await _getOnBoardingStatus();
+    _initializeLogic();
+  }
 
-              if (!onBoardingStatus && mounted) {
-                RouteManager.rPushNamedAndRemoveUntil(
-                  context: context,
-                  rName: AppRoutesNames.rOnBoardingScreen,
-                );
-              } else if (await _checkLocalStoreToken()) {
-                _checkUserTokenEvent();
-              } else {
-                _goToLoginScreen();
-              }
-            }
-            // }
-          }
-        });
-
-    scaleAnimation = Tween<double>(
-      begin: 0.0,
-      end: 12,
-    ).animate(scaleController);
-
-    Timer(const Duration(seconds: 1), () {
-      if (context.mounted) {
-        setState(() {
-          opacity = 1.0;
-          value = false;
-        });
-      }
-    });
-    Timer(const Duration(seconds: 1), () {
-      if (context.mounted) {
-        setState(() {
-          scaleController.forward();
-        });
-      }
+  void _initializeLogic() {
+    Future.delayed(const Duration(seconds: 2), () async {
+      await _handleSplashLogic();
     });
   }
 
-  @override
-  void dispose() {
-    scaleController.dispose();
-    super.dispose();
+  Future<void> _handleSplashLogic() async {
+    userData = await _getUserData();
+    if (!mounted) return;
+
+    if (!await _internetConnectionStatus()) return;
+
+    onBoardingStatus = await _getOnBoardingStatus();
+
+    if (!mounted) return;
+
+    if (!onBoardingStatus) {
+      _triggerExitAnimation(
+        () => RouteManager.rPushNamedAndRemoveUntil(
+          context: context,
+          rName: AppRoutesNames.rOnBoardingScreen,
+        ),
+      );
+      return;
+    }
+
+    if (await _checkLocalStoreToken()) {
+      _checkUserTokenEvent();
+    } else {
+      _triggerExitAnimation(_goToLoginScreen);
+    }
   }
 
   @override
   void didChangeDependencies() async {
     AppReference.getDeviceInfo(context);
-
     super.didChangeDependencies();
   }
 
-  Future<bool> _internetConnectionStatus() async {
-    return await getIt<NetworkInfo>().isConnected;
-  }
+  Future<bool> _internetConnectionStatus() async =>
+      await getIt<NetworkInfo>().isConnected;
 
-  Future<bool> _checkLocalStoreToken() async {
-    return await getIt<BaseAppSecurityData>().getToken() != '';
-  }
+  Future<bool> _checkLocalStoreToken() async =>
+      await getIt<BaseAppSecurityData>().getToken() != '';
 
-  Future<bool> _getOnBoardingStatus() async {
-    return await getIt<OnBoardingLocalData>().getOnBoardingValue();
-  }
+  Future<bool> _getOnBoardingStatus() async =>
+      await getIt<OnBoardingLocalData>().getOnBoardingValue();
 
-  Future<UserEntity?> _getUserData() async {
-    return getIt<UserLocalDataSource>().getUserData();
-  }
+  Future<UserEntity?> _getUserData() async =>
+      getIt<UserLocalDataSource>().getUserData();
 
   void _checkUserTokenEvent() {
     if (mounted) {
@@ -164,9 +108,8 @@ class _SplashScreenState extends State<SplashScreen>
     }
   }
 
-  void _goToHomeScreen() {
-    Navigator.pushReplacementNamed(context, AppRoutesNames.rHomeLayoutView);
-  }
+  void _goToHomeScreen() =>
+      Navigator.pushReplacementNamed(context, AppRoutesNames.rHomeLayoutView);
 
   void _goToLoginScreen() {
     navigatorKey.currentState!.pushReplacementNamed(
@@ -174,10 +117,19 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 
+  // ✅ دالة جديدة: تشغيل أنيميشن خروج ثم تنفيذ التنقل
+  void _triggerExitAnimation(VoidCallback next) async {
+    setState(() => _isExiting = true);
+    await Future.delayed(const Duration(milliseconds: 900));
+    if (mounted) next();
+  }
+
   void _checkNextScreenAfterSplashFromDeepLink(bool isValidToken) {
     if (widget.path!.contains('/home') && isValidToken) {
-      navigatorKey.currentState!.pushReplacementNamed(
-        AppRoutesNames.rHomeLayoutView,
+      _triggerExitAnimation(
+        () => navigatorKey.currentState!.pushReplacementNamed(
+          AppRoutesNames.rHomeLayoutView,
+        ),
       );
     } else if (widget.path!.contains('/coupons') && isValidToken) {
       // navigatorKey.currentState!.pushNamed(AppRoutesNames.rCouponsScreen);
@@ -189,8 +141,10 @@ class _SplashScreenState extends State<SplashScreen>
       //   arguments: userData,
       // );
     } else {
-      navigatorKey.currentState!.pushReplacementNamed(
-        AppRoutesNames.rLoginScreen,
+      _triggerExitAnimation(
+        () => navigatorKey.currentState!.pushReplacementNamed(
+          AppRoutesNames.rLoginScreen,
+        ),
       );
     }
   }
@@ -199,12 +153,12 @@ class _SplashScreenState extends State<SplashScreen>
     switch (isValidToken) {
       case true:
         if (userData == null) {
-          _goToLoginScreen();
+          _triggerExitAnimation(_goToLoginScreen);
         } else {
-          _goToHomeScreen();
+          _triggerExitAnimation(_goToHomeScreen);
         }
       case false:
-        _goToLoginScreen();
+        _triggerExitAnimation(_goToLoginScreen);
     }
   }
 
@@ -228,7 +182,7 @@ class _SplashScreenState extends State<SplashScreen>
             switch (state.checkTokenEventIsFinish) {
               case RequestStates.loaded:
                 if (AppReference.userIsGuest()) {
-                  _goToLoginScreen();
+                  _triggerExitAnimation(_goToLoginScreen);
                 } else {
                   if (widget.path != null) {
                     _checkNextScreenAfterSplashFromDeepLink(state.isValidToken);
@@ -237,12 +191,7 @@ class _SplashScreenState extends State<SplashScreen>
                   }
                 }
               case RequestStates.error:
-                showSnackBar(
-                  description: state.checkTokenErrorMessage,
-                  state: ToastStates.error,
-                  context: context,
-                );
-                _goToLoginScreen();
+                _triggerExitAnimation(_goToLoginScreen);
               default:
             }
           },
@@ -251,10 +200,10 @@ class _SplashScreenState extends State<SplashScreen>
       child: BlocBuilder<GlobalBloc, GlobalState>(
         builder: (context, state) {
           return Scaffold(
-            body: /* state.checkAppVersionState == RequestStates.loaded
-                ?  */ Stack(
-              alignment: AlignmentGeometry.center,
+            body: Stack(
+              alignment: Alignment.center,
               children: [
+                // ✅ الخلفية بتظهر بنعومة من تحت
                 Container(
                   decoration: BoxDecoration(color: context.colors.primary9),
                   height: AppReference.deviceHeight(context),
@@ -265,13 +214,29 @@ class _SplashScreenState extends State<SplashScreen>
                     width: AppReference.deviceWidth(context),
                     height: AppReference.deviceHeight(context),
                   ),
+                ).animateBottomToTop(
+                  duration: const Duration(milliseconds: 1000),
                 ),
-                SizedBox(
-                  child: SvgPicture.asset(
-                    Assets.projectIconSplashLogo,
-                    // fit: BoxFit.contain,
-                    width: Spacing.splashLogo,
-                    height: Spacing.splashLogo,
+
+                // ✅ اللوجو: دخول + خروج أنيميشن
+                AnimatedOpacity(
+                  opacity: _isExiting ? 0 : 1,
+                  duration: const Duration(milliseconds: 600),
+                  curve: Curves.easeInOut,
+                  child: AnimatedScale(
+                    scale: _isExiting ? 0 : 1,
+                    duration: const Duration(milliseconds: 600),
+                    curve: Curves.easeInOutBack,
+                    child:
+                        SvgPicture.asset(
+                              Assets.projectIconSplashLogo,
+                              width: Spacing.splashLogo,
+                              height: Spacing.splashLogo,
+                            )
+                            .animateScaleNFadeVertical(
+                              duration: const Duration(milliseconds: 1200),
+                            )
+                            .animateShimmer(),
                   ),
                 ),
               ],

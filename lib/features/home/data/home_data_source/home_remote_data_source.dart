@@ -23,7 +23,10 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   HomeRemoteDataSourceImpl({required this.baseDataSource});
   @override
   Future<GetAllCategoriesResponseModel> getAllCategories() async {
-    final response = await baseDataSource.get(url: EndPoints.getAllCategories);
+    final response = await baseDataSource.postData(
+      url: EndPoints.getAllCategories,
+      body: {},
+    );
     return GetAllCategoriesResponseModel.fromJson(response);
   }
 
@@ -31,11 +34,12 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   Future<GetAllProductsResponseModel> getAllProducts({
     required GetAllProductsRequest getAllProductsRequest,
   }) async {
-    final response = await baseDataSource.get(
-      url: EndPoints.getAllProductsWithStats(
+    final response = await baseDataSource.postData(
+      url: EndPoints.getAllProducts(
         getAllProductsRequest.page,
         getAllProductsRequest.limitPerPage,
       ),
+      body: {},
     );
     return GetAllProductsResponseModel.fromJson(response);
   }
@@ -44,14 +48,14 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   Future<GetAllProductsResponseModel> getProductsByCategory({
     required GetProductsByCategoryRequest getProductsByCategoryRequest,
   }) async {
-    final response = await baseDataSource.get(
+    final response = await baseDataSource.postData(
       url: EndPoints.getAllProductsByCategory(
         getProductsByCategoryRequest.categoryId,
         getProductsByCategoryRequest.page,
         getProductsByCategoryRequest.limitPerPage,
       ),
+      body: {"category_id": getProductsByCategoryRequest.categoryId},
     );
-    response.log();
     return GetAllProductsResponseModel.fromJson(response);
   }
 
@@ -59,7 +63,6 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   Future<GetAllProductsResponseModel> filterProducts({
     required FilterProductsRequest filterProductsRequest,
   }) async {
-    filterProductsRequest.toJson().log();
     final response = await baseDataSource.postData(
       url: EndPoints.filterProducts,
       body: filterProductsRequest.toJson(),

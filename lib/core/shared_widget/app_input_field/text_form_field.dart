@@ -58,10 +58,10 @@ class TextFormFieldWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (label != null) ...[
+        /*if (label != null) ...[
           Text(label ?? "", style: context.typography.titleMedium),
         ],
-        Spacing.spaceHS5,
+        Spacing.spaceHS5,*/
         TextFormField(
           autovalidateMode: AutovalidateMode.disabled,
           obscuringCharacter: '●',
@@ -80,6 +80,10 @@ class TextFormFieldWidget extends StatelessWidget {
           obscureText: isObscureText,
           enableSuggestions: true,
           decoration: InputDecoration(
+            labelText: label,
+            labelStyle: context.typography.titleMedium.copyWith(
+              color: context.colors.primary9,
+            ),
             hintText: hintText,
             hintStyle: context.typography.titleMedium.copyWith(
               color: context.colors.primary4,

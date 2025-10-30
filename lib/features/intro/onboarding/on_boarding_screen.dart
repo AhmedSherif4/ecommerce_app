@@ -1,8 +1,8 @@
 import 'package:ecommerce_app/config/resources/app_strings.dart';
 import 'package:ecommerce_app/config/routes/route_manager.dart';
 import 'package:ecommerce_app/config/routes/routes_names.dart';
+import 'package:ecommerce_app/core/responsive_manager/responsive_extensions.dart';
 import 'package:ecommerce_app/core/text_styling/extensions/app_text_theme.dart';
-import 'package:ecommerce_app/core/theme_manager/service/app_colors.dart';
 import 'package:ecommerce_app/features/intro/onboarding/dummy_data.dart';
 import 'package:ecommerce_app/features/intro/onboarding/on_boarding_local_data.dart';
 import 'package:flutter/material.dart';
@@ -48,67 +48,64 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView.builder(
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            _currentPage = index;
-          });
-        },
-        itemCount: onBoardingData.length,
-        itemBuilder: (context, index) {
-          final data = onBoardingData[index];
-          return SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: Column(
-              children: [
-                // Illustration section
-                Expanded(
-                  flex: 9,
-                  child: Stack(
-                    children: [
-                      //background center
-                      Align(
-                        alignment: Alignment.center,
-
-                        child: SvgPicture.asset(
-                          Assets.imagesBackground2,
-                          fit: BoxFit.fill,
+      body: SafeArea(
+        child: PageView.builder(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() {
+              _currentPage = index;
+            });
+          },
+          itemCount: onBoardingData.length,
+          itemBuilder: (context, index) {
+            final data = onBoardingData[index];
+            return SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: Column(
+                children: [
+                  // Illustration section
+                  Expanded(
+                    flex: 9,
+                    child: Stack(
+                      children: [
+                        //background center
+                        Align(
                           alignment: Alignment.center,
+
+                          child: SvgPicture.asset(
+                            Assets.imagesBackground2,
+                            fit: BoxFit.fill,
+                            alignment: Alignment.center,
+                          ),
                         ),
-                      ),
-                      //text top
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            data.title,
-                            style: context.typography.displayLarge.copyWith(
-                              height: 1,
+                        //text top
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              data.title,
+                              style: context.typography.displayLarge.copyWith(
+                                height: 1,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      //image bottom
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Image.asset(
-                          Assets.imagesOnboarding2,
-                          fit: BoxFit.contain,
+                        //image bottom
+                        Align(
                           alignment: Alignment.bottomCenter,
+                          child: Image.asset(
+                            Assets.imagesOnboarding2,
+                            fit: BoxFit.contain,
+                            alignment: Alignment.bottomCenter,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                // Content section
-                Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.zero,
-                    decoration: BoxDecoration(color: context.colors.primary0),
+                  // Content section
+                  Expanded(
                     child: DefaultButtonWidget(
                       label: _currentPage < onBoardingData.length - 1
                           ? AppStrings.continueON
@@ -123,14 +120,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                           _goToLoginPage();
                         }
                       },
-                    ),
+                    ).paddingBody(),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+                ],
+              ),
+            );
+          },
+        ),
+      ).paddingBody(),
     );
   }
 

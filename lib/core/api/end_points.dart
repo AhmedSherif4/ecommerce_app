@@ -1,6 +1,10 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import '../../config/storages/keys.dart';
+
 class EndPoints {
-  static const String baseUrl =
-      'https://ucyrylmtzpvglhqeztpn.supabase.co/rest/v1/rpc';
+  static final String baseUrl =
+      '${dotenv.env[AppKeys.supabaseURL]!}/rest/v1/rpc';
 
   static String imagePath(String imgPath) => '$baseUrl$imgPath';
 
@@ -20,18 +24,18 @@ class EndPoints {
   //------------------------------------------
   //! payment apis
   static const String createOrder = '/create_order';
-  static const String createPayment =
-      'https://ucyrylmtzpvglhqeztpn.supabase.co/functions/v1/create-payment';
+  static final String createPayment =
+      '${dotenv.env[AppKeys.supabaseURL]!}/functions/v1/create-payment';
   static const String initiatePayment = '/initiate_payment';
   static const String getUserOrders = '/get_user_orders';
   //------------------------------------------
   static const String getAllCategories = '/get_all_categories';
   static const String filterProducts = '/filter_products';
   static const String searchProducts = '/search_products';
-  static String getAllProductsWithStats(page, limitPerPage) =>
-      '/get_all_products_with_stats?&page=$page&limit_per_page=$limitPerPage';
+  static String getAllProducts(page, limitPerPage) => '/get_all_products';
   static String getAllProductsByCategory(id, page, limitPerPage) =>
-      '/get_products_by_category?category_id=$id&page=$page&limit_per_page=$limitPerPage';
+      '/get_products_by_category';
+  // '/get_products_by_category?category_id=$id&page=$page&limit_per_page=$limitPerPage';
 
   //------------------------------------------
   static const String getUserFavorites = '/get_user_favorites';

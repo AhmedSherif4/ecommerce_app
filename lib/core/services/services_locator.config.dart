@@ -132,12 +132,8 @@ import 'package:ecommerce_app/features/shared_features/notification/presentation
     as _i532;
 import 'package:ecommerce_app/features/shared_features/profile/edit_profile/edit_profile.dart'
     as _i893;
-import 'package:ecommerce_app/features/shared_features/simulated_plans/simulated_plans.dart'
-    as _i537;
 import 'package:ecommerce_app/features/shared_features/terms_and_conditions/terms_and_conditions.dart'
     as _i567;
-import 'package:ecommerce_app/features/shared_features/un_link/un_link.dart'
-    as _i879;
 import 'package:ecommerce_app/features/shared_logic/localization_logic/presentation/localization_view_model/localization_bloc.dart'
     as _i954;
 import 'package:ecommerce_app/my_app/notification/i_notification_service.dart'
@@ -322,9 +318,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i504.OnBoardingLocalData>(() =>
         _i504.OnBoardingLocalDataImpl(
             baseLocalDataSource: gh<_i1055.BaseLocalDataSource>()));
-    gh.lazySingleton<_i537.SimulatedRemoteDataSource>(() =>
-        _i537.SimulatedRemoteDataSourceImpl(
-            baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i613.SignUpRemoteDataSource>(() =>
         _i613.SignUpRemoteDataSourceImpl(gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i914.CheckoutBaseRepository>(
@@ -369,8 +362,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i159.FaqsRemoteDataSource>(() =>
         _i159.FaqsRemoteDataSourceImpl(
             baseRemoteDataSource: gh<_i831.BaseRemoteDataSource>()));
-    gh.lazySingleton<_i879.UnLinkRemoteDataSource>(() =>
-        _i879.UnLinkRemoteDataSourceImpl(gh<_i831.BaseRemoteDataSource>()));
     gh.lazySingleton<_i1042.GlobalBaseRemoteDataSource>(
         () => _i1042.GlobalRemoteDataSourceImpl(
               networkInfo: gh<_i405.NetworkInfo>(),
@@ -454,10 +445,6 @@ extension GetItInjectableX on _i174.GetIt {
           baseRepository: gh<_i407.BaseRepository>(),
           homeLayoutRemoteDataSource: gh<_i834.HomeLayoutRemoteDataSource>(),
         ));
-    gh.lazySingleton<_i879.UnLinkRepository>(() => _i879.UnLinkRepositoryImpl(
-          remoteDataSource: gh<_i879.UnLinkRemoteDataSource>(),
-          baseRepository: gh<_i407.BaseRepository>(),
-        ));
     gh.lazySingleton<_i577.SavedRemoteDataSource>(() =>
         _i577.SavedRemoteDataSourceImpl(
             baseDataSource: gh<_i831.BaseRemoteDataSource>()));
@@ -465,11 +452,6 @@ extension GetItInjectableX on _i174.GetIt {
           remoteDataSource: gh<_i724.HomeRemoteDataSource>(),
           baseRepository: gh<_i407.BaseRepository>(),
         ));
-    gh.lazySingleton<_i537.SimulatedBaseRepository>(
-        () => _i537.SimulatedRepository(
-              baseRepository: gh<_i407.BaseRepository>(),
-              remoteDataSource: gh<_i537.SimulatedRemoteDataSource>(),
-            ));
     gh.lazySingleton<_i577.SavedBaseRepository>(() => _i577.SavedRepository(
           remoteDataSource: gh<_i577.SavedRemoteDataSource>(),
           baseRepository: gh<_i407.BaseRepository>(),
@@ -568,32 +550,6 @@ extension GetItInjectableX on _i174.GetIt {
               remoteDataSource: gh<_i733.ForgetPasswordRemoteDataSource>(),
               baseRepository: gh<_i407.BaseRepository>(),
             ));
-    gh.lazySingleton<_i879.ChildAddExistParentScreenUseCase>(() =>
-        _i879.ChildAddExistParentScreenUseCase(
-            repository: gh<_i879.UnLinkRepository>()));
-    gh.lazySingleton<_i879.ChildAddNewParentUseCase>(() =>
-        _i879.ChildAddNewParentUseCase(
-            repository: gh<_i879.UnLinkRepository>()));
-    gh.lazySingleton<_i879.ParentAddExistChildUseCase>(() =>
-        _i879.ParentAddExistChildUseCase(
-            repository: gh<_i879.UnLinkRepository>()));
-    gh.lazySingleton<_i879.ParentAddNewChildUseCase>(() =>
-        _i879.ParentAddNewChildUseCase(
-            repository: gh<_i879.UnLinkRepository>()));
-    gh.lazySingleton<_i879.UnLinkUseCase>(
-        () => _i879.UnLinkUseCase(repository: gh<_i879.UnLinkRepository>()));
-    gh.lazySingleton<_i537.GetSimulatedPlansUseCase>(() =>
-        _i537.GetSimulatedPlansUseCase(
-            repository: gh<_i537.SimulatedBaseRepository>()));
-    gh.lazySingleton<_i537.GetSimulatedExamsUseCase>(() =>
-        _i537.GetSimulatedExamsUseCase(
-            repository: gh<_i537.SimulatedBaseRepository>()));
-    gh.lazySingleton<_i537.GetSimulatedModelAnswersUseCase>(() =>
-        _i537.GetSimulatedModelAnswersUseCase(
-            repository: gh<_i537.SimulatedBaseRepository>()));
-    gh.lazySingleton<_i537.SubmitExamAnswerUseCase>(() =>
-        _i537.SubmitExamAnswerUseCase(
-            repository: gh<_i537.SimulatedBaseRepository>()));
     gh.lazySingleton<_i567.GetTermsAndConditionsUseCase>(() =>
         _i567.GetTermsAndConditionsUseCase(
             repository: gh<_i567.TermsAndConditionsBaseRepository>()));
@@ -634,13 +590,6 @@ extension GetItInjectableX on _i174.GetIt {
             repository: gh<_i395.SocialRegisterBaseRepository>()));
     gh.factory<_i867.SocialRegisterBloc>(
         () => _i867.SocialRegisterBloc(gh<_i1023.SocialRegisterCodeUseCase>()));
-    gh.factory<_i879.UnLinkBloc>(() => _i879.UnLinkBloc(
-          gh<_i879.UnLinkUseCase>(),
-          gh<_i879.ChildAddExistParentScreenUseCase>(),
-          gh<_i879.ChildAddNewParentUseCase>(),
-          gh<_i879.ParentAddNewChildUseCase>(),
-          gh<_i879.ParentAddExistChildUseCase>(),
-        ));
     gh.factory<_i532.NotificationBloc>(() => _i532.NotificationBloc(
           gh<_i167.NotificationUseCase>(),
           gh<_i167.ReadAllNotificationUseCase>(),
@@ -663,12 +612,6 @@ extension GetItInjectableX on _i174.GetIt {
             repository: gh<_i733.ForgetPasswordBaseRepository>()));
     gh.factory<_i567.TermsAndConditionsBloc>(() =>
         _i567.TermsAndConditionsBloc(gh<_i567.GetTermsAndConditionsUseCase>()));
-    gh.factory<_i537.SimulatedBloc>(() => _i537.SimulatedBloc(
-          gh<_i537.GetSimulatedPlansUseCase>(),
-          gh<_i537.GetSimulatedExamsUseCase>(),
-          gh<_i537.GetSimulatedModelAnswersUseCase>(),
-          gh<_i537.SubmitExamAnswerUseCase>(),
-        ));
     gh.factory<_i1054.VerificationBloc>(() => _i1054.VerificationBloc(
           gh<_i1054.CheckVerificationCodeUseCase>(),
           gh<_i1054.ResendVerificationCodeUseCase>(),
